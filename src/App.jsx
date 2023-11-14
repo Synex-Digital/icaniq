@@ -1,9 +1,32 @@
 import { useState } from "react";
+import {
+    createBrowserRouter,
+    RouterProvider,
+    Route,
+    createRoutesFromElements,
+    Link,
+} from "react-router-dom";
+import SignIn from "./components/pages/SignIn"
+import UserDashboard from "./components/pages/UserDashboard";
+import Rotlayout from "./components/layout/Rotlayout";
+import IqTest from "./components/pages/IqTest";
+
+const router = createBrowserRouter(
+    createRoutesFromElements(
+        <Route>
+            <Route path="/" element={<SignIn/>}></Route>
+            <Route path="/" element={<Rotlayout/>}>
+            <Route path="userdeshboard" element={<UserDashboard/>}></Route>
+            <Route path="iqtest" element={<IqTest/>}></Route>
+            </Route>
+        </Route>
+    )
+);
 
 function App() {
     return (
         <>
-            <h1>Hello world!</h1>
+            <RouterProvider router={router} />
         </>
     );
 }

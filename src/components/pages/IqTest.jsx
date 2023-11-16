@@ -1,7 +1,7 @@
 import React from "react";
 
 const IqTest = () => {
-  return <div>IqTest</div>;
+  return <div className="h-[500px] bg-red-400">IqTest</div>;
 };
 
 export default IqTest;

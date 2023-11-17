@@ -49,23 +49,24 @@ const Rotlayout = () => {
                     <Image className="w-[90px] hidden lg:block" imgsrc={logo} />
                 </div>
                 <div className="flex w-[30%] items-center gap-x-3 relative">
-                    <h3 className=" lg:text-[32px] font-rb lg:font-bold text-tbcolor">
+                    <h3 className=" lg:text-[32px] smalldevice:max-lg:text-xl smalldevice:max-lg:font-semibold smalldevice:max-xl:ml-3 font-rb lg:font-bold text-tbcolor">
                         Dashboard
                     </h3>
                     <input
-                        className="w-full border border-bcolor py-1 pl-3 pr-10 rounded"
+                        className="w-full border border-bcolor py-1 pl-3 pr-10 rounded smalldevice:max-xl:hidden"
                         placeholder="search your module"
                     />
-                    <IoSearchOutline className=" absolute font-semibold text-xl right-5" />
+                    <IoSearchOutline className=" absolute font-semibold text-xl right-5 smalldevice:max-xl:hidden" />
                 </div>
                 <div className="flex w-[55%] items-center gap-x-3 relative justify-end mr-6">
+                    <IoSearchOutline className="  font-semibold text-xl " />
                     <MdOutlineNotificationsActive className=" font-semibold text-xl" />
                     <Image className=" w-12 h-12" imgsrc={profile} />
                 </div>
             </div>
             <div className="flex">
                 {show ? (
-                    <div className="xl:w-[15%] md:w-[25%] sm:max-md:w-[30%] smalldevice:w-1/2 pt-20 px-2 shadow-xl h-[100vh] smalldevice:max-lg:absolute z-[50] bg-white">
+                    <div className="xl:w-[15%] md:w-[25%] smalldevice:max-xl:absolute sm:max-md:w-[30%] smalldevice:w-1/2 pt-20 px-2 shadow-xl h-[100vh]  z-[50] bg-white">
                         <div className="h-[90%] ">
                             <Link
                                 to="deshboard"
@@ -96,7 +97,7 @@ const Rotlayout = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className="xl:w-[4%] smalldevice:max-lg:hidden pt-20 px-2 shadow-xl h-[100vh]">
+                    <div className="xl:w-[4%] pt-20 smalldevice:max-xl:hidden px-2 shadow-xl h-[100vh]">
                         <div className="h-[90%]">
                             <Link
                                 to="deshboard"

@@ -10,8 +10,11 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 import { IoSearchOutline } from "react-icons/io5";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { ImCross } from "react-icons/im";
+import { useDispatch } from "react-redux";
+import { navvalue } from "../../../features/navSlice";
 
 const Rotlayout = () => {
+    let dispatch = useDispatch()
     let [show, setShow] = useState(true);
     useEffect(() => {
         function scrollWidth() {
@@ -23,20 +26,25 @@ const Rotlayout = () => {
         }
         scrollWidth();
         window.addEventListener("resize", scrollWidth);
+        
     }, []);
+    useEffect(() => {
+        dispatch(navvalue(show))
+    }, [show]);
+
     return (
         <>
-            <div className=" absolute flex w-full bg-white z-[51] h-16 justify-between">
+            <div className="fixed  flex w-full  z-[51] h-16 justify-between bg-white">
                 <div className="flex lg:w-[15%] items-center gap-x-3">
                     {show ? (
                         <>
                             <FaBars
-                                className="ml-3 cursor-pointer text-lg smalldevice:max-lg:hidden"
+                                className="ml-3 cursor-pointer text-lg smalldevice:max-xl:hidden"
                                 onClick={() => setShow(!show)}
                             />
                             <ImCross
                                 onClick={() => setShow(!show)}
-                                className="ml-3 cursor-pointer font-bold text-lg lg:hidden"
+                                className="ml-3 cursor-pointer font-bold text-lg xl:hidden"
                             />
                         </>
                     ) : (
@@ -64,9 +72,9 @@ const Rotlayout = () => {
                     <Image className=" w-12 h-12" imgsrc={profile} />
                 </div>
             </div>
-            <div className="flex">
+            <div className="flex ">
                 {show ? (
-                    <div className="xl:w-[15%] md:w-[25%] smalldevice:max-xl:absolute sm:max-md:w-[30%] smalldevice:w-1/2 pt-20 px-2 shadow-xl h-[100vh]  z-[50] bg-white">
+                    <div className="xl:w-[15%] md:w-[25%] smalldevice:max-xl:fixed sm:max-md:w-[30%] smalldevice:w-1/2 pt-20 px-2 shadow-xl h-[100vh] fixed  z-50 bg-white ">
                         <div className="h-[90%] ">
                             <Link
                                 to="deshboard"
@@ -97,7 +105,7 @@ const Rotlayout = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className="xl:w-[4%] pt-20 smalldevice:max-xl:hidden px-2 shadow-xl h-[100vh]">
+                    <div className="xl:w-[4%] bg-white fixed z-50 pt-20 smalldevice:max-xl:hidden px-2 shadow-xl h-[100vh] ">
                         <div className="h-[90%]">
                             <Link
                                 to="deshboard"

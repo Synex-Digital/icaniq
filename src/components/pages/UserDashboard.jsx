@@ -5,10 +5,10 @@ import PassGraphs from "../layout/PassGraphs";
 import { useSelector } from "react-redux";
 
 const UserDashboard = (props) => {
-    let navValue = useSelector((state) => state.counter.value);
+    let show = useSelector((state) => state.counter.value);
 
     return (
-        <div className={`sm:flex justify-between mt-16 p-4 w-full ${navValue ? "xl:ml-[200px]" : "xl:ml-[55px]"} `}>
+        <div className={`sm:flex justify-between mt-16 p-4 w-full ${show ? "xl:ml-[200px] 2xl:ml-[220px]" : "xl:ml-[50px]"} `}>
             <div className="md:w-[75%] flex  gap-x-3 gap-y-3 flex-wrap">
             <div className="md:w-full flex md:gap-x-6 md:gap-y-6 gap-x-3 gap-y-3 md:h-36 smalldevice:max-md:flex-wrap">
                 <div className="lg:p-5 p-3 rounded-lg border bg-white border-[#32B548] lg:w-[32%] smalldevice:max-md:max-w-[48%]">
@@ -52,7 +52,7 @@ const UserDashboard = (props) => {
                     <p className=" font-rb font-light mt-2 mb-7 text-white">
                         ID: 1216319561998
                     </p>
-                    <p className="bg-[#FFCC00] px-3 py-2 rounded font-rb">
+                    <p className="bg-[#FFCC00] px-2 py-2 rounded font-rb">
                         Validity Till 30 December, 2024
                     </p>
                 </div>

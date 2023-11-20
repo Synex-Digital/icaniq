@@ -18,7 +18,6 @@ module.exports = {
             fontFamily: {
                 rb: ["Roboto", "sans-serif"],
             },
-            
         },
     },
     plugins: [],

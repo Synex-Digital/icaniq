@@ -32,59 +32,61 @@ const IqTest = (props) => {
     return (
         <>
             <section
-                className={`mt-16 flex gap-x-4 flex-wrap gap-y-4 p-4 ${
-                    show ? "xl:ml-[200px]" : "xl:ml-[50px]"
-                }`}
+                className={`mt-16 flex xl:justify-end p-4 `}
             >
-                <Module
-                    updatetime="Updated by 1day ago"
-                    modulename="Module 1"
-                    moduletext="Lorem ipsum dolor sit amet consectetur. Feugiat consectetur
+                <div className={`flex xl:justify-end gap-x-4 flex-wrap gap-y-4 ${
+                    show ? "xl:w-[86.2%]" : "xl:w-[98%]"
+                }`}>
+                    <Module
+                        updatetime="Updated by 1day ago"
+                        modulename="Module 1"
+                        moduletext="Lorem ipsum dolor sit amet consectetur. Feugiat consectetur
                 lectus sagittis tincidunt."
-                    questionnumber="100"
-                    durationtime="1"
-                    onclick={openModal}
-                />
-                <Module
-                    updatetime="Updated by 1day ago"
-                    modulename="Module 2"
-                    moduletext="Lorem ipsum dolor sit amet consectetur. Feugiat consectetur
+                        questionnumber="100"
+                        durationtime="1"
+                        onclick={openModal}
+                    />
+                    <Module
+                        updatetime="Updated by 1day ago"
+                        modulename="Module 2"
+                        moduletext="Lorem ipsum dolor sit amet consectetur. Feugiat consectetur
                 lectus sagittis tincidunt."
-                    questionnumber="100"
-                    durationtime="1"
-                />
-                <Module
-                    updatetime="Updated by 1day ago"
-                    modulename="Module 3"
-                    moduletext="Lorem ipsum dolor sit amet consectetur. Feugiat consectetur
+                        questionnumber="100"
+                        durationtime="1"
+                    />
+                    <Module
+                        updatetime="Updated by 1day ago"
+                        modulename="Module 3"
+                        moduletext="Lorem ipsum dolor sit amet consectetur. Feugiat consectetur
                 lectus sagittis tincidunt."
-                    questionnumber="100"
-                    durationtime="1"
-                />
-                <Module
-                    updatetime="Updated by 1day ago"
-                    modulename="Module 4"
-                    moduletext="Lorem ipsum dolor sit amet consectetur. Feugiat consectetur
+                        questionnumber="100"
+                        durationtime="1"
+                    />
+                    <Module
+                        updatetime="Updated by 1day ago"
+                        modulename="Module 4"
+                        moduletext="Lorem ipsum dolor sit amet consectetur. Feugiat consectetur
                 lectus sagittis tincidunt."
-                    questionnumber="100"
-                    durationtime="1"
-                />
-                <Module
-                    updatetime="Updated by 1day ago"
-                    modulename="Module 5"
-                    moduletext="Lorem ipsum dolor sit amet consectetur. Feugiat consectetur
+                        questionnumber="100"
+                        durationtime="1"
+                    />
+                    <Module
+                        updatetime="Updated by 1day ago"
+                        modulename="Module 5"
+                        moduletext="Lorem ipsum dolor sit amet consectetur. Feugiat consectetur
                 lectus sagittis tincidunt."
-                    questionnumber="100"
-                    durationtime="1"
-                />
-                <Module
-                    updatetime="Updated by 1day ago"
-                    modulename="Module 6"
-                    moduletext="Lorem ipsum dolor sit amet consectetur. Feugiat consectetur
+                        questionnumber="100"
+                        durationtime="1"
+                    />
+                    <Module
+                        updatetime="Updated by 1day ago"
+                        modulename="Module 6"
+                        moduletext="Lorem ipsum dolor sit amet consectetur. Feugiat consectetur
                 lectus sagittis tincidunt."
-                    questionnumber="100"
-                    durationtime="1"
-                />
+                        questionnumber="100"
+                        durationtime="1"
+                    />
+                </div>
             </section>
             <div>
                 <Modal

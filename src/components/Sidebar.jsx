@@ -11,8 +11,8 @@ const Sidebar = () => {
     return (
         <aside className="flex ">
             {show ? (
-                <div className="xl:w-[15%] md:w-[25%] smalldevice:max-xl:fixed sm:max-md:w-[30%] smalldevice:w-1/2 pt-20 px-2 shadow-xl h-[100vh] fixed  z-50 bg-[#162655] ">
-                    <div className="h-[90%] ">
+                <div className="xl:w-[15%] md:w-[25%] smalldevice:max-xl:fixed sm:max-md:w-[30%] smalldevice:w-1/2 pt-20 px-2 shadow-xl h-[100vh] fixed z-50 bg-[#162655] ">
+                    <div className="h-[90%]">
                         <Link
                             to="deshboard"
                             className="flex items-center gap-x-2 mb-4"

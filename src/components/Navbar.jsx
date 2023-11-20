@@ -8,13 +8,16 @@ import { IoSearchOutline } from "react-icons/io5";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { ImCross } from "react-icons/im";
 import { navvalue } from "../../features/navSlice";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
     let dispatch = useDispatch();
+    let location = useLocation();
+
     let [show, setShow] = useState(true);
     useEffect(() => {
         function scrollWidth() {
-            if (window.innerWidth < 1024) {
+            if (window.innerWidth < 1280) {
                 setShow(false);
             } else {
                 setShow(true);
@@ -51,9 +54,15 @@ const Navbar = () => {
                 <Image className="w-[90px] hidden lg:block" imgsrc={logo} />
             </div>
             <div className="flex w-[30%] items-center gap-x-3 relative">
-                <h3 className=" lg:text-[32px] smalldevice:max-lg:text-xl smalldevice:max-lg:font-semibold smalldevice:max-xl:ml-3 font-rb lg:font-bold text-tbcolor">
-                    Dashboard
-                </h3>
+                {location.pathname == "/user/iqtest" ? (
+                    <h3 className=" lg:text-[32px] smalldevice:max-lg:text-xl smalldevice:max-lg:font-semibold smalldevice:max-xl:ml-3 font-rb lg:font-bold text-tbcolor">
+                        Test
+                    </h3>
+                ) : (
+                    <h3 className=" lg:text-[32px] smalldevice:max-lg:text-xl smalldevice:max-lg:font-semibold smalldevice:max-xl:ml-3 font-rb lg:font-bold text-tbcolor">
+                        Dashboard
+                    </h3>
+                )}
                 <input
                     className="w-full border border-bcolor py-1 pl-3 pr-10 rounded smalldevice:max-xl:hidden"
                     placeholder="search your module"

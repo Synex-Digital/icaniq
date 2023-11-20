@@ -5,7 +5,7 @@ import { PiClockClockwiseFill } from "react-icons/pi";
 
 const Module = (props) => {
     return (
-        <div className="border p-5 rounded-2xl w-[32%] shadow-md">
+        <div className="border p-5 rounded-2xl xl:w-[32%] sm:w-[48%] smalldevice:w-full shadow-md">
             <time className="flex items-center gap-x-1 justify-end font-rb text-sm text-[#6D6D6D]">
                 <span>
                     <BsCalendar2Check />

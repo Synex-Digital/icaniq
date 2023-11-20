@@ -8,7 +8,7 @@ const UserDashboard = (props) => {
     let show = useSelector((state) => state.counter.value);
 
     return (
-        <div className={`sm:flex justify-between mt-16 p-4 w-full ${show ? "xl:ml-[200px]" : "xl:ml-[50px]"} `}>
+        <div className={`sm:flex justify-between mt-16 p-4 w-full ${show ? "xl:ml-[200px] 2xl:ml-[220px]" : "xl:ml-[50px]"} `}>
             <div className="md:w-[75%] flex  gap-x-3 gap-y-3 flex-wrap">
             <div className="md:w-full flex md:gap-x-6 md:gap-y-6 gap-x-3 gap-y-3 md:h-36 smalldevice:max-md:flex-wrap">
                 <div className="lg:p-5 p-3 rounded-lg border bg-white border-[#32B548] lg:w-[32%] smalldevice:max-md:max-w-[48%]">

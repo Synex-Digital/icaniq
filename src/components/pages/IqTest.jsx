@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Module from "../layout/Module";
 import Modal from "react-modal";
+import { useNavigate } from "react-router-dom";
 
 const customStyles = {
     content: {
@@ -12,9 +13,13 @@ const customStyles = {
         marginRight: "-50%",
         transform: "translate(-50%, -50%)",
     },
+    overlay: {
+        backgroundColor: 'rgba(12, 12, 12, 0.85)'
+      },
 };
 
 const IqTest = (props) => {
+    let navigate = useNavigate()
     let show = useSelector((state) => state.counter.value);
 
     // let handletextstart = () => {
@@ -29,10 +34,13 @@ const IqTest = (props) => {
     let closeModal = () => {
         setIsOpen(false);
     };
+    let handleexamstart=()=>{
+        navigate("/user/exam")
+    }
     return (
         <>
             <section
-                className={`mt-16 flex xl:justify-end p-4 `}
+                className="mt-16 flex xl:justify-end p-4 mx-auto"
             >
                 <div className={`flex xl:justify-end gap-x-4 flex-wrap gap-y-4 ${
                     show ? "xl:w-[86.2%]" : "xl:w-[98%]"
@@ -107,7 +115,7 @@ const IqTest = (props) => {
                         >
                             Cancel
                         </button>
-                        <button className="w-[48%] text-[#3888F9] border rounded border-[#3888F9] transition duration-300 ease-in-out py-2 px-6 hover:bg-[#3888F9] hover:text-white text-lg font-rb font-semibold">
+                        <button onClick={handleexamstart} className="w-[48%] text-[#3888F9] border rounded border-[#3888F9] transition duration-300 ease-in-out py-2 px-6 hover:bg-[#3888F9] hover:text-white text-lg font-rb font-semibold">
                             Start
                         </button>
                     </div>

@@ -30,7 +30,7 @@ const Module = (props) => {
                     Duration {props.durationtime}h
                 </h4>
             </div>
-            <button className="group font-rb font-bold text-lg text-center border py-[10px] w-full text-[#3888F9] rounded-lg border-[#3888F9] transition duration-300 ease-in-out hover:text-white hover:bg-[#3888F9]">
+            <button onClick={props.onclick} className="group font-rb font-bold text-lg text-center border py-[10px] w-full text-[#3888F9] rounded-lg border-[#3888F9] transition duration-300 ease-in-out hover:text-white hover:bg-[#3888F9]">
                 Take the test
             </button>
         </div>

@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Image from "../layout/Image";
 import profile from "../../assets/profile.png";
 import PassGraphs from "../layout/PassGraphs";
@@ -8,40 +8,43 @@ const UserDashboard = (props) => {
     let show = useSelector((state) => state.counter.value);
 
     return (
-        <div className={`sm:flex justify-between mt-16 p-4 w-full ${show ? "xl:ml-[200px] 2xl:ml-[220px]" : "xl:ml-[50px]"} `}>
-            <div className="md:w-[75%] flex  gap-x-3 gap-y-3 flex-wrap">
-            <div className="md:w-full flex md:gap-x-6 md:gap-y-6 gap-x-3 gap-y-3 md:h-36 smalldevice:max-md:flex-wrap">
-                <div className="lg:p-5 p-3 rounded-lg border bg-white border-[#32B548] lg:w-[32%] smalldevice:max-md:max-w-[48%]">
-                    <p className="font-rb font-bold text-2xl text-[#32B548] bg-[#F1FCF2] w-14 h-14 rounded-full flex items-center justify-center mb-5">
-                        5
-                    </p>
-                    <p className="font-rb font-semibold lg:text-xl text-lg">
-                        Total Test Given
-                    </p>
+        <div className="sm:flex justify-between xl:justify-end mt-16 p-4 w-full  ">
+            <div
+                className={`md:w-[75%] ${
+                    show ? "xl:w-[59%]" : "xl:w-[70.2%]"
+                } flex  gap-x-3 gap-y-3 flex-wrap`}
+            >
+                <div className="md:w-full flex md:gap-x-6 md:gap-y-6 gap-x-3 gap-y-3 md:h-36 smalldevice:max-md:flex-wrap">
+                    <div className="lg:p-5 p-3 rounded-lg border bg-white border-[#32B548] lg:w-[32%] smalldevice:max-md:max-w-[48%]">
+                        <p className="font-rb font-bold text-2xl text-[#32B548] bg-[#F1FCF2] w-14 h-14 rounded-full flex items-center justify-center mb-5">
+                            5
+                        </p>
+                        <p className="font-rb font-semibold lg:text-xl text-lg">
+                            Total Test Given
+                        </p>
+                    </div>
+                    <div className="lg:p-5 p-3 border rounded-lg bg-white border-[#8478DA] lg:w-[32%] smalldevice:max-md:max-w-[48%]">
+                        <p className="font-rb font-bold text-2xl text-[#8478DA] bg-[#F5F5FD] w-14 h-14 rounded-full flex items-center justify-center mb-5">
+                            5
+                        </p>
+                        <p className="font-rb font-semibold lg:text-xl text-lg ">
+                            AVG Score Point
+                        </p>
+                    </div>
+                    <div className="lg:p-5 p-3 border rounded-lg bg-white border-[#3888F9] lg:w-[32%] smalldevice:max-md:max-w-[48%]">
+                        <p className="font-rb font-bold text-2xl text-[#3888F9] bg-[#EFF7FF] w-14 h-14 rounded-full flex items-center justify-center mb-5">
+                            5
+                        </p>
+                        <p className="font-rb font-semibold lg:text-xl text-lg ">
+                            AVG Time Taken
+                        </p>
+                    </div>
                 </div>
-                <div className="lg:p-5 p-3 border rounded-lg bg-white border-[#8478DA] lg:w-[32%] smalldevice:max-md:max-w-[48%]">
-                    <p className="font-rb font-bold text-2xl text-[#8478DA] bg-[#F5F5FD] w-14 h-14 rounded-full flex items-center justify-center mb-5">
-                        5
-                    </p>
-                    <p className="font-rb font-semibold lg:text-xl text-lg ">
-                        AVG Score Point
-                    </p>
-                </div>
-                <div className="lg:p-5 p-3 border rounded-lg bg-white border-[#3888F9] lg:w-[32%] smalldevice:max-md:max-w-[48%]">
-                    <p className="font-rb font-bold text-2xl text-[#3888F9] bg-[#EFF7FF] w-14 h-14 rounded-full flex items-center justify-center mb-5">
-                        5
-                    </p>
-                    <p className="font-rb font-semibold lg:text-xl text-lg ">
-                        AVG Time Taken
-                    </p>
-                </div>
-            </div>
-            
-            <PassGraphs bgcolor={"#63B967"} ratetilte="Pass Rate"/>
-            <PassGraphs bgcolor={"#FFCC00"} ratetilte="Fail Rate"/>
-            <PassGraphs bgcolor={"#8478DA"} ratetilte="AVG Time"/>
-            <PassGraphs bgcolor={"#3888F9"} ratetilte="AVG Score"/>
-           
+
+                <PassGraphs bgcolor={"#63B967"} ratetilte="Pass Rate" />
+                <PassGraphs bgcolor={"#FFCC00"} ratetilte="Fail Rate" />
+                <PassGraphs bgcolor={"#8478DA"} ratetilte="AVG Time" />
+                <PassGraphs bgcolor={"#3888F9"} ratetilte="AVG Score" />
             </div>
             <div className="md:w-[25%] md:ml-4 smalldevice:max-md:mt-4">
                 <div className=" bg-[#162655] p-5 rounded-2xl text-center">

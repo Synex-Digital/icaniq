@@ -7,10 +7,10 @@ import { useNavigate } from "react-router-dom";
 const customStyles = {
     content: {
         top: "50%",
-        left: "60%",
+        left: "50%",
         right: "auto",
         bottom: "auto",
-        marginRight: "-50%",
+        marginRight: "-45%",
         transform: "translate(-50%, -50%)",
     },
     overlay: {
@@ -40,7 +40,7 @@ const IqTest = (props) => {
     return (
         <>
             <section
-                className="mt-16 flex xl:justify-end p-4 mx-auto"
+                className="mt-16 flex xl:justify-end p-4 mx-auto "
             >
                 <div className={`flex xl:justify-end gap-x-4 flex-wrap gap-y-4 ${
                     show ? "xl:w-[86.2%]" : "xl:w-[98%]"
@@ -103,7 +103,7 @@ const IqTest = (props) => {
                     style={customStyles}
                     contentLabel="Example Modal"
                 >
-                    <p className="w-[456px] font-rb text-lg text-[#454545] mb-10">
+                    <p className="sm:w-[456px] font-rb text-lg text-[#454545] mb-10">
                         The test is designed with 100 marks, each associated
                         with a distinct set of questions totaling 100. I retain
                         the flexibility to skip questions as desired.

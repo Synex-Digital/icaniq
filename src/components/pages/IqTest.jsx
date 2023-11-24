@@ -40,7 +40,7 @@ const IqTest = (props) => {
     return (
         <>
             <section
-                className="mt-16 flex xl:justify-end p-4 mx-auto"
+                className="mt-16 flex xl:justify-end p-4 mx-auto "
             >
                 <div className={`flex xl:justify-end gap-x-4 flex-wrap gap-y-4 ${
                     show ? "xl:w-[86.2%]" : "xl:w-[98%]"

@@ -1,19 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit'
-
-
+import { createSlice } from "@reduxjs/toolkit";
 
 export const counterSlice = createSlice({
-  name: 'navvalue',
-  initialState:{
-    value: false
-  },
-  reducers: {
-    navvalue: (state,actions) => {
-        state.value = actions.payload
+    name: "navvalue",
+    initialState: {
+        value: false,
     },
-  },
-})
+    reducers: {
+        navvalue: (state, actions) => {
+            state.value = actions.payload;
+        },
+    },
+});
 
-export const { navvalue } = counterSlice.actions
+export const { navvalue } = counterSlice.actions;
 
-export default counterSlice.reducer
+export default counterSlice.reducer;

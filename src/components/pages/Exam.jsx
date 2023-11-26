@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import ReactPaginate from "react-paginate";
 import { Question } from "../../../data/data";
 import { questionid } from "../../../features/questionSlice";
-import { LuMoveRight } from "react-icons/lu";
+import { LuMoveRight, LuMoveLeft } from "react-icons/lu";
+import ExamTime from "../layout/ExamTime";
 
 const Exam = () => {
     let dispatch = useDispatch();
@@ -15,6 +16,9 @@ const Exam = () => {
         dispatch(questionid(event.selected + 1));
     };
 
+    const time = new Date();
+    time.setSeconds(time.getSeconds() + 60); // 10 minutes timer 3599
+
     return (
         <section className="mt-16 flex  xl:justify-end p-4 mx-auto ">
             <div
@@ -22,9 +26,13 @@ const Exam = () => {
                     show ? "xl:w-[85%]" : "xl:w-[96%]"
                 }`}
             >
-                <h2 className=" font-rb font-bold text-2xl mb-6 ">
-                    IQ Test 01
-                </h2>
+                <div className="flex justify-between">
+                    <h2 className=" font-rb font-bold text-2xl mb-6 ">
+                        IQ Test 01
+                    </h2>
+                    <time><ExamTime expiryTimestamp={time} /></time>
+                    
+                </div>
                 <ReactPaginate
                     breakLabel="..."
                     breakClassName="text-2xl font-bold"
@@ -32,14 +40,25 @@ const Exam = () => {
                     onPageChange={handlePageClick}
                     pageRangeDisplayed={35}
                     pageCount={pageCount}
-                    pageClassName="text-lg flex items-center justify-center font-rb border border-[#FFCC00] p-2 rounded w-[45px] h-[35px] text-center cursor-pointer"
-                    previousClassName="absolute xl:-bottom-[85px] xl:left-[295px] border-[#3888F9] border p-3 w-[15%] text-center text-lg font-rb bg-[#3888F9] text-white font-semibold rounded"
-                    nextClassName="absolute xl:-bottom-[85px] xl:right-[295px] border-[#3888F9] border p-3 w-[15%] text-center text-lg font-rb bg-[#3888F9] text-white font-semibold rounded"
+                    previousLabel={
+                        <div className="flex items-center justify-center gap-x-4 text-lg font-rb">
+                            <LuMoveLeft className="text-2xl" />
+                            Previous
+                        </div>
+                    }
+                    nextLabel={
+                        <div className="flex items-center justify-center gap-x-4 text-lg font-rb ">
+                            Next
+                            <LuMoveRight className="text-2xl" />
+                        </div>
+                    }
+                    pageLinkClassName="text-lg flex items-center justify-center font-rb border border-[#FFCC00] p-2 rounded w-[45px] h-[35px] text-center cursor-pointer"
+                    previousLinkClassName="absolute xl:-bottom-[85px] -bottom-[85px] left-0 xl:left-[295px] border-[#3888F9] border p-3 xl:w-[15%] hover:bg-[#1F7CFF] text-center text-lg font-rb bg-[#3888F9] text-white font-semibold rounded"
+                    nextLinkClassName="absolute xl:-bottom-[85px] xl:right-[295px] border-[#3888F9] border p-3 w-[15%] hover:bg-[#1F7CFF] text-center text-lg font-rb bg-[#3888F9] text-white font-semibold rounded"
                     containerClassName="flex flex-wrap gap-x-2 gap-y-2"
                     activeClassName="flex items-center justify-center text-lg font-rb border bg-[#FFCC00] border-[#FFCC00] p-2 rounded w-[45px] h-[35px] text-center cursor-pointer "
                     renderOnZeroPageCount={null}
                 />
-
                 {Question.map(
                     (item) =>
                         qusid == item.id && (
@@ -60,6 +79,8 @@ const Exam = () => {
                             </>
                         )
                 )}
+                {/* <button onClick={handleClicktext}>one</button>
+                <button onClick={handleClicktext}>two</button> */}
             </div>
         </section>
     );

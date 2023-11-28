@@ -21,10 +21,6 @@ const customStyles = {
 const IqTest = (props) => {
     let navigate = useNavigate()
     let show = useSelector((state) => state.counter.value);
-
-    // let handletextstart = () => {
-    //     console.log("ok");
-    // };
     const [modalIsOpen, setIsOpen] = useState(false);
 
     let openModal = () => {

@@ -17,7 +17,7 @@ const Exam = () => {
     };
 
     const time = new Date();
-    time.setSeconds(time.getSeconds() + 60); // 10 minutes timer 3599
+    time.setSeconds(time.getSeconds() + 10); // 10 minutes timer 3599
 
     return (
         <section className="mt-16 flex  xl:justify-end p-4 mx-auto ">
@@ -53,8 +53,8 @@ const Exam = () => {
                         </div>
                     }
                     pageLinkClassName="text-lg flex items-center justify-center font-rb border border-[#FFCC00] p-2 rounded w-[45px] h-[35px] text-center cursor-pointer"
-                    previousLinkClassName="absolute xl:-bottom-[85px] -bottom-[85px] left-0 xl:left-[295px] border-[#3888F9] border p-3 xl:w-[15%] hover:bg-[#1F7CFF] text-center text-lg font-rb bg-[#3888F9] text-white font-semibold rounded"
-                    nextLinkClassName="absolute xl:-bottom-[85px] xl:right-[295px] border-[#3888F9] border p-3 w-[15%] hover:bg-[#1F7CFF] text-center text-lg font-rb bg-[#3888F9] text-white font-semibold rounded"
+                    previousLinkClassName="absolute -bottom-[85px] left-0 sm:left-[50px] lg:left-[230px] xl:left-[295px] border-[#3888F9] border w-[150px] p-3 xl:w-[15%] hover:bg-[#1F7CFF] text-center text-lg font-rb bg-[#3888F9] text-white font-semibold rounded"
+                    nextLinkClassName="absolute -bottom-[85px] xl:right-[295px] sm:right-[50px] lg:right-[230px] border-[#3888F9] right-0 border p-3 w-[150px] xl:w-[15%] hover:bg-[#1F7CFF] text-center text-lg font-rb bg-[#3888F9] text-white font-semibold rounded"
                     containerClassName="flex flex-wrap gap-x-2 gap-y-2"
                     activeClassName="flex items-center justify-center text-lg font-rb border bg-[#FFCC00] border-[#FFCC00] p-2 rounded w-[45px] h-[35px] text-center cursor-pointer "
                     renderOnZeroPageCount={null}
@@ -79,8 +79,6 @@ const Exam = () => {
                             </>
                         )
                 )}
-                {/* <button onClick={handleClicktext}>one</button>
-                <button onClick={handleClicktext}>two</button> */}
             </div>
         </section>
     );

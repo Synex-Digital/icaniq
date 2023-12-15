@@ -7,13 +7,40 @@ import layoutimg from "../../assets/layoutimg.png";
 import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
+let initialValue = {
+    email: "",
+    password: "",
+    error: "",
+};
 
 const Signin = () => {
     let [show, setShow] = useState(false);
+    let [values, setValues] = useState(initialValue);
+
+    let handlevalues = (e) => {
+        setValues({
+            ...values,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    let handlelogin = async () => {
+        let data = {
+            email: values.email,
+            password: values.password,
+        };
+        await axios.post("http://icaniq.synexdigital.com/api/login", data);
+    };
+
     return (
         <div className="  flex ">
             <div className=" hidden xl:block xl:w-1/2 relative">
-                <Image className="absolute top-8 left-8 md:w-[120px]" imgsrc={icanIQ} />
+                <Image
+                    className="absolute top-8 left-8 md:w-[120px]"
+                    imgsrc={icanIQ}
+                />
                 <Image
                     imgsrc={cover}
                     className="h-[100vh] w-full object-cover"
@@ -46,6 +73,8 @@ const Signin = () => {
                             type="email"
                             className="p-3 mt-2 mb-2 md:mt-4 md:mb-5 w-full border rounded border-bcolor border-solid"
                             placeholder="your email here"
+                            onChange={handlevalues}
+                            name="email"
                         />
                         <h3 className="smalldevice:max-sm:text-white font-rb md:font-semibold font-medium md:text-lg text-tbcolor smalldevice:max-sm:mt-3">
                             Password
@@ -55,6 +84,8 @@ const Signin = () => {
                                 type={show ? "text" : "password"}
                                 className="p-3 w-full my-2 md:my-4 border rounded border-bcolor border-solid"
                                 placeholder="password"
+                                name="password"
+                                onChange={handlevalues}
                             />
                             {show ? (
                                 <IoEye
@@ -71,7 +102,10 @@ const Signin = () => {
                         <Link className="smalldevice:max-sm:text-white  font-rb text-tbcolor ">
                             Forgot Password?
                         </Link>
-                        <button className=" bg-btncolor w-full p-1 md:p-3 mt-2 text-white md:mt-7 text-xl font-medium md:font-bold rounded smalldevice:max-sm:my-5 smalldevice:max-sm:p-3">
+                        <button
+                            className=" bg-btncolor w-full p-1 md:p-3 mt-2 text-white md:mt-7 text-xl font-medium md:font-bold rounded smalldevice:max-sm:my-5 smalldevice:max-sm:p-3"
+                            onClick={handlelogin}
+                        >
                             Log in
                         </button>
                     </div>

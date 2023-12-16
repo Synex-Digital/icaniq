@@ -27,11 +27,12 @@ const Exam = () => {
                 }`}
             >
                 <div className="flex justify-between">
-                    <h2 className=" font-rb font-bold text-2xl mb-6 ">
+                    <h2 className=" font-rb font-bold text-2xl mb-4 ">
                         IQ Test 01
                     </h2>
-                    <time><ExamTime expiryTimestamp={time} /></time>
-                    
+                    <time>
+                        <ExamTime expiryTimestamp={time} />
+                    </time>
                 </div>
                 <ReactPaginate
                     breakLabel="..."
@@ -63,14 +64,22 @@ const Exam = () => {
                     (item) =>
                         qusid == item.id && (
                             <>
-                                <div className="border rounded-lg relative mt-10 sm:mt-16 sm:w-[515px] p-2 sm:p-5 mx-auto">
-                                    <h2 className=" font-rb font-semibold text-xl sm:text-2xl text-center mb-5">
-                                        {item.name}
-                                    </h2>
-                                    <div className="flex flex-wrap gap-y-4  sm:gap-y-4 ">
+                                <div className="border rounded-lg relative mt-4 p-2 sm:p-4 mx-auto sm:w-1/2">
+                                    <div className="mb-4 flex justify-center items-center gap-x-3">
+                                        {item.img && (
+                                            <img
+                                                className="w-[160px] h-[160px]"
+                                                src={item.img}
+                                            />
+                                        )}
+                                        <h2 className=" font-rb font-semibold text-xl sm:text-2xl text-center">
+                                            {item.name}
+                                        </h2>
+                                    </div>
+                                    <div className="flex flex-col gap-y-4 ">
                                         {item.answer &&
                                             item.answer.map((sitem, index) => (
-                                                <p className="border rounded border-[#292055] font-rb sm:text-lg py-2 px-2 sm:px-6  text-[#0C0C0C] mx-auto cursor-pointer">
+                                                <p className="border rounded border-[#292055] font-rb sm:text-lg py-2 px-2 sm:px-6  text-[#0C0C0C] mx-auto cursor-pointer w-[98%]">
                                                     {index + 1}. {sitem.name}
                                                 </p>
                                             ))}

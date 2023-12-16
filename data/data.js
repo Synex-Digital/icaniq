@@ -2,6 +2,7 @@ let Question = [
     {
         id:1,
         name: "Which one is odd1?",
+        img: "../src/assets/profile.png",
         answer: [
             {
                 name: "Which one is odd1 ",
@@ -22,13 +23,16 @@ let Question = [
         name: "Which one is odd2?",
         answer: [
             {
-                name: "Which one is odd2",
+                name: "Which one is odd2 Which one is odd2 Which one is odd2 Which one is odd2 Which one is odd2",
             },
             {
                 name: "Which two is odd2",
             },
             {
                 name: "Which three is odd2",
+            },
+            {
+                name: "Which four is odd2",
             },
             {
                 name: "Which four is odd2",

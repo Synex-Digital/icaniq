@@ -23,15 +23,51 @@ const Signin = () => {
         setValues({
             ...values,
             [e.target.name]: e.target.value,
+            error: "",
         });
     };
 
     let handlelogin = async () => {
-        let data = {
-            email: values.email,
-            password: values.password,
-        };
-        await axios.post("http://icaniq.synexdigital.com/api/login", data);
+        try {
+            let data = new FormData();
+            data.append("email", values.email);
+            data.append("password", values.password);
+
+            const response = await fetch(
+                "http://icaniq.synexdigital.com/api/login",
+                {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                    },
+                    body: data,
+                }
+            );
+
+
+            // const response = await axios.post(
+            //     "http://icaniq.synexdigital.com/api/login",
+            //     data
+            // );
+
+            if (!response.ok) {
+                console.log("Ops");
+            }
+
+            const responseData = await response.json();
+
+            // setValues({
+            //     ...values,
+            //     error: responseData.message,
+            // });
+            console.log(responseData);
+            // Extract and handle tokens or user data from the response if needed
+
+            // return responseData; // You can return data after successful login if needed
+        } catch (error) {
+            console.error("Login error:", error);
+            throw error;
+        }
     };
 
     return (
@@ -76,6 +112,7 @@ const Signin = () => {
                             onChange={handlevalues}
                             name="email"
                         />
+                        {values.error.email && <p>{values.error.email[0]}</p>}
                         <h3 className="smalldevice:max-sm:text-white font-rb md:font-semibold font-medium md:text-lg text-tbcolor smalldevice:max-sm:mt-3">
                             Password
                         </h3>
@@ -87,6 +124,9 @@ const Signin = () => {
                                 name="password"
                                 onChange={handlevalues}
                             />
+                            {values.error.password && (
+                                <p>{values.error.password[0]}</p>
+                            )}
                             {show ? (
                                 <IoEye
                                     className=" cursor-pointer absolute top-7 md:top-[34px] right-4 text-[#adadad]"

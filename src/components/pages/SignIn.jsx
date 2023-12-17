@@ -7,8 +7,10 @@ import layoutimg from "../../assets/layoutimg.png";
 import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userData } from "../../../features/userSlice";
+import { userToken } from "../../../features/tokenSlice";
 
 let initialValue = {
     email: "",
@@ -18,6 +20,7 @@ let initialValue = {
 
 const Signin = () => {
     let navigate = useNavigate();
+    const dispatch = useDispatch();
     let [show, setShow] = useState(false);
     let [values, setValues] = useState(initialValue);
 
@@ -49,14 +52,20 @@ const Signin = () => {
             const responseData = await response.json();
 
             if (responseData.status == 1) {
-                console.log("done");
-                // navigate("/user/deshboard");
+                dispatch(userData(responseData.user));
+                dispatch(userToken(responseData.token));
+                localStorage.setItem(
+                    "token",
+                    JSON.stringify(responseData.token)
+                );
+                localStorage.setItem("user", JSON.stringify(responseData.user));
+                navigate("/user/deshboard");
             } else {
-                console.log(responseData);
                 // setValues({
                 //     ...values,
-                //     error: responseData.message,
+                //     error: "",
                 // });
+                console.log("you do not have login");
             }
         } catch (error) {
             console.error("Login error:", error);

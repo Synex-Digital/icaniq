@@ -8,6 +8,7 @@ import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 let initialValue = {
     email: "",
@@ -16,6 +17,7 @@ let initialValue = {
 };
 
 const Signin = () => {
+    let navigate = useNavigate();
     let [show, setShow] = useState(false);
     let [values, setValues] = useState(initialValue);
 
@@ -44,26 +46,18 @@ const Signin = () => {
                 }
             );
 
-
-            // const response = await axios.post(
-            //     "http://icaniq.synexdigital.com/api/login",
-            //     data
-            // );
-
-            if (!response.ok) {
-                console.log("Ops");
-            }
-
             const responseData = await response.json();
 
-            // setValues({
-            //     ...values,
-            //     error: responseData.message,
-            // });
-            console.log(responseData);
-            // Extract and handle tokens or user data from the response if needed
-
-            // return responseData; // You can return data after successful login if needed
+            if (responseData.status == 1) {
+                console.log("done");
+                // navigate("/user/deshboard");
+            } else {
+                console.log(responseData);
+                // setValues({
+                //     ...values,
+                //     error: responseData.message,
+                // });
+            }
         } catch (error) {
             console.error("Login error:", error);
             throw error;
@@ -112,7 +106,7 @@ const Signin = () => {
                             onChange={handlevalues}
                             name="email"
                         />
-                        {values.error.email && <p>{values.error.email[0]}</p>}
+                        {/* {values.error.email && <p>{values.error.email[0]}</p>} */}
                         <h3 className="smalldevice:max-sm:text-white font-rb md:font-semibold font-medium md:text-lg text-tbcolor smalldevice:max-sm:mt-3">
                             Password
                         </h3>

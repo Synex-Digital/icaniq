@@ -16,7 +16,7 @@ const Module = (props) => {
                 <h2 className="font-rb text-2xl font-semibold text-tbcolor mt-2 mb-4">
                     {props.modulename}
                 </h2>
-                <p className="font-rb text-sm text-[#6D6D6D] ">
+                <p className="font-rb text-sm text-[#6D6D6D] xl:w-[320px]">
                     {props.moduletext}
                 </p>
                 <div className="flex justify-between mt-5 mb-8">

@@ -31,7 +31,7 @@ const Navbar = () => {
         dispatch(navvalue(show));
     }, [show]);
     return (
-        <nav className="fixed  flex w-full  z-[51] h-16 justify-between bg-white shadow-md">
+        <nav className="fixed top-0 right-0 left-0 bottom-0 flex w-full  z-[51] h-16 justify-between bg-white shadow-md">
             <div className="flex lg:w-[15%] items-center gap-x-3">
                 {show ? (
                     <>

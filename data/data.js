@@ -41,7 +41,7 @@ let Question = [
     },
     {
         id:3,
-        name: "Which one is odd3?",
+        img: "../src/assets/profile.png",
         answer: [
             {
                 name: "Which one is odd3",

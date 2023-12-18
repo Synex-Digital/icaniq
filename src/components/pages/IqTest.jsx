@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Module from "../layout/Module";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
+import { BsCalendar2Check } from "react-icons/bs";
+import { GiNotebook } from "react-icons/gi";
+import { PiClockClockwiseFill } from "react-icons/pi";
 
 const customStyles = {
     content: {
@@ -23,8 +25,10 @@ const IqTest = (props) => {
     Modal.setAppElement("#root");
     let show = useSelector((state) => state.counter.value);
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [modalIsOpen_2, setIsOpen_2] = useState(false);
     const [models, setModels] = useState([]);
     const [modelsId, setModelsId] = useState("");
+    const [examId, setExamId] = useState("");
     let userToken = useSelector((state) => state.tokened.Token);
 
     useEffect(() => {
@@ -38,7 +42,6 @@ const IqTest = (props) => {
                             Authorization: `Bearer ${userToken}`,
                             Accept: "application/json",
                         },
-                        // body: data,
                     }
                 );
 
@@ -50,7 +53,7 @@ const IqTest = (props) => {
             }
         }
         fetchData();
-    }, []);
+    }, [modelsId]);
 
     let openModal = (item) => {
         setIsOpen(true);
@@ -60,7 +63,8 @@ const IqTest = (props) => {
     let closeModal = () => {
         setIsOpen(false);
     };
-    let handleexamstart = async () => {
+
+    let handlstart = async () => {
         try {
             const response = await fetch(
                 `http://icaniq.synexdigital.com/api/model/request/${modelsId}`,
@@ -80,28 +84,107 @@ const IqTest = (props) => {
         }
         setIsOpen(false);
     };
+
+    let handleexam = (item) => {
+        setExamId(item.id);
+        setIsOpen_2(true);
+    };
+
+    let handleexamstart =async()=>{
+        try {
+            let data = new FormData();
+            data.append("model_id", examId);
+
+            const response = await fetch(
+                "http://icaniq.synexdigital.com/api/attempt",
+                {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${userToken}`,
+                        Accept: "application/json",
+                    },
+                    body: data,
+                }
+            );
+
+            const responseData = await response.json();
+            console.log(responseData.data);
+
+            
+        } catch (error) {
+            console.error("Login error:", error);
+            throw error;
+        }
+        navigate("/user/exam")
+    }
     return (
         <>
-            <section
-                className="flex xl:justify-center mt-16 p-4 w-full  "
-            >
+            <section className="flex mt-16 p-4 w-full  ">
                 <div
                     className={` ${
-                        show ? "xl:w-[70%]" : "xl:w-[92%]"
+                        show ? "xl:w-[70%" : "xl:w-[92%"
                     } flex lg:max-xl:w-full gap-x-3 gap-y-3 flex-wrap`}
                 >
-                    {models.map((item) => (
-                        <Module
-                            updatetime="Updated by 1day ago"
-                            modulename={item.title}
-                            moduletext={item.note}
-                            questionnumber="100"
-                            durationtime={item.exam_time}
-                            onclick={() => openModal(item)}
-                        />
+                    {models.map((item, index) => (
+                        <div
+                            key={index}
+                            className="smalldevice:max-sm:w-full sm:max-lg:w-[49%] lg:max-xl:w-[49.3%] "
+                        >
+                            <div className="border p-5 rounded-2xl shadow-md">
+                                <time className="flex items-center gap-x-1 justify-end font-rb text-sm text-[#6D6D6D]">
+                                    <span>
+                                        <BsCalendar2Check />
+                                    </span>
+                                    Updated by 1day ago
+                                </time>
+                                <h2 className="font-rb text-2xl font-semibold text-tbcolor mt-2 mb-4">
+                                    {item.title}
+                                </h2>
+                                <p className="font-rb text-sm text-[#6D6D6D] xl:w-[320px]">
+                                    {item.note}
+                                </p>
+                                <div className="flex justify-between mt-5 mb-8">
+                                    <h4 className="flex items-center gap-x-2 font-rb text-[#3D3D3D]">
+                                        <span className=" text-2xl text-[#705BCC]">
+                                            <GiNotebook />
+                                        </span>
+                                        100 Question
+                                    </h4>
+                                    <h4 className="flex items-center gap-x-2 font-rb text-[#3D3D3D]">
+                                        <span className=" text-2xl text-[#32B548]">
+                                            <PiClockClockwiseFill />
+                                        </span>
+                                        Duration {item.exam_time} m
+                                    </h4>
+                                </div>
+                                {item.approval == 1 ? (
+                                    <button
+                                        onClick={() => openModal(item)}
+                                        className="group font-rb font-bold text-lg text-center border py-[10px] w-full text-[#3888F9] rounded-lg border-[#3888F9] transition duration-300 ease-in-out hover:text-white hover:bg-[#3888F9]"
+                                    >
+                                        Request
+                                    </button>
+                                ) : item.approval == 2 ? (
+                                    <button
+                                        className="group font-rb font-bold text-lg text-center border py-[10px] w-full text-[#6C757D] rounded-lg border-[#6C757D] "
+                                        disabled
+                                    >
+                                        Pending
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={() => handleexam(item)}
+                                        className="group font-rb font-bold text-lg text-center border py-[10px] w-full rounded-lg border-[#198754] transition duration-300 ease-in-out text-white bg-[#198754]"
+                                    >
+                                        Start
+                                    </button>
+                                )}
+                            </div>
+                        </div>
                     ))}
                 </div>
             </section>
+
             <div>
                 <Modal
                     appElement={document.getElementById("root")}
@@ -118,6 +201,34 @@ const IqTest = (props) => {
                     <div className="flex justify-between">
                         <button
                             onClick={closeModal}
+                            className="w-[48%] border text-[#3888F9] transition duration-300 ease-in-out border-[#3888F9] py-2 px-6 rounded hover:bg-[#3888F9] hover:text-white text-lg font-rb font-semibold"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            onClick={handlstart}
+                            className="w-[48%] text-[#3888F9] border rounded border-[#3888F9] transition duration-300 ease-in-out py-2 px-6 hover:bg-[#3888F9] hover:text-white text-lg font-rb font-semibold"
+                        >
+                            Start
+                        </button>
+                    </div>
+                </Modal>
+
+                <Modal
+                    appElement={document.getElementById("root")}
+                    isOpen={modalIsOpen_2}
+                    onRequestClose={() => setIsOpen_2(false)}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                >
+                    <p className="sm:w-[456px] font-rb text-lg text-[#454545] mb-10">
+                        The test is designed with 100 marks, each associated
+                        with a distinct set of questions totaling 100. I retain
+                        the flexibility to skip questions as desired.
+                    </p>
+                    <div className="flex justify-between">
+                        <button
+                            onClick={() => setIsOpen_2(false)}
                             className="w-[48%] border text-[#3888F9] transition duration-300 ease-in-out border-[#3888F9] py-2 px-6 rounded hover:bg-[#3888F9] hover:text-white text-lg font-rb font-semibold"
                         >
                             Cancel

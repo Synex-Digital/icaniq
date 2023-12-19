@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userData } from "../../../features/userSlice";
 import { userToken } from "../../../features/tokenSlice";
+import { MdErrorOutline } from "react-icons/md";
 
 let initialValue = {
     email: "",
@@ -33,6 +34,23 @@ const Signin = () => {
     };
 
     let handlelogin = async () => {
+        let { email, password } = values;
+
+        if (!email) {
+            setValues({
+                ...values,
+                error: "Enter_your_email",
+            });
+            return;
+        }
+        if (!password) {
+            setValues({
+                ...values,
+                error: "Enter_your_password",
+            });
+            return;
+        }
+
         try {
             let data = new FormData();
             data.append("email", values.email);
@@ -110,26 +128,39 @@ const Signin = () => {
                         </h3>
                         <input
                             type="email"
-                            className="p-3 mt-2 mb-2 md:mt-4 md:mb-5 w-full border rounded border-bcolor border-solid"
+                            className="p-3 mt-2 mb-2 md:mt-4 w-full border rounded border-bcolor border-solid"
                             placeholder="your email here"
                             onChange={handlevalues}
                             name="email"
                         />
-                        {/* {values.error.email && <p>{values.error.email[0]}</p>} */}
+                        {values.error &&
+                            values.error?.includes("Enter_your_email") && (
+                                <p className="font-rb bg-[#FDEDED] text-[#692B20] p-2 w-full my-2 md:my-4 flex gap-x-2 items-center">
+                                        <MdErrorOutline />
+                                        Please Enter your Email
+                                    </p>
+                            )}
                         <h3 className="smalldevice:max-sm:text-white font-rb md:font-semibold font-medium md:text-lg text-tbcolor smalldevice:max-sm:mt-3">
                             Password
                         </h3>
+
                         <div className=" relative">
                             <input
                                 type={show ? "text" : "password"}
-                                className="p-3 w-full my-2 md:my-4 border rounded border-bcolor border-solid"
+                                className="p-3 w-full mt-2 md:mt-4 border rounded border-bcolor border-solid"
                                 placeholder="password"
                                 name="password"
                                 onChange={handlevalues}
                             />
-                            {values.error.password && (
-                                <p>{values.error.password[0]}</p>
-                            )}
+                            {values.error &&
+                                values.error?.includes(
+                                    "Enter_your_password"
+                                ) && (
+                                    <p className="font-rb bg-[#FDEDED] text-[#692B20] p-2 w-full my-2 md:my-4 flex gap-x-2 items-center">
+                                        <MdErrorOutline />
+                                        Please Enter your Password
+                                    </p>
+                                )}
                             {show ? (
                                 <IoEye
                                     className=" cursor-pointer absolute top-7 md:top-[34px] right-4 text-[#adadad]"

@@ -10,7 +10,9 @@ import SignIn from "./components/pages/SignIn";
 import UserDashboard from "./components/pages/UserDashboard";
 import Rotlayout from "./components/layout/Rotlayout";
 import IqTest from "./components/pages/IqTest";
-import Exam from "./components/pages/Exam"
+import Exam from "./components/pages/Exam";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -29,6 +31,20 @@ function App() {
     return (
         <>
             <RouterProvider router={router} />
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
+            {/* Same as */}
+            <ToastContainer />
         </>
     );
 }

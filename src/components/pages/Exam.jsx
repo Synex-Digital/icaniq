@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ReactPaginate from "react-paginate";
-import { Question } from "../../../data/data";
 import { questionid } from "../../../features/questionSlice";
 import { LuMoveRight, LuMoveLeft } from "react-icons/lu";
 import ExamTime from "../layout/ExamTime";
@@ -10,21 +9,31 @@ const Exam = () => {
     let dispatch = useDispatch();
     let show = useSelector((state) => state.counter.value);
     let qusid = useSelector((state) => state.queis.value);
-    const pageCount = Math.ceil(Question.length / 1);
+    let examQuestion = useSelector((state) => state.question.Question);
+    let modeltestvaluse = useSelector((state) => state.userModelTest.values);
+    const pageCount = Math.ceil(examQuestion.length / 1);
+
+    // useEffect(()=>{
+    //     console.log(typeof(+modeltestvaluse.exam_time));
+    // },[])
 
     const handlePageClick = (event) => {
         dispatch(questionid(event.selected + 1));
     };
 
     const time = new Date();
-    time.setSeconds(time.getSeconds() + (2*40)); // 10 minutes timer 3599
+    time.setSeconds(time.getSeconds() +  60* +modeltestvaluse.exam_time); // 10 minutes timer 3599
+
+    let hendlesubmit = (sitem) => {
+        console.log(sitem);
+    };
 
     return (
         <section className="mt-16  p-4 mx-auto ">
             <div className=" relative">
                 <div className="flex justify-between">
                     <h2 className=" font-rb font-bold text-2xl mb-4 ">
-                        IQ Test 01
+                        {modeltestvaluse.title}
                     </h2>
                     <time>
                         <ExamTime expiryTimestamp={time} />
@@ -35,7 +44,7 @@ const Exam = () => {
                     breakClassName="text-2xl font-bold"
                     breakLinkClassName=""
                     onPageChange={handlePageClick}
-                    pageRangeDisplayed={35}
+                    pageRangeDisplayed={100}
                     pageCount={pageCount}
                     previousLabel={
                         <div className="flex items-center justify-center gap-x-4 text-lg font-rb">
@@ -56,27 +65,37 @@ const Exam = () => {
                     activeClassName="flex items-center justify-center text-lg font-rb border bg-[#FFCC00] border-[#FFCC00] p-2 rounded w-[45px] h-[35px] text-center cursor-pointer "
                     renderOnZeroPageCount={null}
                 />
-                {Question.map(
-                    (item) =>
-                        qusid == item.id && (
+                {examQuestion.map(
+                    (item, index) =>
+                        item.id == qusid && (
                             <>
-                                <div className="border rounded-lg relative mt-4 p-2 sm:p-4 mx-auto sm:w-1/2">
+                                <div
+                                    key={index}
+                                    className="border rounded-lg relative mt-4 p-2 sm:p-4 mx-auto sm:w-1/2"
+                                >
                                     <div className="mb-4 flex justify-center items-center gap-x-3">
-                                        {item.img && (
+                                        {item.question_test_image && (
                                             <img
                                                 className="w-[160px] h-[160px]"
-                                                src={item.img}
+                                                src={item.question_test_image}
                                             />
                                         )}
                                         <h2 className=" font-rb font-semibold text-xl sm:text-2xl text-center">
-                                            {item.name}
+                                            {item.question_test_text}
                                         </h2>
                                     </div>
                                     <div className="flex flex-col gap-y-4 ">
-                                        {item.answer &&
-                                            item.answer.map((sitem, index) => (
-                                                <p className="border rounded border-[#292055] font-rb sm:text-lg py-2 px-2 sm:px-6  text-[#0C0C0C] mx-auto cursor-pointer w-[98%]">
-                                                    {index + 1}. {sitem.name}
+                                        {item.choices &&
+                                            item.choices.map((sitem, index) => (
+                                                <p
+                                                    key={sitem.id}
+                                                    className="border rounded border-[#292055] font-rb sm:text-lg py-2 px-2 sm:px-6  text-[#0C0C0C] mx-auto cursor-pointer w-[98%]"
+                                                    onClick={() =>
+                                                        hendlesubmit(sitem)
+                                                    }
+                                                >
+                                                    {index + 1}.{" "}
+                                                    {sitem.choice_text}
                                                 </p>
                                             ))}
                                     </div>

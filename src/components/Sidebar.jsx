@@ -8,6 +8,7 @@ import { userData } from "../../features/userSlice";
 import { userToken } from "../../features/tokenSlice";
 import { questionid } from "../../features/questionSlice";
 import { navvalue } from "../../features/navSlice";
+import { userExamQuestion } from "../../features/examQuestionSlice";
 
 const Sidebar = () => {
     let navigate = useNavigate();
@@ -36,7 +37,9 @@ const Sidebar = () => {
         }
         localStorage.removeItem("user");
         localStorage.removeItem("token");
+        localStorage.removeItem("question");
         dispatch(userData(null));
+        dispatch(userExamQuestion(null));
         dispatch(userToken(null));
         dispatch(navvalue(null));
         dispatch(questionid(null));

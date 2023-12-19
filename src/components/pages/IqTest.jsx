@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import { BsCalendar2Check } from "react-icons/bs";
 import { GiNotebook } from "react-icons/gi";
 import { PiClockClockwiseFill } from "react-icons/pi";
+import { toast } from "react-toastify";
+import { userExamQuestion } from "../../../features/examQuestionSlice";
+import { modelTest } from "../../../features/modelTestSlice";
 
 const customStyles = {
     content: {
@@ -20,8 +23,21 @@ const customStyles = {
     },
 };
 
+const notify = (mas) =>
+    toast.warn(mas, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+    });
+
 const IqTest = (props) => {
     let navigate = useNavigate();
+    const dispatch = useDispatch();
     Modal.setAppElement("#root");
     let show = useSelector((state) => state.counter.value);
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -29,6 +45,7 @@ const IqTest = (props) => {
     const [models, setModels] = useState([]);
     const [modelsId, setModelsId] = useState("");
     const [examId, setExamId] = useState("");
+    const [modeltextvaluse, setModelTextValuse] = useState("");
     let userToken = useSelector((state) => state.tokened.Token);
 
     useEffect(() => {
@@ -53,7 +70,7 @@ const IqTest = (props) => {
             }
         }
         fetchData();
-    }, [modelsId]);
+    }, [modalIsOpen]);
 
     let openModal = (item) => {
         setIsOpen(true);
@@ -78,6 +95,7 @@ const IqTest = (props) => {
             );
 
             const responseData = await response.json();
+            notify(responseData.message);
         } catch (error) {
             console.error("Login error:", error);
             throw error;
@@ -88,9 +106,12 @@ const IqTest = (props) => {
     let handleexam = (item) => {
         setExamId(item.id);
         setIsOpen_2(true);
+        setModelTextValuse(item);
     };
 
-    let handleexamstart =async()=>{
+    let handleexamstart = async () => {
+        dispatch(modelTest(modeltextvaluse));
+        localStorage.setItem("modeltest", JSON.stringify(modeltextvaluse));
         try {
             let data = new FormData();
             data.append("model_id", examId);
@@ -108,15 +129,15 @@ const IqTest = (props) => {
             );
 
             const responseData = await response.json();
-            console.log(responseData.data);
-
-            
+            dispatch(userExamQuestion(responseData.data));
+            localStorage.setItem("question", JSON.stringify(responseData.data));
         } catch (error) {
             console.error("Login error:", error);
             throw error;
         }
-        navigate("/user/exam")
-    }
+        navigate("/user/exam");
+    };
+
     return (
         <>
             <section className="flex mt-16 p-4 w-full  ">

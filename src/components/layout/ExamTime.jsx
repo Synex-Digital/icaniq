@@ -3,7 +3,7 @@ import { useTimer } from "react-timer-hook";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import Image from "./Image";
-import img from "../../assets/img1.png"
+import img from "../../assets/img1.png";
 
 const customStyles = {
     content: {
@@ -30,7 +30,7 @@ const ExamTime = ({ expiryTimestamp }) => {
     let handleexamstart = () => {
         navigate("/user/deshboard");
     };
-    const { seconds, minutes, isRunning } = useTimer({
+    const { hours, seconds, minutes, isRunning } = useTimer({
         expiryTimestamp,
         onExpire: () => {
             return setIsOpen(true);
@@ -42,7 +42,8 @@ const ExamTime = ({ expiryTimestamp }) => {
             <div style={{ textAlign: "center" }}>
                 <div className="flex gap-x-5 items-center">
                     <div className=" font-semibold text-2xl">
-                        <span>{minutes}</span>:<span>{seconds}</span>
+                        <span>{hours}</span>:<span>{minutes}</span>:
+                        <span>{seconds}</span>
                     </div>
                     <p className=" font-medium text-lg text-green-500">
                         {isRunning ? (
@@ -53,19 +54,24 @@ const ExamTime = ({ expiryTimestamp }) => {
                     </p>
                 </div>
             </div>
-            <div >
+            <div>
                 <Modal
                     isOpen={modalIsOpen}
                     onRequestClose={closeModal}
                     style={customStyles}
                     contentLabel="Example Modal"
                 >
-                    <Image className="mx-auto md:mb-7 mb-2 w-[180px] h-[120px] md:w-[290px] md:h-[200px]" imgsrc={img}/>
-                    <p className=" font-rb font-bold text-3xl text-[#32B548] text-center">PASS</p>
+                    <Image
+                        className="mx-auto md:mb-7 mb-2 w-[180px] h-[120px] md:w-[250px] md:h-[180px]"
+                        imgsrc={img}
+                    />
+                    <p className=" font-rb font-bold text-3xl text-[#32B548] text-center">
+                        PASS
+                    </p>
                     <p className="font-rb text-lg text-white mb-2 md:mb-4 text-center">
                         (You achieved a score of 85 out of 100.)
                     </p>
-                    <p className="sm:w-[456px] font-rb text-lg text-white mb-4 md:mb-8">
+                    <p className="sm:w-[456px] font-rb text-white mb-4 md:mb-8">
                         Congratulations on your achievement! Your hard work and
                         dedication have paid off, and this success is
                         well-deserved.

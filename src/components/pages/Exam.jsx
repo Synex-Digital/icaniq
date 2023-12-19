@@ -17,15 +17,11 @@ const Exam = () => {
     };
 
     const time = new Date();
-    time.setSeconds(time.getSeconds() + 10); // 10 minutes timer 3599
+    time.setSeconds(time.getSeconds() + (2*40)); // 10 minutes timer 3599
 
     return (
-        <section className="mt-16 flex  xl:justify-end p-4 mx-auto ">
-            <div
-                className={` gap-x-4 gap-y-4 relative  ${
-                    show ? "xl:w-[85%]" : "xl:w-[96%]"
-                }`}
-            >
+        <section className="mt-16  p-4 mx-auto ">
+            <div className=" relative">
                 <div className="flex justify-between">
                     <h2 className=" font-rb font-bold text-2xl mb-4 ">
                         IQ Test 01

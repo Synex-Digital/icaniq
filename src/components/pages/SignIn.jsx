@@ -7,7 +7,10 @@ import layoutimg from "../../assets/layoutimg.png";
 import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userData } from "../../../features/userSlice";
+import { userToken } from "../../../features/tokenSlice";
 
 let initialValue = {
     email: "",
@@ -16,6 +19,8 @@ let initialValue = {
 };
 
 const Signin = () => {
+    let navigate = useNavigate();
+    const dispatch = useDispatch();
     let [show, setShow] = useState(false);
     let [values, setValues] = useState(initialValue);
 
@@ -44,26 +49,24 @@ const Signin = () => {
                 }
             );
 
-
-            // const response = await axios.post(
-            //     "http://icaniq.synexdigital.com/api/login",
-            //     data
-            // );
-
-            if (!response.ok) {
-                console.log("Ops");
-            }
-
             const responseData = await response.json();
 
-            // setValues({
-            //     ...values,
-            //     error: responseData.message,
-            // });
-            console.log(responseData);
-            // Extract and handle tokens or user data from the response if needed
-
-            // return responseData; // You can return data after successful login if needed
+            if (responseData.status == 1) {
+                dispatch(userData(responseData.user));
+                dispatch(userToken(responseData.token));
+                localStorage.setItem(
+                    "token",
+                    JSON.stringify(responseData.token)
+                );
+                localStorage.setItem("user", JSON.stringify(responseData.user));
+                navigate("/user/deshboard");
+            } else {
+                // setValues({
+                //     ...values,
+                //     error: "",
+                // });
+                console.log("you do not have login");
+            }
         } catch (error) {
             console.error("Login error:", error);
             throw error;
@@ -112,7 +115,7 @@ const Signin = () => {
                             onChange={handlevalues}
                             name="email"
                         />
-                        {values.error.email && <p>{values.error.email[0]}</p>}
+                        {/* {values.error.email && <p>{values.error.email[0]}</p>} */}
                         <h3 className="smalldevice:max-sm:text-white font-rb md:font-semibold font-medium md:text-lg text-tbcolor smalldevice:max-sm:mt-3">
                             Password
                         </h3>

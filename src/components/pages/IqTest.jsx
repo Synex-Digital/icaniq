@@ -46,7 +46,10 @@ const IqTest = (props) => {
     const [modelsId, setModelsId] = useState("");
     const [examId, setExamId] = useState("");
     const [modeltextvaluse, setModelTextValuse] = useState("");
+    let [loading, setloading] = useState(true);
     let userToken = useSelector((state) => state.tokened.Token);
+    let modeltestvaluse = useSelector((state) => state.userModelTest.values);
+    let loginUser = useSelector((state) => state.loggedUser.loginUser);
 
     useEffect(() => {
         async function fetchData() {
@@ -70,7 +73,23 @@ const IqTest = (props) => {
             }
         }
         fetchData();
+        setloading(false);
     }, [modalIsOpen]);
+
+    // if (modeltestvaluse != null) {
+    //     navigate("/user/exam");
+    //     return;
+    // }
+    // if (examQuestion != null) {
+    //     navigate("/user/exam");
+    //     return;
+    // }
+
+    if (loading) {
+        return(
+            <h1 className="mt-16">Loading.............</h1>
+        )
+    }
 
     let openModal = (item) => {
         setIsOpen(true);
@@ -140,7 +159,7 @@ const IqTest = (props) => {
 
     return (
         <>
-            <section className="flex mt-16 p-4 w-full  ">
+            <section className="flex mt-16 p-4 w-full">
                 <div
                     className={` ${
                         show ? "xl:w-[70%" : "xl:w-[92%"

@@ -4,6 +4,8 @@ import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import Image from "./Image";
 import img from "../../assets/img1.png";
+import { useDispatch } from "react-redux";
+import { userExamQuestion } from "../../../features/examQuestionSlice";
 
 const customStyles = {
     content: {
@@ -22,18 +24,25 @@ const customStyles = {
 
 const ExamTime = ({ expiryTimestamp }) => {
     let navigate = useNavigate();
+    const dispatch = useDispatch();
+    Modal.setAppElement("#root");
     const [modalIsOpen, setIsOpen] = useState(false);
 
     let closeModal = () => {
         setIsOpen(false);
+        dispatch(userExamQuestion(null));
+        localStorage.removeItem("question");
+        navigate("/user/iqtest");
     };
     let handleexamstart = () => {
-        navigate("/user/deshboard");
+        dispatch(userExamQuestion(null));
+        localStorage.removeItem("question");
+        navigate("/user/iqtest");
     };
     const { hours, seconds, minutes, isRunning } = useTimer({
         expiryTimestamp,
         onExpire: () => {
-            return setIsOpen(true);
+            setIsOpen(true);
         },
     });
 
@@ -57,6 +66,7 @@ const ExamTime = ({ expiryTimestamp }) => {
             <div>
                 <Modal
                     isOpen={modalIsOpen}
+                    appElement={document.getElementById("root")}
                     onRequestClose={closeModal}
                     style={customStyles}
                     contentLabel="Example Modal"

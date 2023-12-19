@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Image from "../layout/Image";
 import signinframe from "../../assets/signinframe.webp";
 import cover from "../../assets/cover.png";
@@ -8,10 +8,11 @@ import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userData } from "../../../features/userSlice";
 import { userToken } from "../../../features/tokenSlice";
 import { MdErrorOutline } from "react-icons/md";
+import { toast } from "react-toastify";
 
 let initialValue = {
     email: "",
@@ -19,11 +20,30 @@ let initialValue = {
     error: "",
 };
 
+const notify = (mas) =>
+    toast.success(mas, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+    });
+
 const Signin = () => {
     let navigate = useNavigate();
     const dispatch = useDispatch();
     let [show, setShow] = useState(false);
     let [values, setValues] = useState(initialValue);
+    let loginUser = useSelector((state) => state.loggedUser.loginUser);
+
+    useEffect(() => {
+        if (loginUser != null) {
+            navigate("/user/deshboard");
+        }
+    }, []);
 
     let handlevalues = (e) => {
         setValues({
@@ -77,13 +97,8 @@ const Signin = () => {
                     JSON.stringify(responseData.token)
                 );
                 localStorage.setItem("user", JSON.stringify(responseData.user));
+                notify("Login Successful");
                 navigate("/user/deshboard");
-            } else {
-                // setValues({
-                //     ...values,
-                //     error: "",
-                // });
-                console.log("you do not have login");
             }
         } catch (error) {
             console.error("Login error:", error);
@@ -136,9 +151,9 @@ const Signin = () => {
                         {values.error &&
                             values.error?.includes("Enter_your_email") && (
                                 <p className="font-rb bg-[#FDEDED] text-[#692B20] p-2 w-full my-2 md:my-4 flex gap-x-2 items-center">
-                                        <MdErrorOutline />
-                                        Please Enter your Email
-                                    </p>
+                                    <MdErrorOutline />
+                                    Please Enter your Email
+                                </p>
                             )}
                         <h3 className="smalldevice:max-sm:text-white font-rb md:font-semibold font-medium md:text-lg text-tbcolor smalldevice:max-sm:mt-3">
                             Password

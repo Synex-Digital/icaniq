@@ -6,7 +6,8 @@ import { useSelector } from "react-redux";
 
 const UserDashboard = (props) => {
     let show = useSelector((state) => state.counter.value);
-
+    let loginUser = useSelector((state) => state.loggedUser.loginUser);
+    console.log(loginUser);
     return (
         <div className="sm:flex justify-between mt-16 p-4 w-full  ">
             <div
@@ -48,13 +49,13 @@ const UserDashboard = (props) => {
                 <div className=" bg-[#162655] p-5 rounded-2xl text-center">
                     <Image className="w-24 h-24 mx-auto" imgsrc={profile} />
                     <h2 className=" font-rb font-bold text-2xl mt-5 text-white">
-                        Welcome Abrar
+                        Welcome {loginUser.name}
                     </h2>
                     <p className=" font-rb font-light mt-2 mb-7 text-white">
-                        ID: 1216319561998
+                        ID: {loginUser.id}
                     </p>
                     <p className="bg-[#FFCC00] px-2 py-2 rounded font-rb">
-                        Validity Till 30 December, 2024
+                        Validity Till {loginUser.created_at}
                     </p>
                 </div>
             </div>

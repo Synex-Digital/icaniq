@@ -9,12 +9,17 @@ import { useNavigate } from "react-router-dom";
 const Exam = () => {
     let navigate = useNavigate();
     let dispatch = useDispatch();
+    const [models, setModels] = useState([]);
+    const [question, setQuestion] = useState("");
+    const [choiceid, setChoiceid] = useState("");
+    const [modelid, setModelid] = useState("");
     let show = useSelector((state) => state.counter.value);
     let qusid = useSelector((state) => state.queis.value);
     let examQuestion = useSelector((state) => state.question.Question);
     let modeltestvaluse = useSelector((state) => state.userModelTest.values);
     let loginUser = useSelector((state) => state.loggedUser.loginUser);
     let userToken = useSelector((state) => state.tokened.Token);
+    let examId = useSelector((state) => state.examid.id);
 
     // useEffect(()=>{
     //     const interval = setInterval(() => {
@@ -67,6 +72,35 @@ const Exam = () => {
     //   }, []);
 
     useEffect(() => {
+        async function fetchData() {
+            try {
+                let data = new FormData();
+                data.append("model_id", examId);
+
+                const response = await fetch(
+                    "http://icaniq.synexdigital.com/api/attempt",
+                    {
+                        method: "POST",
+                        headers: {
+                            Authorization: `Bearer ${userToken}`,
+                            Accept: "application/json",
+                        },
+                        body: data,
+                    }
+                );
+
+                const responseData = await response.json();
+                setModels(responseData.data);
+                console.log(responseData.data);
+            } catch (error) {
+                console.error("Login error:", error);
+                throw error;
+            }
+        }
+        fetchData();
+    }, [modelid, choiceid, question]);
+
+    useEffect(() => {
         if (loginUser == null) {
             navigate("/");
         }
@@ -85,6 +119,8 @@ const Exam = () => {
         return;
     }
 
+    let lastlength = (examQuestion.length)
+
     const pageCount = Math.ceil(examQuestion.length / 1);
 
     const handlePageClick = (event) => {
@@ -92,37 +128,36 @@ const Exam = () => {
     };
 
     const time = new Date();
-    // time.setSeconds(time.getSeconds() + 60 * +modeltestvaluse.exam_time); 
-    time.setSeconds(time.getSeconds() + 2); 
+    // time.setSeconds(time.getSeconds() + 60 * +modeltestvaluse.exam_time);
+    time.setSeconds(time.getSeconds() + 3600);
 
     let hendlesubmit = async (sitem, item) => {
-        // console.log("cho", sitem);
-        console.log("qus", item);
-        // console.log("mod", modeltestvaluse);
-        // try {
-        //     let data = new FormData();
-        //     data.append("choice_id", sitem.id);
-        //     data.append("question_id", item.id);
-        //     data.append("model_id", modeltestvaluse.id);
+        try {
+            let data = new FormData();
+            data.append("choice_id", sitem.id);
+            data.append("question_id", item.id);
+            data.append("model_id", modeltestvaluse.id);
 
-        //     const response = await fetch(
-        //         "http://icaniq.synexdigital.com/api/answer/submit",
-        //         {
-        //             method: "POST",
-        //             headers: {
-        //                 Authorization: `Bearer ${userToken}`,
-        //                 Accept: "application/json",
-        //             },
-        //             body: data,
-        //         }
-        //     );
+            const response = await fetch(
+                "http://icaniq.synexdigital.com/api/answer/submit",
+                {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${userToken}`,
+                        Accept: "application/json",
+                    },
+                    body: data,
+                }
+            );
 
-        //     const responseData = await response.json();
-        //     console.log(responseData);
-        // } catch (error) {
-        //     console.error("Login error:", error);
-        //     throw error;
-        // }
+            const responseData = await response.json();
+        } catch (error) {
+            console.error("Login error:", error);
+            throw error;
+        }
+        setQuestion(item.id);
+        setModelid(modeltestvaluse.id);
+        setChoiceid(sitem.id);
     };
 
     return (
@@ -150,6 +185,11 @@ const Exam = () => {
                         </div>
                     }
                     nextLabel={
+                        qusid == lastlength ?
+                        <div className="flex items-center justify-center gap-x-4 text-lg font-rb ">
+                            Submit
+                        </div>
+                        :
                         <div className="flex items-center justify-center gap-x-4 text-lg font-rb ">
                             Next
                             <LuMoveRight className="text-2xl" />
@@ -162,7 +202,7 @@ const Exam = () => {
                     activeClassName="flex items-center justify-center text-lg font-rb border bg-[#FFCC00] border-[#FFCC00] p-2 rounded w-[45px] h-[35px] text-center cursor-pointer "
                     renderOnZeroPageCount={null}
                 />
-                {examQuestion.map(
+                {models.map(
                     (item, index) =>
                         item.id == qusid && (
                             <div key={index}>
@@ -183,7 +223,12 @@ const Exam = () => {
                                             item.choices.map((sitem, index) => (
                                                 <p
                                                     key={sitem.id}
-                                                    className="border rounded border-[#292055] font-rb sm:text-lg py-2 px-2 sm:px-6  text-[#0C0C0C] mx-auto cursor-pointer w-[98%]"
+                                                    className={`
+                                                    ${
+                                                        sitem.exam_status
+                                                            ? "border rounded bg-red-400 border-[#ff3636] font-rb sm:text-lg py-2 px-2 sm:px-6  text-[#0c0c0c] mx-auto cursor-pointer w-[98%]"
+                                                            : "border rounded border-[#292055] font-rb sm:text-lg py-2 px-2 sm:px-6  text-[#0C0C0C] mx-auto cursor-pointer w-[98%]"
+                                                    }`}
                                                     onClick={() =>
                                                         hendlesubmit(
                                                             sitem,

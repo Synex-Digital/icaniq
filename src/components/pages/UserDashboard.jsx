@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 const UserDashboard = (props) => {
     let show = useSelector((state) => state.counter.value);
     let loginUser = useSelector((state) => state.loggedUser.loginUser);
-    console.log(loginUser);
+    
     return (
         <div className="sm:flex justify-between mt-16 p-4 w-full  ">
             <div

@@ -5,6 +5,7 @@ import userReducer from "../features/userSlice";
 import tokenReducer from "../features/tokenSlice";
 import examQuestionReducer from "../features/examQuestionSlice";
 import modelTestReducer from "../features/modelTestSlice";
+import examidReducer from "../features/examIdSlice";
 
 export const store = configureStore({
     reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
         queis: questionReducer,
         question: examQuestionReducer,
         userModelTest: modelTestReducer,
+        examid: examidReducer,
     },
 });

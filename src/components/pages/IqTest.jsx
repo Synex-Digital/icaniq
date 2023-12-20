@@ -8,6 +8,7 @@ import { PiClockClockwiseFill } from "react-icons/pi";
 import { toast } from "react-toastify";
 import { userExamQuestion } from "../../../features/examQuestionSlice";
 import { modelTest } from "../../../features/modelTestSlice";
+import { userExamid } from "../../../features/examIdSlice";
 
 const customStyles = {
     content: {
@@ -66,6 +67,7 @@ const IqTest = (props) => {
                 );
 
                 const responseData = await response.json();
+                console.log(responseData);
                 setModels(responseData.modelTest);
             } catch (error) {
                 console.error("Login error:", error);
@@ -123,7 +125,7 @@ const IqTest = (props) => {
     };
 
     let handleexam = (item) => {
-        setExamId(item.id);
+        setExamId(item.id);    
         setIsOpen_2(true);
         setModelTextValuse(item);
     };
@@ -148,12 +150,15 @@ const IqTest = (props) => {
             );
 
             const responseData = await response.json();
+            console.log(responseData);
             dispatch(userExamQuestion(responseData.data));
             localStorage.setItem("question", JSON.stringify(responseData.data));
         } catch (error) {
             console.error("Login error:", error);
             throw error;
         }
+        dispatch(userExamid(examId));
+        localStorage.setItem("examid", JSON.stringify(examId));
         navigate("/user/exam");
     };
 

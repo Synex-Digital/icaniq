@@ -21,6 +21,8 @@ const Exam = () => {
     let userToken = useSelector((state) => state.tokened.Token);
     let examId = useSelector((state) => state.examid.id);
 
+    console.log(qusid);
+
     // useEffect(()=>{
     //     const interval = setInterval(() => {
     //         async function fetchData() {
@@ -206,7 +208,7 @@ const Exam = () => {
                 />
                 {models.map(
                     (item, index) =>
-                        item.id == qusid && (
+                        index + 1 == qusid && (
                             <div key={index}>
                                 <div className="border rounded-lg relative mt-4 p-2 sm:p-4 mx-auto sm:w-1/2">
                                     <div className="mb-4 flex justify-center items-center gap-x-3">

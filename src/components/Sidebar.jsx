@@ -52,38 +52,43 @@ const Sidebar = () => {
             {show ? (
                 <div className="xl:w-[15%] md:w-[25%] smalldevice:max-xl:fixed sm:max-md:w-[30%] smalldevice:w-1/2 xl:pt-20 pt-6 px-2 shadow-xl h-[100vh] fixed z-50 bg-[#0C0C0C]">
                     <div className="h-[90%]">
-                        <div className="mb-6 ml-10">
-                        <Image
-                            className="w-[90px]"
-                            imgsrc={logo}
-                        />
+                        <div className="mx-2 my-6 pb-4 flex justify-center items-center">
+                            <Image
+                                className="w-[90px]"
+                                imgsrc={logo}
+                            />
                         </div>
-                        <Link
-                            to="deshboard"
-                            className="flex items-center gap-x-2 mb-4 ml-2"
-                        >
-                            <MdOutlineStickyNote2 className="text-3xl font-medium text-white" />
-                            <p className=" font-rb font-medium text-lg text-white">
-                                Dashboard
-                            </p>
-                        </Link>
-                        <Link to="iqtest" className="flex items-center gap-x-2 ml-2">
-                            <RxDashboard className="  font-medium text-3xl text-white" />
-                            <p className=" font-rb font-medium text-lg text-white">
-                                Test
-                            </p>
-                        </Link>
+                        <div className="flex flex-col gap-4">
+                            <Link
+                                to="deshboard"
+                                className="flex items-center p-2 rounded-md bg-[#2d2d2d73] hover:bg-slate-800"
+                            >
+
+                                <RxDashboard className="font-base text-2xl text-white mr-2" />
+                                <p className=" font-rb font-base text-base text-white">
+                                    Dashboard
+                                </p>
+                            </Link>
+                            <Link to="iqtest" className="flex items-center p-2 rounded-md bg-[#2d2d2d73] hover:bg-slate-800">
+                                <MdOutlineStickyNote2 className="text-2xl font-base text-white mr-2" />
+                                <p className=" font-rb font-base text-base text-white">
+                                    Test
+                                </p>
+                            </Link>
+                        </div>
                     </div>
                     <div className="h-[10%]">
-                        <Link
-                            onClick={hendleLogout}
-                            className="flex items-center gap-x-2 ml-2"
-                        >
-                            <RiLogoutCircleRLine className="text-3xl font-medium text-white" />
-                            <p className=" font-rb font-medium text-lg  text-white">
-                                Log out
-                            </p>
-                        </Link>
+                        <div className="w-full flex justify-center rounded-md bg-[#2d2d2d73] hover:bg-slate-800 py-2">
+                            <Link
+                                onClick={hendleLogout}
+                                className="flex items-center"
+                            >
+                                <RiLogoutCircleRLine className="text-3xl mr-4 font-medium text-gray-400" />
+                                <p className=" font-rb font-medium text-lg  text-gray-400">
+                                    Log out
+                                </p>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             ) : (

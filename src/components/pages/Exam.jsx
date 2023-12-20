@@ -129,7 +129,7 @@ const Exam = () => {
 
     const time = new Date();
     // time.setSeconds(time.getSeconds() + 60 * +modeltestvaluse.exam_time);
-    time.setSeconds(time.getSeconds() + 3600);
+    time.setSeconds(time.getSeconds() + 10);
 
     let hendlesubmit = async (sitem, item) => {
         try {
@@ -160,6 +160,10 @@ const Exam = () => {
         setChoiceid(sitem.id);
     };
 
+    let hendleexamsubmit = ()=>{
+        console.log(modeltestvaluse.id);
+    }
+
     return (
         <section className="mt-16  p-4 mx-auto ">
             <div className=" relative">
@@ -186,7 +190,7 @@ const Exam = () => {
                     }
                     nextLabel={
                         qusid == lastlength ?
-                        <div className="flex items-center justify-center gap-x-4 text-lg font-rb ">
+                        <div onClick={hendleexamsubmit} className="flex items-center justify-center gap-x-4 text-lg font-rb ">
                             Submit
                         </div>
                         :
@@ -226,7 +230,7 @@ const Exam = () => {
                                                     className={`
                                                     ${
                                                         sitem.exam_status
-                                                            ? "border rounded bg-red-400 border-[#ff3636] font-rb sm:text-lg py-2 px-2 sm:px-6  text-[#0c0c0c] mx-auto cursor-pointer w-[98%]"
+                                                            ? "border rounded bg-green-400 border-[#36ff40] font-rb sm:text-lg py-2 px-2 sm:px-6  text-[#0c0c0c] mx-auto cursor-pointer w-[98%]"
                                                             : "border rounded border-[#292055] font-rb sm:text-lg py-2 px-2 sm:px-6  text-[#0C0C0C] mx-auto cursor-pointer w-[98%]"
                                                     }`}
                                                     onClick={() =>

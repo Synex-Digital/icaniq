@@ -4,7 +4,7 @@ import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import Image from "./Image";
 import img from "../../assets/img1.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userExamQuestion } from "../../../features/examQuestionSlice";
 
 const customStyles = {
@@ -27,6 +27,7 @@ const ExamTime = ({ expiryTimestamp }) => {
     const dispatch = useDispatch();
     Modal.setAppElement("#root");
     const [modalIsOpen, setIsOpen] = useState(false);
+    let modeltestvaluse = useSelector((state) => state.userModelTest.values);
 
     let closeModal = () => {
         setIsOpen(false);
@@ -43,6 +44,7 @@ const ExamTime = ({ expiryTimestamp }) => {
         expiryTimestamp,
         onExpire: () => {
             setIsOpen(true);
+            console.log(modeltestvaluse.id);
         },
     });
 

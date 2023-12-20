@@ -129,7 +129,7 @@ const Exam = () => {
 
     const time = new Date();
     // time.setSeconds(time.getSeconds() + 60 * +modeltestvaluse.exam_time);
-    time.setSeconds(time.getSeconds() + 10);
+    time.setSeconds(time.getSeconds() + 338 * 8);
 
     let hendlesubmit = async (sitem, item) => {
         try {
@@ -160,7 +160,7 @@ const Exam = () => {
         setChoiceid(sitem.id);
     };
 
-    let hendleexamsubmit = ()=>{
+    let hendleexamsubmit = () => {
         console.log(modeltestvaluse.id);
     }
 
@@ -183,21 +183,19 @@ const Exam = () => {
                     pageRangeDisplayed={100}
                     pageCount={pageCount}
                     previousLabel={
-                        <div className="flex items-center justify-center gap-x-4 text-lg font-rb">
+                        <div className="flex items-center justify-center gap-x-4 text-lg font-rb rounded-2xl">
                             <LuMoveLeft className="text-2xl" />
-                            Previous
                         </div>
                     }
                     nextLabel={
                         qusid == lastlength ?
-                        <div onClick={hendleexamsubmit} className="flex items-center justify-center gap-x-4 text-lg font-rb ">
-                            Submit
-                        </div>
-                        :
-                        <div className="flex items-center justify-center gap-x-4 text-lg font-rb ">
-                            Next
-                            <LuMoveRight className="text-2xl" />
-                        </div>
+                            <div onClick={hendleexamsubmit} className="flex items-center justify-center gap-x-4 text-lg font-rb ">
+                                Submit
+                            </div>
+                            :
+                            <div className="flex items-center justify-center gap-x-4 text-lg font-rb ">
+                                <LuMoveRight className="text-2xl" />
+                            </div>
                     }
                     pageLinkClassName="text-lg flex items-center justify-center font-rb border border-[#FFCC00] p-2 rounded w-[45px] h-[35px] text-center cursor-pointer"
                     previousLinkClassName="absolute -bottom-[85px] left-0 sm:left-[50px] lg:left-[230px] xl:left-[295px] border-[#3888F9] border w-[150px] p-3 xl:w-[15%] hover:bg-[#1F7CFF] text-center text-lg font-rb bg-[#3888F9] text-white font-semibold rounded"
@@ -228,11 +226,10 @@ const Exam = () => {
                                                 <p
                                                     key={sitem.id}
                                                     className={`
-                                                    ${
-                                                        sitem.exam_status
+                                                    ${sitem.exam_status
                                                             ? "border rounded bg-green-400 border-[#36ff40] font-rb sm:text-lg py-2 px-2 sm:px-6  text-[#0c0c0c] mx-auto cursor-pointer w-[98%]"
                                                             : "border rounded border-[#292055] font-rb sm:text-lg py-2 px-2 sm:px-6  text-[#0C0C0C] mx-auto cursor-pointer w-[98%]"
-                                                    }`}
+                                                        }`}
                                                     onClick={() =>
                                                         hendlesubmit(
                                                             sitem,

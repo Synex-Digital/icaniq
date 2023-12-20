@@ -36,12 +36,12 @@ const Navbar = () => {
                 {show ? (
                     <>
                         <FaBars
-                            className="ml-3 cursor-pointer text-lg smalldevice:max-xl:hidden"
+                            className="ml-4 cursor-pointer text-lg smalldevice:max-xl:hidden"
                             onClick={() => setShow(!show)}
                         />
                         <ImCross
                             onClick={() => setShow(!show)}
-                            className="ml-3 cursor-pointer font-bold text-lg xl:hidden"
+                            className="ml-4 cursor-pointer font-bold text-lg xl:hidden"
                         />
                     </>
                 ) : (
@@ -51,13 +51,11 @@ const Navbar = () => {
                     />
                 )}
 
-                <Image className="w-[90px] hidden lg:block" imgsrc={logo} />
+                {/* <span className="text-3xl font-semibold">Ican IQ</span> */}
             </div>
-            <div className="flex w-[30%] items-center gap-x-3 relative">
+            {/* <div className="flex w-[30%] items-center gap-x-3 relative">
                 {location.pathname == "/user/iqtest" ? (
-                    <h3 className=" lg:text-[32px] smalldevice:max-lg:text-xl smalldevice:max-lg:font-semibold smalldevice:max-xl:ml-3 font-rb lg:font-bold text-tbcolor">
-                        Test
-                    </h3>
+                    ''
                 ) : location.pathname == "/user/deshboard" ? (
                     <h3 className=" lg:text-[32px] smalldevice:max-lg:text-xl smalldevice:max-lg:font-semibold smalldevice:max-xl:ml-3 font-rb lg:font-bold text-tbcolor">
                         Dashboard
@@ -70,7 +68,7 @@ const Navbar = () => {
                     placeholder="search your module"
                 />
                 <IoSearchOutline className=" absolute font-semibold text-xl right-5 smalldevice:max-xl:hidden" />
-            </div>
+            </div> */}
             <div className="flex w-[55%] items-center gap-x-3 relative justify-end mr-6">
                 <IoSearchOutline className="xl:hidden  font-semibold text-xl " />
                 <MdOutlineNotificationsActive className=" font-semibold text-xl" />

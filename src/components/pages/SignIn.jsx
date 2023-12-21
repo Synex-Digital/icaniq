@@ -99,7 +99,6 @@ const Signin = () => {
             );
 
             const responseData = await response.json();
-            console.log(responseData);
             notifytwo(responseData.user);
 
             if (responseData.status == 1) {
@@ -114,7 +113,6 @@ const Signin = () => {
                 navigate("/user/dashboard");
             }
         } catch (error) {
-            console.error("Login error:", error);
             throw error;
         }
     };

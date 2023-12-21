@@ -9,8 +9,25 @@ import { userToken } from "../../features/tokenSlice";
 import { questionid } from "../../features/questionSlice";
 import { navvalue } from "../../features/navSlice";
 import { userExamQuestion } from "../../features/examQuestionSlice";
+import { modelTest } from "../../features/modelTestSlice";
+import { examResult } from "../../features/resultSlice";
+import { userExamid } from "../../features/examIdSlice";
 import Image from "./layout/Image";
 import logo from "../assets/logo.png"
+import { toast } from "react-toastify";
+
+
+const notify = (mas) =>
+    toast.success(mas, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+    });
 
 const Sidebar = () => {
     let navigate = useNavigate();
@@ -32,19 +49,20 @@ const Sidebar = () => {
             );
 
             const responseData = await response.json();
-            console.log(responseData);
+            notify(responseData.message);
         } catch (error) {
             console.error("Login error:", error);
             throw error;
         }
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
-        localStorage.removeItem("question");
+        localStorage.clear()
         dispatch(userData(null));
         dispatch(userExamQuestion(null));
         dispatch(userToken(null));
         dispatch(navvalue(null));
         dispatch(questionid(null));
+        dispatch(modelTest(null));
+        dispatch(examResult(null));
+        dispatch(userExamid(null));
         navigate("/");
     };
     return (

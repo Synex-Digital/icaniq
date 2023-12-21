@@ -49,8 +49,6 @@ const IqTest = (props) => {
     const [modeltextvaluse, setModelTextValuse] = useState("");
     let [loading, setloading] = useState(true);
     let userToken = useSelector((state) => state.tokened.Token);
-    let modeltestvaluse = useSelector((state) => state.userModelTest.values);
-    let loginUser = useSelector((state) => state.loggedUser.loginUser);
 
     useEffect(() => {
         async function fetchData() {
@@ -82,6 +80,12 @@ const IqTest = (props) => {
     if (loading) {
         return <h1 className="mt-16">Loading......</h1>;
     }
+
+    // if (models.length == 0) {
+    //     console.log("ok");
+        
+    //     return;
+    // }
 
     let openModal = (item) => {
         setIsOpen(true);

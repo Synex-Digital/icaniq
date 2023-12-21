@@ -4,7 +4,6 @@ import {
     RouterProvider,
     Route,
     createRoutesFromElements,
-    Link,
 } from "react-router-dom";
 import SignIn from "./components/pages/SignIn";
 import UserDashboard from "./components/pages/UserDashboard";

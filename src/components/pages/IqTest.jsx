@@ -56,7 +56,7 @@ const IqTest = (props) => {
         async function fetchData() {
             try {
                 const response = await fetch(
-                    "http://icaniq.synexdigital.com/api/model/test",
+                    "https://icaniq.synexdigital.com/api/model/test",
                     {
                         method: "GET",
                         headers: {
@@ -95,7 +95,7 @@ const IqTest = (props) => {
     let handlstart = async () => {
         try {
             const response = await fetch(
-                `http://icaniq.synexdigital.com/api/model/request/${modelsId}`,
+                `https://icaniq.synexdigital.com/api/model/request/${modelsId}`,
                 {
                     method: "GET",
                     headers: {
@@ -128,7 +128,7 @@ const IqTest = (props) => {
             data.append("model_id", examId);
 
             const response = await fetch(
-                "http://icaniq.synexdigital.com/api/attempt",
+                "https://icaniq.synexdigital.com/api/attempt",
                 {
                     method: "POST",
                     headers: {

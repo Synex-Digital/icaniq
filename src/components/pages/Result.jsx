@@ -17,7 +17,7 @@ const Result = () => {
         async function fetchData() {
             try {
                 const response = await fetch(
-                    "http://icaniq.synexdigital.com/api/result/list",
+                    "https://icaniq.synexdigital.com/api/result/list",
                     {
                         method: "GET",
                         headers: {
@@ -41,7 +41,7 @@ const Result = () => {
     let hendleView = async (item) => {
         try {
             const response = await fetch(
-                `http://icaniq.synexdigital.com/api/result/${item.id}`,
+                `https://icaniq.synexdigital.com/api/result/${item.id}`,
                 {
                     method: "GET",
                     headers: {

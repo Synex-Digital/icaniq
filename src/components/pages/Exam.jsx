@@ -29,7 +29,7 @@ const Exam = () => {
                 data.append("model_id", examId);
 
                 const response = await fetch(
-                    "http://icaniq.synexdigital.com/api/attempt",
+                    "https://icaniq.synexdigital.com/api/attempt",
                     {
                         method: "POST",
                         headers: {
@@ -56,7 +56,7 @@ const Exam = () => {
                 data.append("model_id", modeltestvaluse.id);
 
                 const response = await fetch(
-                    "http://icaniq.synexdigital.com/api/answer/submit",
+                    "https://icaniq.synexdigital.com/api/answer/submit",
                     {
                         method: "POST",
                         headers: {
@@ -81,7 +81,7 @@ const Exam = () => {
                 data.append("model_id", examId);
 
                 const response = await fetch(
-                    "http://icaniq.synexdigital.com/api/attempt",
+                    "https://icaniq.synexdigital.com/api/attempt",
                     {
                         method: "POST",
                         headers: {
@@ -144,7 +144,7 @@ const Exam = () => {
             data.append("model_id", modeltestvaluse.id);
 
             const response = await fetch(
-                "http://icaniq.synexdigital.com/api/answer/submit",
+                "https://icaniq.synexdigital.com/api/answer/submit",
                 {
                     method: "POST",
                     headers: {
@@ -177,7 +177,7 @@ const Exam = () => {
             data.append("model_id", modeltestvaluse.id);
 
             const response = await fetch(
-                "http://icaniq.synexdigital.com/api/answer/submit/done",
+                "https://icaniq.synexdigital.com/api/answer/submit/done",
                 {
                     method: "POST",
                     headers: {

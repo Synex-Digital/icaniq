@@ -21,7 +21,7 @@ const Sidebar = () => {
     let hendleLogout = async () => {
         try {
             const response = await fetch(
-                "http://icaniq.synexdigital.com/api/logout",
+                "https://icaniq.synexdigital.com/api/logout",
                 {
                     method: "POST",
                     headers: {
@@ -50,8 +50,8 @@ const Sidebar = () => {
     return (
         <aside>
             {show ? (
-                <div className="xl:w-[15%] md:w-[25%] smalldevice:max-xl:fixed sm:max-md:w-[30%] smalldevice:w-1/2 xl:pt-20 pt-6 px-2 shadow-xl h-[100vh] fixed z-50 bg-[#0C0C0C]">
-                    <div className="h-[90%]">
+                <div className="xl:w-[15%] md:w-[25%] smalldevice:max-xl:fixed sm:max-md:w-[30%] smalldevice:w-1/2 xl:pt-20 pt-6 px-2 shadow-xl h-[100vh] fixed z-50 bg-[#162655]">
+                    <div className="h-[80%]">
                         <div className="mx-2 my-6 pb-4 flex justify-center items-center">
                             <Image
                                 className="w-[90px]"
@@ -61,8 +61,8 @@ const Sidebar = () => {
                         <div className="flex flex-col gap-4">
                             <Link
                                 
-                                to="deshboard"
-                                className="flex items-center p-2 rounded-md bg-[#2d2d2d73] hover:bg-slate-800"
+                                to="dashboard"
+                                className="flex items-center p-2 rounded-md bg-[#0C0C0C] hover:bg-black"
                             >
 
                                 <RxDashboard className="font-base text-2xl text-white mr-2" />
@@ -70,13 +70,13 @@ const Sidebar = () => {
                                     Dashboard
                                 </p>
                             </Link>
-                            <Link to="iqtest" className="flex items-center p-2 rounded-md bg-[#2d2d2d73] hover:bg-slate-800">
+                            <Link to="iqtest" className="flex items-center p-2 rounded-md bg-[#0C0C0C] hover:bg-black">
                                 <MdOutlineStickyNote2 className="text-2xl font-base text-white mr-2" />
                                 <p className=" font-rb font-base text-base text-white">
                                     Test
                                 </p>
                             </Link>
-                            <Link to="result" className="flex items-center p-2 rounded-md bg-[#2d2d2d73] hover:bg-slate-800">
+                            <Link to="result" className="flex items-center p-2 rounded-md bg-[#0C0C0C] hover:bg-black">
                                 <MdOutlineStickyNote2 className="text-2xl font-base text-white mr-2" />
                                 <p className=" font-rb font-base text-base text-white">
                                     Result
@@ -84,14 +84,14 @@ const Sidebar = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="h-[10%]">
-                        <div className="w-full flex justify-center rounded-md bg-[#2d2d2d73] hover:bg-slate-800 py-2">
+                    <div className="h-[20%]">
+                        <div className="w-full flex justify-center py-2">
                             <Link
                                 onClick={hendleLogout}
                                 className="flex items-center"
                             >
-                                <RiLogoutCircleRLine className="text-3xl mr-4 font-medium text-gray-400" />
-                                <p className=" font-rb font-medium text-lg  text-gray-400">
+                                <RiLogoutCircleRLine className="text-2xl mr-2 font-medium text-white" />
+                                <p className=" font-rb font-medium text-lg text-white">
                                     Log out
                                 </p>
                             </Link>
@@ -99,10 +99,10 @@ const Sidebar = () => {
                     </div>
                 </div>
             ) : (
-                <div className="xl:w-[4%] bg-[#0C0C0C] fixed z-50 pt-20 smalldevice:max-xl:hidden px-2 shadow-xl h-[100vh] top-0 bottom-0 right-0 left-0">
+                <div className="xl:w-[4%] bg-[#162655] fixed z-50 pt-20 smalldevice:max-xl:hidden px-2 shadow-xl h-[100vh] top-0 bottom-0 right-0 left-0">
                     <div className="h-[90%]">
                         <Link
-                            to="deshboard"
+                            to="dashboard"
                             className="flex items-center gap-x-2 mb-4"
                         >
                             <MdOutlineStickyNote2 className="text-3xl font-medium text-white" />

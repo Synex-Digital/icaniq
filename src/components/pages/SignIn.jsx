@@ -31,6 +31,17 @@ const notify = (mas) =>
         progress: undefined,
         theme: "dark",
     });
+const notifytwo = (mas) =>
+    toast.warn(mas, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+    });
 
 const Signin = () => {
     let navigate = useNavigate();
@@ -41,7 +52,7 @@ const Signin = () => {
 
     useEffect(() => {
         if (loginUser != null) {
-            navigate("/user/deshboard");
+            navigate("/user/dashboard");
         }
     }, []);
 
@@ -77,7 +88,7 @@ const Signin = () => {
             data.append("password", values.password);
 
             const response = await fetch(
-                "http://icaniq.synexdigital.com/api/login",
+                "https://icaniq.synexdigital.com/api/login",
                 {
                     method: "POST",
                     headers: {
@@ -88,6 +99,8 @@ const Signin = () => {
             );
 
             const responseData = await response.json();
+            console.log(responseData);
+            notifytwo(responseData.user);
 
             if (responseData.status == 1) {
                 dispatch(userData(responseData.user));
@@ -98,7 +111,7 @@ const Signin = () => {
                 );
                 localStorage.setItem("user", JSON.stringify(responseData.user));
                 notify("Login Successful");
-                navigate("/user/deshboard");
+                navigate("/user/dashboard");
             }
         } catch (error) {
             console.error("Login error:", error);

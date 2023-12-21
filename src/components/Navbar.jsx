@@ -31,47 +31,33 @@ const Navbar = () => {
         dispatch(navvalue(show));
     }, [show]);
     return (
-        <nav className="fixed top-0 right-0 left-0 bottom-0 flex w-full  z-[51] h-16 justify-between bg-white shadow-md">
+        <nav className="fixed top-0 right-0 left-0 bottom-0 flex w-full  z-[51] h-16 justify-between  bg-[#162655] shadow-md">
             <div className="flex lg:w-[15%] items-center gap-x-3">
                 {show ? (
                     <>
                         <FaBars
-                            className="ml-4 cursor-pointer text-lg smalldevice:max-xl:hidden"
+                            className="ml-4 cursor-pointer text-lg smalldevice:max-xl:hidden text-white"
                             onClick={() => setShow(!show)}
                         />
                         <ImCross
                             onClick={() => setShow(!show)}
-                            className="ml-4 cursor-pointer font-bold text-lg xl:hidden"
+                            className="ml-4 text-white cursor-pointer font-bold xl:hidden"
                         />
                     </>
                 ) : (
                     <FaBars
-                        className="ml-3 cursor-pointer text-lg"
+                        className="ml-3 cursor-pointer text-lg text-white"
                         onClick={() => setShow(!show)}
                     />
                 )}
-
-                {/* <span className="text-3xl font-semibold">Ican IQ</span> */}
             </div>
-            {/* <div className="flex w-[30%] items-center gap-x-3 relative">
-                {location.pathname == "/user/iqtest" ? (
-                    ''
-                ) : location.pathname == "/user/deshboard" ? (
-                    <h3 className=" lg:text-[32px] smalldevice:max-lg:text-xl smalldevice:max-lg:font-semibold smalldevice:max-xl:ml-3 font-rb lg:font-bold text-tbcolor">
-                        Dashboard
-                    </h3>
-                ) : (
-                    ""
-                )}
-                <input
-                    className="w-full border border-bcolor py-1 pl-3 pr-10 rounded smalldevice:max-xl:hidden"
-                    placeholder="search your module"
-                />
-                <IoSearchOutline className=" absolute font-semibold text-xl right-5 smalldevice:max-xl:hidden" />
-            </div> */}
-            <div className="flex w-[55%] items-center gap-x-3 relative justify-end mr-6">
-                <IoSearchOutline className="xl:hidden  font-semibold text-xl " />
-                <MdOutlineNotificationsActive className=" font-semibold text-xl" />
+            <div className="flex justify-center items-center w-[70%]">
+                <h1 className="text-white text-4xl font-rb font-bold">iCAN-IQ</h1>
+            </div>
+           
+            <div className="flex w-[15%] items-center gap-x-3 relative justify-end mr-6">
+                <IoSearchOutline className="xl:hidden text-white font-semibold text-xl " />
+                <MdOutlineNotificationsActive className=" font-semibold text-white text-xl" />
                 <Image className=" w-12 h-12" imgsrc={profile} />
             </div>
         </nav>

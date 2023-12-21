@@ -11,22 +11,22 @@ const UserDashboard = (props) => {
     let loginUser = useSelector((state) => state.loggedUser.loginUser);
 
     return (
-        <div className="sm:flex justify-between mt-16 p-4 w-full  ">
-            <div
-                style={{
-                    backgroundImage: `url(${Background})`,
-                    backgroundSize: "contain",
-                    objectFit: "cover",
-                    width: "100%",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
-                    opacity: "10%",
-                }}
-                className=""
-            >
-                
+        <div className="flex flex-col md:flex-row gap-4  justify-between mt-16 p-4 w-full  ">
+            <div className="grid gap-4 h-fit w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 text-center">
+                <div className="rounded-xl border border-gray-300 px-2 py-4 shadow-sm flex flex-col">
+                    <span>Name</span>
+                    <span>Description</span>
+                </div>
+                <div className="rounded-xl border border-gray-300 px-2 py-4 shadow-sm flex flex-col">
+                    <span>Name</span>
+                    <span>Description</span>
+                </div>
+                <div className="rounded-xl border border-gray-300 px-2 py-4 shadow-sm flex flex-col">
+                    <span>Name</span>
+                    <span>Description</span>
+                </div>
             </div>
-            <div className="flex flex-col gap-4 md:w-[30%] md:ml-4 smalldevice:max-md:mt-4">
+            <div className="flex flex-col gap-4">
                 <div className=" bg-[#162655] h-fit p-5 rounded-2xl text-center">
                     <Image className="w-24 h-24 mx-auto" imgsrc={profile} />
                     <h2 className=" font-rb font-bold text-2xl mt-5 text-white">

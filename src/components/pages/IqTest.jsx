@@ -25,7 +25,7 @@ const customStyles = {
 };
 
 const notify = (mas) =>
-    toast.warn(mas, {
+    toast.success(mas, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -75,22 +75,12 @@ const IqTest = (props) => {
             }
         }
         fetchData();
+
         setloading(false);
     }, [modalIsOpen]);
 
-    // if (modeltestvaluse != null) {
-    //     navigate("/user/exam");
-    //     return;
-    // }
-    // if (examQuestion != null) {
-    //     navigate("/user/exam");
-    //     return;
-    // }
-
     if (loading) {
-        return(
-            <h1 className="mt-16">Loading.............</h1>
-        )
+        return <h1 className="mt-16">Loading......</h1>;
     }
 
     let openModal = (item) => {
@@ -125,7 +115,7 @@ const IqTest = (props) => {
     };
 
     let handleexam = (item) => {
-        setExamId(item.id);    
+        setExamId(item.id);
         setIsOpen_2(true);
         setModelTextValuse(item);
     };
@@ -150,7 +140,6 @@ const IqTest = (props) => {
             );
 
             const responseData = await response.json();
-            console.log(responseData);
             dispatch(userExamQuestion(responseData.data));
             localStorage.setItem("question", JSON.stringify(responseData.data));
         } catch (error) {
@@ -193,7 +182,7 @@ const IqTest = (props) => {
                                         <span className=" text-2xl text-[#705BCC]">
                                             <GiNotebook />
                                         </span>
-                                        100 Question
+                                        {item.total_question} Question
                                     </h4>
                                     <h4 className="flex items-center gap-x-2 font-rb text-[#3D3D3D]">
                                         <span className=" text-2xl text-[#32B548]">
@@ -216,12 +205,19 @@ const IqTest = (props) => {
                                     >
                                         Pending
                                     </button>
-                                ) : (
+                                ) : item.approval == 3 ? (
                                     <button
                                         onClick={() => handleexam(item)}
                                         className="group font-rb font-bold text-lg text-center border py-[10px] w-full rounded-lg border-[#198754] transition duration-300 ease-in-out text-white bg-[#198754]"
                                     >
                                         Start
+                                    </button>
+                                ) : (
+                                    <button
+                                        disabled
+                                        className="group font-rb font-bold text-lg text-center border py-[10px] w-full rounded-lg border-[#198754] transition duration-300 ease-in-out text-white bg-[#198754]"
+                                    >
+                                        Completed
                                     </button>
                                 )}
                             </div>

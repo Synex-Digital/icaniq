@@ -13,6 +13,7 @@ const Exam = () => {
     const [question, setQuestion] = useState("");
     const [choiceid, setChoiceid] = useState("");
     const [modelid, setModelid] = useState("");
+    const [examcount, setExamCount] = useState("");
     let show = useSelector((state) => state.counter.value);
     let qusid = useSelector((state) => state.queis.value);
     let examQuestion = useSelector((state) => state.question.Question);
@@ -20,58 +21,6 @@ const Exam = () => {
     let loginUser = useSelector((state) => state.loggedUser.loginUser);
     let userToken = useSelector((state) => state.tokened.Token);
     let examId = useSelector((state) => state.examid.id);
-
-    console.log(qusid);
-
-    // useEffect(()=>{
-    //     const interval = setInterval(() => {
-    //         async function fetchData() {
-    //             try {
-    //                 const response = await fetch(
-    //                     "http://icaniq.synexdigital.com/api/model/test",
-    //                     {
-    //                         method: "GET",
-    //                         headers: {
-    //                             Authorization: `Bearer ${userToken}`,
-    //                             Accept: "application/json",
-    //                         },
-    //                     }
-    //                 );
-
-    //                 const responseData = await response.json();
-    //                 console.log(responseData);
-    //                 // setModels(responseData.modelTest);
-    //             } catch (error) {
-    //                 console.error("Login error:", error);
-    //                 throw error;
-    //             }
-    //         }
-    //         fetchData();
-    //       }, 1000);
-
-    //       return () => clearInterval(10);
-
-    // },[])
-
-    // useEffect(() => {
-    //     // Function to be executed every 1 second
-    //     const fetchData = () => {
-    //       // Your logic here
-    //       console.log('Effect is running');
-    //     };
-
-    //     // Call the fetchData function immediately (on mount)
-    //     fetchData();
-
-    //     // Set up an interval to call fetchData every 1 second
-    //     const intervalId = setInterval(fetchData, 1000);
-
-    //     // Clean up the interval when the component is unmounted or when a specific condition is met
-    //     return () => {
-    //       clearInterval(intervalId);
-    //       console.log('Interval is cleared');
-    //     };
-    //   }, []);
 
     useEffect(() => {
         async function fetchData() {
@@ -93,13 +42,64 @@ const Exam = () => {
 
                 const responseData = await response.json();
                 setModels(responseData.data);
-                console.log(responseData.data);
             } catch (error) {
                 console.error("Login error:", error);
                 throw error;
             }
         }
         fetchData();
+        async function fetchDatatwo() {
+            try {
+                let data = new FormData();
+                data.append("choice_id", choiceid);
+                data.append("question_id", question);
+                data.append("model_id", modeltestvaluse.id);
+
+                const response = await fetch(
+                    "http://icaniq.synexdigital.com/api/answer/submit",
+                    {
+                        method: "POST",
+                        headers: {
+                            Authorization: `Bearer ${userToken}`,
+                            Accept: "application/json",
+                        },
+                        body: data,
+                    }
+                );
+
+                const responseData = await response.json();
+                // console.log("time",responseData);
+            } catch (error) {
+                console.error("Login error:", error);
+                throw error;
+            }
+        }
+        fetchDatatwo();
+        async function fetchDatathree() {
+            try {
+                let data = new FormData();
+                data.append("model_id", examId);
+
+                const response = await fetch(
+                    "http://icaniq.synexdigital.com/api/attempt",
+                    {
+                        method: "POST",
+                        headers: {
+                            Authorization: `Bearer ${userToken}`,
+                            Accept: "application/json",
+                        },
+                        body: data,
+                    }
+                );
+
+                const responseData = await response.json();
+                setExamCount(responseData.exam_time);
+            } catch (error) {
+                console.error("Login error:", error);
+                throw error;
+            }
+        }
+        fetchDatathree();
     }, [modelid, choiceid, question]);
 
     useEffect(() => {
@@ -121,7 +121,7 @@ const Exam = () => {
         return;
     }
 
-    let lastlength = (examQuestion.length)
+    let lastlength = examQuestion.length;
 
     const pageCount = Math.ceil(examQuestion.length / 1);
 
@@ -129,9 +129,12 @@ const Exam = () => {
         dispatch(questionid(event.selected + 1));
     };
 
+    if (examcount == "") {
+        return;
+    }
+
     const time = new Date();
-    // time.setSeconds(time.getSeconds() + 60 * +modeltestvaluse.exam_time);
-    time.setSeconds(time.getSeconds() + 338 * 8);
+    time.setSeconds(time.getSeconds() + examcount);
 
     let hendlesubmit = async (sitem, item) => {
         try {
@@ -153,6 +156,9 @@ const Exam = () => {
             );
 
             const responseData = await response.json();
+            console.log("ok", responseData);
+            console.log(models);
+            console.log(qusid);
         } catch (error) {
             console.error("Login error:", error);
             throw error;
@@ -160,11 +166,35 @@ const Exam = () => {
         setQuestion(item.id);
         setModelid(modeltestvaluse.id);
         setChoiceid(sitem.id);
+        // console.log("qus", item.id);
+        // console.log("mod", modeltestvaluse.id);
+        console.log("cho", sitem);
     };
 
-    let hendleexamsubmit = () => {
-        console.log(modeltestvaluse.id);
-    }
+    let hendleexamsubmit = async () => {
+        try {
+            let data = new FormData();
+            data.append("model_id", modeltestvaluse.id);
+
+            const response = await fetch(
+                "http://icaniq.synexdigital.com/api/answer/submit/done",
+                {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${userToken}`,
+                        Accept: "application/json",
+                    },
+                    body: data,
+                }
+            );
+
+            const responseData = await response.json();
+            navigate("/user/iqtest");
+        } catch (error) {
+            console.error("Login error:", error);
+            throw error;
+        }
+    };
 
     return (
         <section className="mt-16  p-4 mx-auto ">
@@ -190,14 +220,18 @@ const Exam = () => {
                         </div>
                     }
                     nextLabel={
-                        qusid == lastlength ?
-                            <div onClick={hendleexamsubmit} className="flex items-center justify-center gap-x-4 text-lg font-rb ">
+                        qusid == lastlength ? (
+                            <div
+                                onClick={hendleexamsubmit}
+                                className="flex items-center justify-center gap-x-4 text-lg font-rb "
+                            >
                                 Submit
                             </div>
-                            :
+                        ) : (
                             <div className="flex items-center justify-center gap-x-4 text-lg font-rb ">
                                 <LuMoveRight className="text-2xl" />
                             </div>
+                        )
                     }
                     pageLinkClassName="text-lg flex items-center justify-center font-rb border border-[#FFCC00] p-2 rounded w-[45px] h-[35px] text-center cursor-pointer"
                     previousLinkClassName="absolute -bottom-[85px] left-0 sm:left-[50px] lg:left-[230px] xl:left-[295px] border-[#3888F9] border w-[150px] p-3 xl:w-[15%] hover:bg-[#1F7CFF] text-center text-lg font-rb bg-[#3888F9] text-white font-semibold rounded"
@@ -228,10 +262,11 @@ const Exam = () => {
                                                 <p
                                                     key={sitem.id}
                                                     className={`
-                                                    ${sitem.exam_status
+                                                    ${
+                                                        sitem.exam_status
                                                             ? "border rounded bg-green-400 border-[#36ff40] font-rb sm:text-lg py-2 px-2 sm:px-6  text-[#0c0c0c] mx-auto cursor-pointer w-[98%]"
                                                             : "border rounded border-[#292055] font-rb sm:text-lg py-2 px-2 sm:px-6  text-[#0C0C0C] mx-auto cursor-pointer w-[98%]"
-                                                        }`}
+                                                    }`}
                                                     onClick={() =>
                                                         hendlesubmit(
                                                             sitem,
@@ -249,6 +284,7 @@ const Exam = () => {
                         )
                 )}
             </div>
+            
         </section>
     );
 };

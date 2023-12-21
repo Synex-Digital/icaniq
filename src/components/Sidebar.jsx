@@ -60,6 +60,7 @@ const Sidebar = () => {
                         </div>
                         <div className="flex flex-col gap-4">
                             <Link
+                                
                                 to="deshboard"
                                 className="flex items-center p-2 rounded-md bg-[#2d2d2d73] hover:bg-slate-800"
                             >
@@ -73,6 +74,12 @@ const Sidebar = () => {
                                 <MdOutlineStickyNote2 className="text-2xl font-base text-white mr-2" />
                                 <p className=" font-rb font-base text-base text-white">
                                     Test
+                                </p>
+                            </Link>
+                            <Link to="result" className="flex items-center p-2 rounded-md bg-[#2d2d2d73] hover:bg-slate-800">
+                                <MdOutlineStickyNote2 className="text-2xl font-base text-white mr-2" />
+                                <p className=" font-rb font-base text-base text-white">
+                                    Result
                                 </p>
                             </Link>
                         </div>

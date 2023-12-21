@@ -28,6 +28,7 @@ const ExamTime = ({ expiryTimestamp }) => {
     Modal.setAppElement("#root");
     const [modalIsOpen, setIsOpen] = useState(false);
     let modeltestvaluse = useSelector((state) => state.userModelTest.values);
+    let userToken = useSelector((state) => state.tokened.Token);
 
     let closeModal = () => {
         setIsOpen(false);
@@ -42,9 +43,30 @@ const ExamTime = ({ expiryTimestamp }) => {
     };
     const { hours, seconds, minutes, isRunning } = useTimer({
         expiryTimestamp,
-        onExpire: () => {
+        onExpire: async () => {
             setIsOpen(true);
-            console.log(modeltestvaluse.id);
+            try {
+                let data = new FormData();
+                data.append("model_id", modeltestvaluse.id);
+
+                const response = await fetch(
+                    "http://icaniq.synexdigital.com/api/answer/submit/done",
+                    {
+                        method: "POST",
+                        headers: {
+                            Authorization: `Bearer ${userToken}`,
+                            Accept: "application/json",
+                        },
+                        body: data,
+                    }
+                );
+
+                const responseData = await response.json();
+                console.log(responseData);
+            } catch (error) {
+                console.error("Login error:", error);
+                throw error;
+            }
         },
     });
 

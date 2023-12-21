@@ -5,6 +5,7 @@ import { RxDashboard } from "react-icons/rx";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { userData } from "../../features/userSlice";
+import { LuBookMinus } from "react-icons/lu";
 import { userToken } from "../../features/tokenSlice";
 import { questionid } from "../../features/questionSlice";
 import { navvalue } from "../../features/navSlice";
@@ -71,7 +72,7 @@ const Sidebar = () => {
                                 </p>
                             </Link>
                             <Link to="iqtest" className="flex items-center p-2 rounded-md bg-[#0C0C0C] hover:bg-black">
-                                <MdOutlineStickyNote2 className="text-2xl font-base text-white mr-2" />
+                                <LuBookMinus className="text-2xl font-base text-white mr-2" />
                                 <p className=" font-rb font-base text-base text-white">
                                     Test
                                 </p>

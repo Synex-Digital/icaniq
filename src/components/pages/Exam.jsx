@@ -156,9 +156,6 @@ const Exam = () => {
             );
 
             const responseData = await response.json();
-            console.log("ok", responseData);
-            console.log(models);
-            console.log(qusid);
         } catch (error) {
             console.error("Login error:", error);
             throw error;
@@ -166,8 +163,8 @@ const Exam = () => {
         setQuestion(item.id);
         setModelid(modeltestvaluse.id);
         setChoiceid(sitem.id);
-        // console.log("qus", item.id);
-        // console.log("mod", modeltestvaluse.id);
+
+        console.log("qus", item);
         console.log("cho", sitem);
     };
 

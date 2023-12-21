@@ -16,7 +16,6 @@ const Show = () => {
                     <div className="flex flex-wrap mt-6 gap-x-4 gap-y-5">
                         {item.choices &&
                             item.choices.map((sitem) => (
-
                                 <p
                                     key={sitem.id}
                                     className={`${

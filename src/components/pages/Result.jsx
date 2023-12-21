@@ -28,7 +28,6 @@ const Result = () => {
                 );
 
                 const responseData = await response.json();
-                console.log(responseData);
                 setModalResult(responseData.data);
             } catch (error) {
                 console.error("Login error:", error);

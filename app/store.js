@@ -7,6 +7,7 @@ import examQuestionReducer from "../features/examQuestionSlice";
 import modelTestReducer from "../features/modelTestSlice";
 import examidReducer from "../features/examIdSlice";
 import resultReducer from "../features/resultSlice";
+import colorReducer from "../features/colorchangeSlice";
 
 export const store = configureStore({
     reducer: {
@@ -18,5 +19,6 @@ export const store = configureStore({
         userModelTest: modelTestReducer,
         examid: examidReducer,
         examresult: resultReducer,
+        color: colorReducer,
     },
 });

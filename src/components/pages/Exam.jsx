@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ReactPaginate from "react-paginate";
 import { questionid } from "../../../features/questionSlice";
+import { colorChange } from "../../../features/colorchangeSlice";
 import { LuMoveRight, LuMoveLeft } from "react-icons/lu";
 import ExamTime from "../layout/ExamTime";
 import { useNavigate } from "react-router-dom";
@@ -14,13 +15,13 @@ const Exam = () => {
     const [choiceid, setChoiceid] = useState("");
     const [modelid, setModelid] = useState("");
     const [examcount, setExamCount] = useState("");
-    let show = useSelector((state) => state.counter.value);
     let qusid = useSelector((state) => state.queis.value);
     let examQuestion = useSelector((state) => state.question.Question);
     let modeltestvaluse = useSelector((state) => state.userModelTest.values);
     let loginUser = useSelector((state) => state.loggedUser.loginUser);
     let userToken = useSelector((state) => state.tokened.Token);
     let examId = useSelector((state) => state.examid.id);
+    let color = useSelector((state) => state.color.values);
 
     useEffect(() => {
         async function fetchData() {
@@ -163,6 +164,9 @@ const Exam = () => {
         setQuestion(item.id);
         setModelid(modeltestvaluse.id);
         setChoiceid(sitem.id);
+        
+           
+        
 
         console.log("qus", item);
         console.log("cho", sitem);
@@ -191,6 +195,9 @@ const Exam = () => {
             console.error("Login error:", error);
             throw error;
         }
+
+        dispatch(colorChange(false));
+        localStorage.removeItem("colorchange");
     };
 
     return (
@@ -230,7 +237,9 @@ const Exam = () => {
                             </div>
                         )
                     }
-                    pageLinkClassName="text-lg flex items-center justify-center font-rb border border-[#FFCC00] p-2 rounded w-[45px] h-[35px] text-center cursor-pointer"
+                    pageLinkClassName={`"text-lg flex items-center justify-center font-rb border ${
+                        color.exam_status ? "bg-red-400" : "bg-[#FFCC00]"
+                    } border-[#FFCC00] p-2 rounded w-[45px] h-[35px] text-center cursor-pointer"`}
                     previousLinkClassName="absolute -bottom-[85px] left-0 sm:left-[50px] lg:left-[230px] xl:left-[295px] border-[#3888F9] border w-[150px] p-3 xl:w-[15%] hover:bg-[#1F7CFF] text-center text-lg font-rb bg-[#3888F9] text-white font-semibold rounded"
                     nextLinkClassName="absolute -bottom-[85px] xl:right-[295px] sm:right-[50px] lg:right-[230px] border-[#3888F9] right-0 border p-3 w-[150px] xl:w-[15%] hover:bg-[#1F7CFF] text-center text-lg font-rb bg-[#3888F9] text-white font-semibold rounded"
                     containerClassName="flex flex-wrap gap-x-2 gap-y-2"
@@ -281,7 +290,6 @@ const Exam = () => {
                         )
                 )}
             </div>
-            
         </section>
     );
 };

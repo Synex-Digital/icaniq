@@ -36,7 +36,7 @@ const UserDashboard = (props) => {
     }, []);
 
     if (loading) {
-        return <h1 className="mt-16">Loading......</h1>;
+        return <h1 className="mt-16">Loading.......</h1>;
     }
 
     return (
@@ -72,7 +72,7 @@ const UserDashboard = (props) => {
             </div>
             <div className="flex flex-col gap-4">
                 <div className=" bg-[#162655] h-fit p-5 rounded-2xl text-center">
-                    <Image className="w-24 h-24 mx-auto" imgsrc={profile} />
+                    <Image className="w-24 h-24 rounded-full mx-auto" imgsrc={loginUser.profile} />
                     <h2 className=" font-rb font-bold text-2xl mt-5 text-white">
                         Welcome {loginUser.name}
                     </h2>
@@ -80,7 +80,7 @@ const UserDashboard = (props) => {
                         ID: {loginUser.student_id}
                     </p>
                     <p className="bg-[#FFCC00] px-2 py-2 rounded font-rb">
-                        Validity Till {loginUser.date}
+                        Validity {loginUser.validity}
                     </p>
                 </div>
 

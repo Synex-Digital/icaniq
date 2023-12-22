@@ -9,8 +9,24 @@ import { userToken } from "../../features/tokenSlice";
 import { questionid } from "../../features/questionSlice";
 import { navvalue } from "../../features/navSlice";
 import { userExamQuestion } from "../../features/examQuestionSlice";
+import { modelTest } from "../../features/modelTestSlice";
+import { userExamid } from "../../features/examIdSlice";
+import { TfiWrite } from "react-icons/tfi";
 import Image from "./layout/Image";
-import logo from "../assets/logo.png"
+import logo from "../assets/logo.png";
+import { toast } from "react-toastify";
+
+const notify = (mas) =>
+    toast.success(mas, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+    });
 
 const Sidebar = () => {
     let navigate = useNavigate();
@@ -21,7 +37,7 @@ const Sidebar = () => {
     let hendleLogout = async () => {
         try {
             const response = await fetch(
-                "https://icaniq.synexdigital.com/api/logout",
+                "https://laraveladmin.icaniqbd.com/api/logout",
                 {
                     method: "POST",
                     headers: {
@@ -32,19 +48,19 @@ const Sidebar = () => {
             );
 
             const responseData = await response.json();
-            console.log(responseData);
+            notify(responseData.message);
         } catch (error) {
             console.error("Login error:", error);
             throw error;
         }
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
-        localStorage.removeItem("question");
         dispatch(userData(null));
         dispatch(userExamQuestion(null));
         dispatch(userToken(null));
         dispatch(navvalue(null));
         dispatch(questionid(null));
+        dispatch(modelTest(null));
+        dispatch(userExamid(null));
+        localStorage.clear();
         navigate("/");
     };
     return (
@@ -53,30 +69,31 @@ const Sidebar = () => {
                 <div className="xl:w-[15%] md:w-[25%] smalldevice:max-xl:fixed sm:max-md:w-[30%] smalldevice:w-1/2 xl:pt-20 pt-6 px-2 shadow-xl h-[100vh] fixed z-50 bg-[#162655]">
                     <div className="h-[80%]">
                         <div className="mx-2 my-6 pb-4 flex justify-center items-center">
-                            <Image
-                                className="w-[90px]"
-                                imgsrc={logo}
-                            />
+                            <Image className="w-[90px]" imgsrc={logo} />
                         </div>
                         <div className="flex flex-col gap-4">
                             <Link
-
                                 to="dashboard"
                                 className="flex items-center p-2 rounded-md bg-[#0C0C0C] hover:bg-black"
                             >
-
-                                <RxDashboard className="font-base text-2xl text-white mr-2" />
+                                <RxDashboard className="font-base text-xl text-white mr-2" />
                                 <p className=" font-rb font-base text-base text-white">
                                     Dashboard
                                 </p>
                             </Link>
-                            <Link to="iqtest" className="flex items-center p-2 rounded-md bg-[#0C0C0C] hover:bg-black">
-                                <MdOutlineStickyNote2 className="text-2xl font-base text-white mr-2" />
+                            <Link
+                                to="iqtest"
+                                className="flex items-center p-2 rounded-md bg-[#0C0C0C] hover:bg-black"
+                            >
+                                <TfiWrite className="text-xl font-base text-white mr-2" />
                                 <p className=" font-rb font-base text-base text-white">
                                     Test
                                 </p>
                             </Link>
-                            <Link to="result" className="flex items-center p-2 rounded-md bg-[#0C0C0C] hover:bg-black">
+                            <Link
+                                to="result"
+                                className="flex items-center p-2 rounded-md bg-[#0C0C0C] hover:bg-black"
+                            >
                                 <MdOutlineStickyNote2 className="text-2xl font-base text-white mr-2" />
                                 <p className=" font-rb font-base text-base text-white">
                                     Result

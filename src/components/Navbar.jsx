@@ -8,11 +8,9 @@ import { IoSearchOutline } from "react-icons/io5";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { ImCross } from "react-icons/im";
 import { navvalue } from "../../features/navSlice";
-import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
     let dispatch = useDispatch();
-    let location = useLocation();
 
     let [show, setShow] = useState(true);
     useEffect(() => {
@@ -52,11 +50,12 @@ const Navbar = () => {
                 )}
             </div>
             <div className="flex justify-center items-center w-[70%]">
-                <h1 className="text-white text-4xl font-rb font-bold">iCAN-IQ</h1>
+                <h1 className="text-white text-4xl font-rb font-bold">
+                    iCAN-IQ
+                </h1>
             </div>
-           
+
             <div className="flex w-[15%] items-center gap-x-3 relative justify-end mr-6">
-                <IoSearchOutline className="xl:hidden text-white font-semibold text-xl " />
                 <MdOutlineNotificationsActive className=" font-semibold text-white text-xl" />
                 <Image className=" w-12 h-12" imgsrc={profile} />
             </div>

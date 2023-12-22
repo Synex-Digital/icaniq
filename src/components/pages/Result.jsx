@@ -12,12 +12,13 @@ const Result = () => {
     let show = useSelector((state) => state.counter.value);
     let userToken = useSelector((state) => state.tokened.Token);
     let [modalresult, setModalResult] = useState([]);
+    let [loading, setloading] = useState(true);
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const response = await fetch(
-                    "https://icaniq.synexdigital.com/api/result/list",
+                    "https://laraveladmin.icaniqbd.com/api/result/list",
                     {
                         method: "GET",
                         headers: {
@@ -28,7 +29,6 @@ const Result = () => {
                 );
 
                 const responseData = await response.json();
-                console.log(responseData);
                 setModalResult(responseData.data);
             } catch (error) {
                 console.error("Login error:", error);
@@ -36,12 +36,17 @@ const Result = () => {
             }
         }
         fetchData();
+        setloading(false);
     }, []);
+
+    if (loading) {
+        return <h1 className="mt-16">Loading......</h1>;
+    }
 
     let hendleView = async (item) => {
         try {
             const response = await fetch(
-                `https://icaniq.synexdigital.com/api/result/${item.id}`,
+                `https://laraveladmin.icaniqbd.com/api/result/${item.id}`,
                 {
                     method: "GET",
                     headers: {

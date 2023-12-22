@@ -13,7 +13,7 @@ export const store = configureStore({
         loggedUser: userReducer,
         tokened: tokenReducer,
         counter: counterReducer,
-        queis: questionReducer,
+        queid: questionReducer,
         question: examQuestionReducer,
         userModelTest: modelTestReducer,
         examid: examidReducer,

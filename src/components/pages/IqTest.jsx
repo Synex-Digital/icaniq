@@ -10,6 +10,7 @@ import { userExamQuestion } from "../../../features/examQuestionSlice";
 import { modelTest } from "../../../features/modelTestSlice";
 import { userExamid } from "../../../features/examIdSlice";
 
+
 const customStyles = {
     content: {
         top: "50%",
@@ -54,7 +55,7 @@ const IqTest = (props) => {
         async function fetchData() {
             try {
                 const response = await fetch(
-                    "https://icaniq.synexdigital.com/api/model/test",
+                    "https://laraveladmin.icaniqbd.com/api/model/test",
                     {
                         method: "GET",
                         headers: {
@@ -65,7 +66,6 @@ const IqTest = (props) => {
                 );
 
                 const responseData = await response.json();
-                console.log(responseData);
                 setModels(responseData.modelTest);
             } catch (error) {
                 console.error("Login error:", error);
@@ -83,7 +83,7 @@ const IqTest = (props) => {
 
     // if (models.length == 0) {
     //     console.log("ok");
-        
+
     //     return;
     // }
 
@@ -99,7 +99,7 @@ const IqTest = (props) => {
     let handlstart = async () => {
         try {
             const response = await fetch(
-                `https://icaniq.synexdigital.com/api/model/request/${modelsId}`,
+                `https://laraveladmin.icaniqbd.com/api/model/request/${modelsId}`,
                 {
                     method: "GET",
                     headers: {
@@ -132,7 +132,7 @@ const IqTest = (props) => {
             data.append("model_id", examId);
 
             const response = await fetch(
-                "https://icaniq.synexdigital.com/api/attempt",
+                "https://laraveladmin.icaniqbd.com/api/attempt",
                 {
                     method: "POST",
                     headers: {
@@ -239,9 +239,7 @@ const IqTest = (props) => {
                     contentLabel="Example Modal"
                 >
                     <p className="sm:w-[456px] font-rb text-lg text-[#454545] mb-10">
-                        The test is designed with 100 marks, each associated
-                        with a distinct set of questions totaling 100. I retain
-                        the flexibility to skip questions as desired.
+                    Send a request to Admin to start the exam 
                     </p>
                     <div className="flex justify-between">
                         <button
@@ -267,9 +265,8 @@ const IqTest = (props) => {
                     contentLabel="Example Modal"
                 >
                     <p className="sm:w-[456px] font-rb text-lg text-[#454545] mb-10">
-                        The test is designed with 100 marks, each associated
-                        with a distinct set of questions totaling 100. I retain
-                        the flexibility to skip questions as desired.
+                        Starting the quiz will start the timer. Are you sure you
+                        want to start the quiz?
                     </p>
                     <div className="flex justify-between">
                         <button

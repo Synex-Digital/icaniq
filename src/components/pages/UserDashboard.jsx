@@ -8,6 +8,7 @@ const UserDashboard = (props) => {
     let loginUser = useSelector((state) => state.loggedUser.loginUser);
     let userToken = useSelector((state) => state.tokened.Token);
     let [performance, setPerformance] = useState("");
+    let [loading, setloading] = useState(true);
 
     useEffect(() => {
         async function fetchData() {
@@ -31,22 +32,42 @@ const UserDashboard = (props) => {
             }
         }
         fetchData();
+        setloading(false);
     }, []);
+
+    if (loading) {
+        return <h1 className="mt-16">Loading......</h1>;
+    }
 
     return (
         <div className="flex flex-col md:flex-row gap-4  justify-between mt-16 p-4 w-full  ">
             <div className="grid gap-4 h-fit w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 text-center">
-                <div className="rounded-xl border border-gray-300 px-2 py-4 shadow-sm flex flex-col">
-                    <span>Total Tests</span>
-                    <span>{performance.total_test}</span>
+                <div className="rounded-lg border text-[#6D6D6D] border-gray-300 px-8 py-5 shadow-sm flex flex-col">
+                    <div className="flex gap-x-3 items-center justify-center">
+                        <div className="w-[18px] h-[18px] rounded-full bg-[#6D6D6D]"></div>
+                        <p className="font-rb text-2xl">Total Tests</p>
+                    </div>
+                    <span className="font-rb text-black font-semibold mt-5 text-2xl">
+                        {performance.total_test}
+                    </span>
                 </div>
-                <div className="rounded-xl border border-gray-300 px-2 py-4 shadow-sm flex flex-col">
-                    <span>Average Score</span>
-                    <span>{performance.av_score}</span>
+                <div className="rounded-lg border text-[#6D6D6D] border-gray-300 px-8 py-5 shadow-sm flex flex-col">
+                    <div className="flex gap-x-3 items-center justify-center">
+                        <div className="w-[18px] h-[18px] rounded-full bg-[#32B548]"></div>
+                        <p className="font-rb text-2xl">Average Score</p>
+                    </div>
+                    <span className="font-rb text-black font-semibold mt-5 text-2xl">
+                        {performance.av_score}
+                    </span>
                 </div>
-                <div className="rounded-xl border border-gray-300 px-2 py-4 shadow-sm flex flex-col">
-                    <span>Average Time</span>
-                    <span>{performance.av_time}</span>
+                <div className="rounded-lg border text-[#6D6D6D] border-gray-300 px-8 py-5 shadow-sm flex flex-col">
+                    <div className="flex gap-x-3 items-center justify-center">
+                        <div className="w-[18px] h-[18px] rounded-full bg-[#DB2828]"></div>
+                        <p className="font-rb text-2xl">Average Time</p>
+                    </div>
+                    <span className="font-rb text-black font-semibold mt-5 text-2xl">
+                        {performance.av_time}
+                    </span>
                 </div>
             </div>
             <div className="flex flex-col gap-4">

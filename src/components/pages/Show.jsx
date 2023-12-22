@@ -19,7 +19,7 @@ const Show = () => {
             {/* <div className="w-full flex items-center justify-center my-[30px]">
                 <a className="py-3 px-8 bg-[#3888F9] font-rb text-xl font-semibold text-white cursor-pointer">Download Sheet</a>
             </div> */}
-            <div className="w-full border-[4px] border-green-400 font-rb font-medium text-2xl p-5 uppercase">
+            <div className="w-full border-[4px] border-green-400 font-rb font-medium md:text-2xl text-xl p-5 uppercase">
                 <p>
                     <span>Total Number: </span> {result.history.total}
                 </p>
@@ -42,7 +42,7 @@ const Show = () => {
                             )}
                         </span>
                     </h2>
-                    <div className="flex flex-wrap mt-6 gap-x-4 gap-y-5">
+                    <div className="md:flex md:flex-wrap smalldevice:max-md:flex smalldevice:max-md:flex-col smalldevice:max-md:w-full mt-6 gap-x-4 gap-y-5">
                         {item.choices &&
                             item.choices.map((sitem) => (
                                 <p
@@ -57,7 +57,7 @@ const Show = () => {
                                             : item.correct_id == sitem.id
                                             ? "bg-green-400 text-white"
                                             : "text-black"
-                                    } w-[48%] p-3 border font-rb text-lg`}
+                                    } md:w-[48%] p-3 border font-rb text-lg`}
                                 >
                                     {sitem.choice_text}
                                 </p>

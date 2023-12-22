@@ -12,6 +12,7 @@ const Result = () => {
     let show = useSelector((state) => state.counter.value);
     let userToken = useSelector((state) => state.tokened.Token);
     let [modalresult, setModalResult] = useState([]);
+    let [loading, setloading] = useState(true);
 
     useEffect(() => {
         async function fetchData() {
@@ -35,7 +36,12 @@ const Result = () => {
             }
         }
         fetchData();
+        setloading(false);
     }, []);
+
+    if (loading) {
+        return <h1 className="mt-16">Loading......</h1>;
+    }
 
     let hendleView = async (item) => {
         try {

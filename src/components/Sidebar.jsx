@@ -11,6 +11,7 @@ import { navvalue } from "../../features/navSlice";
 import { userExamQuestion } from "../../features/examQuestionSlice";
 import { modelTest } from "../../features/modelTestSlice";
 import { userExamid } from "../../features/examIdSlice";
+import { TfiWrite } from "react-icons/tfi";
 import Image from "./layout/Image";
 import logo from "../assets/logo.png";
 import { toast } from "react-toastify";
@@ -75,7 +76,7 @@ const Sidebar = () => {
                                 to="dashboard"
                                 className="flex items-center p-2 rounded-md bg-[#0C0C0C] hover:bg-black"
                             >
-                                <RxDashboard className="font-base text-2xl text-white mr-2" />
+                                <RxDashboard className="font-base text-xl text-white mr-2" />
                                 <p className=" font-rb font-base text-base text-white">
                                     Dashboard
                                 </p>
@@ -84,7 +85,7 @@ const Sidebar = () => {
                                 to="iqtest"
                                 className="flex items-center p-2 rounded-md bg-[#0C0C0C] hover:bg-black"
                             >
-                                <MdOutlineStickyNote2 className="text-2xl font-base text-white mr-2" />
+                                <TfiWrite className="text-xl font-base text-white mr-2" />
                                 <p className=" font-rb font-base text-base text-white">
                                     Test
                                 </p>

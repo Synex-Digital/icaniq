@@ -10,6 +10,7 @@ import { userExamQuestion } from "../../../features/examQuestionSlice";
 import { modelTest } from "../../../features/modelTestSlice";
 import { userExamid } from "../../../features/examIdSlice";
 
+
 const customStyles = {
     content: {
         top: "50%",
@@ -238,9 +239,7 @@ const IqTest = (props) => {
                     contentLabel="Example Modal"
                 >
                     <p className="sm:w-[456px] font-rb text-lg text-[#454545] mb-10">
-                        The test is designed with 100 marks, each associated
-                        with a distinct set of questions totaling 100. I retain
-                        the flexibility to skip questions as desired.
+                    Send a request to Admin to start the exam 
                     </p>
                     <div className="flex justify-between">
                         <button
@@ -266,9 +265,8 @@ const IqTest = (props) => {
                     contentLabel="Example Modal"
                 >
                     <p className="sm:w-[456px] font-rb text-lg text-[#454545] mb-10">
-                        The test is designed with 100 marks, each associated
-                        with a distinct set of questions totaling 100. I retain
-                        the flexibility to skip questions as desired.
+                        Starting the quiz will start the timer. Are you sure you
+                        want to start the quiz?
                     </p>
                     <div className="flex justify-between">
                         <button

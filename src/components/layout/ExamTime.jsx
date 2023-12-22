@@ -60,9 +60,7 @@ const ExamTime = ({ expiryTimestamp }) => {
                         body: data,
                     }
                 );
-
                 const responseData = await response.json();
-                console.log(responseData);
             } catch (error) {
                 console.error("Login error:", error);
                 throw error;

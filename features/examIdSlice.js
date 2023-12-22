@@ -5,7 +5,7 @@ export const examIdSlice = createSlice({
     initialState: {
         id: localStorage.getItem("examid")
             ? JSON.parse(localStorage.getItem("examid"))
-            : null,
+            : 1,
     },
     reducers: {
         userExamid: (state, actions) => {

@@ -17,7 +17,7 @@ const Result = () => {
         async function fetchData() {
             try {
                 const response = await fetch(
-                    "https://icaniq.synexdigital.com/api/result/list",
+                    "https://laraveladmin.icaniqbd.com/api/result/list",
                     {
                         method: "GET",
                         headers: {
@@ -28,7 +28,6 @@ const Result = () => {
                 );
 
                 const responseData = await response.json();
-                console.log(responseData);
                 setModalResult(responseData.data);
             } catch (error) {
                 console.error("Login error:", error);
@@ -41,7 +40,7 @@ const Result = () => {
     let hendleView = async (item) => {
         try {
             const response = await fetch(
-                `https://icaniq.synexdigital.com/api/result/${item.id}`,
+                `https://laraveladmin.icaniqbd.com/api/result/${item.id}`,
                 {
                     method: "GET",
                     headers: {

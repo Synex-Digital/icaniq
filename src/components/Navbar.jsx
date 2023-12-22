@@ -8,11 +8,9 @@ import { IoSearchOutline } from "react-icons/io5";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { ImCross } from "react-icons/im";
 import { navvalue } from "../../features/navSlice";
-import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
     let dispatch = useDispatch();
-    let location = useLocation();
 
     let [show, setShow] = useState(true);
     useEffect(() => {

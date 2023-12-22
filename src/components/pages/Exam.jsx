@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ReactPaginate from "react-paginate";
 import { questionid } from "../../../features/questionSlice";
-import { LuMoveRight, LuMoveLeft } from "react-icons/lu";
+import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 import ExamTime from "../layout/ExamTime";
 import { useNavigate } from "react-router-dom";
 
@@ -14,8 +14,10 @@ const Exam = () => {
     const [choiceid, setChoiceid] = useState("");
     const [modelid, setModelid] = useState("");
     const [examcount, setExamCount] = useState("");
+    const [indexid, setIndexID] = useState("");
+    const [qusindexid, setQusIndexID] = useState(0);
     let show = useSelector((state) => state.counter.value);
-    let qusid = useSelector((state) => state.queis.value);
+    let qusid = useSelector((state) => state.queid.value);
     let examQuestion = useSelector((state) => state.question.Question);
     let modeltestvaluse = useSelector((state) => state.userModelTest.values);
     let loginUser = useSelector((state) => state.loggedUser.loginUser);
@@ -29,7 +31,7 @@ const Exam = () => {
                 data.append("model_id", examId);
 
                 const response = await fetch(
-                    "https://icaniq.synexdigital.com/api/attempt",
+                    "https://laraveladmin.icaniqbd.com/api/attempt",
                     {
                         method: "POST",
                         headers: {
@@ -56,7 +58,7 @@ const Exam = () => {
                 data.append("model_id", modeltestvaluse.id);
 
                 const response = await fetch(
-                    "https://icaniq.synexdigital.com/api/answer/submit",
+                    "https://laraveladmin.icaniqbd.com/api/answer/submit",
                     {
                         method: "POST",
                         headers: {
@@ -68,7 +70,6 @@ const Exam = () => {
                 );
 
                 const responseData = await response.json();
-                // console.log("time",responseData);
             } catch (error) {
                 console.error("Login error:", error);
                 throw error;
@@ -81,7 +82,7 @@ const Exam = () => {
                 data.append("model_id", examId);
 
                 const response = await fetch(
-                    "https://icaniq.synexdigital.com/api/attempt",
+                    "https://laraveladmin.icaniqbd.com/api/attempt",
                     {
                         method: "POST",
                         headers: {
@@ -121,13 +122,7 @@ const Exam = () => {
         return;
     }
 
-    let lastlength = examQuestion.length;
-
-    const pageCount = Math.ceil(examQuestion.length / 1);
-
-    const handlePageClick = (event) => {
-        dispatch(questionid(event.selected + 1));
-    };
+    let lastlength = models.length;
 
     if (examcount == "") {
         return;
@@ -144,7 +139,7 @@ const Exam = () => {
             data.append("model_id", modeltestvaluse.id);
 
             const response = await fetch(
-                "https://icaniq.synexdigital.com/api/answer/submit",
+                "https://laraveladmin.icaniqbd.com/api/answer/submit",
                 {
                     method: "POST",
                     headers: {
@@ -156,9 +151,6 @@ const Exam = () => {
             );
 
             const responseData = await response.json();
-            console.log("ok", responseData);
-            console.log(models);
-            console.log(qusid);
         } catch (error) {
             console.error("Login error:", error);
             throw error;
@@ -167,8 +159,7 @@ const Exam = () => {
         setModelid(modeltestvaluse.id);
         setChoiceid(sitem.id);
         // console.log("qus", item.id);
-        // console.log("mod", modeltestvaluse.id);
-        console.log("cho", sitem);
+        // console.log("mod", modeltestvaluse.id)
     };
 
     let hendleexamsubmit = async () => {
@@ -177,7 +168,7 @@ const Exam = () => {
             data.append("model_id", modeltestvaluse.id);
 
             const response = await fetch(
-                "https://icaniq.synexdigital.com/api/answer/submit/done",
+                "https://laraveladmin.icaniqbd.com/api/answer/submit/done",
                 {
                     method: "POST",
                     headers: {
@@ -196,6 +187,28 @@ const Exam = () => {
         }
     };
 
+    let handlearrowleft = () => {
+        if (qusid > 1) {
+            let incre = qusid - 1;
+
+            dispatch(questionid(incre));
+            localStorage.setItem("questionid", JSON.stringify(incre));
+        } 
+    };
+
+    let handlearrowright = () => {
+        if (lastlength != qusid) {
+            let incre = qusid + 1;
+            dispatch(questionid(incre));
+            localStorage.setItem("questionid", JSON.stringify(incre));
+        }
+    };
+
+    let handlequstionindex = (item) => {
+        dispatch(questionid(item.index));
+        localStorage.setItem("questionid", JSON.stringify(item.index));
+    };
+
     return (
         <section className="mt-16  p-4 mx-auto ">
             <div className=" relative">
@@ -207,44 +220,39 @@ const Exam = () => {
                         <ExamTime expiryTimestamp={time} />
                     </time>
                 </div>
-                <ReactPaginate
-                    breakLabel="..."
-                    breakClassName="text-2xl font-bold"
-                    breakLinkClassName=""
-                    onPageChange={handlePageClick}
-                    pageRangeDisplayed={100}
-                    pageCount={pageCount}
-                    previousLabel={
-                        <div className="flex items-center justify-center gap-x-4 text-lg font-rb rounded-2xl">
-                            <LuMoveLeft className="text-2xl" />
-                        </div>
-                    }
-                    nextLabel={
-                        qusid == lastlength ? (
-                            <div
-                                onClick={hendleexamsubmit}
-                                className="flex items-center justify-center gap-x-4 text-lg font-rb "
+                <div className="flex gap-2">
+                    {models.map((item, index) => (
+                        <div key={index} className="cursor-pointer font-rb text-lg font-medium">
+                            <p
+                                className={` ${
+                                    qusid == item.index &&
+                                    "bg-[#e6d414] text-white border border-[#e6d414]"
+                                }   
+                                 ${
+                                     item.exam_status &&
+                                     "bg-[#21BA45] text-white border border-[#21BA45]"
+                                 } border rounded-sm py-1 px-3`}
+                                onClick={() => handlequstionindex(item)}
                             >
-                                Submit
-                            </div>
-                        ) : (
-                            <div className="flex items-center justify-center gap-x-4 text-lg font-rb ">
-                                <LuMoveRight className="text-2xl" />
-                            </div>
-                        )
-                    }
-                    pageLinkClassName="text-lg flex items-center justify-center font-rb border border-[#FFCC00] p-2 rounded w-[45px] h-[35px] text-center cursor-pointer"
-                    previousLinkClassName="absolute -bottom-[85px] left-0 sm:left-[50px] lg:left-[230px] xl:left-[295px] border-[#3888F9] border w-[150px] p-3 xl:w-[15%] hover:bg-[#1F7CFF] text-center text-lg font-rb bg-[#3888F9] text-white font-semibold rounded"
-                    nextLinkClassName="absolute -bottom-[85px] xl:right-[295px] sm:right-[50px] lg:right-[230px] border-[#3888F9] right-0 border p-3 w-[150px] xl:w-[15%] hover:bg-[#1F7CFF] text-center text-lg font-rb bg-[#3888F9] text-white font-semibold rounded"
-                    containerClassName="flex flex-wrap gap-x-2 gap-y-2"
-                    activeClassName="flex items-center justify-center text-lg font-rb border bg-[#FFCC00] border-[#FFCC00] p-2 rounded w-[45px] h-[35px] text-center cursor-pointer "
-                    renderOnZeroPageCount={null}
-                />
+                                {index + 1}
+                            </p>
+                        </div>
+                    ))}
+                </div>
                 {models.map(
                     (item, index) =>
-                        index + 1 == qusid && (
-                            <div key={index}>
-                                <div className="border rounded-lg relative mt-4 p-2 sm:p-4 mx-auto sm:w-1/2">
+                        qusid == item.index && (
+                            <div
+                                key={index}
+                                className="flex items-center justify-center"
+                            >
+                                <div>
+                                    <GoArrowLeft
+                                        className="border border-[#705BCC] rounded-full p-3 text-lg w-12 h-12 text-[#705BCC]  cursor-pointer mr-7"
+                                        onClick={() => handlearrowleft(item)}
+                                    />
+                                </div>
+                                <div className="border rounded-lg relative mt-4 p-2 sm:p-4 sm:w-1/2">
                                     <div className="mb-4 flex justify-center items-center gap-x-3">
                                         {item.question_test_image && (
                                             <img
@@ -256,6 +264,7 @@ const Exam = () => {
                                             {item.question_test_text}
                                         </h2>
                                     </div>
+
                                     <div className="flex flex-col gap-y-4 ">
                                         {item.choices &&
                                             item.choices.map((sitem, index) => (
@@ -280,11 +289,30 @@ const Exam = () => {
                                             ))}
                                     </div>
                                 </div>
+                                {lastlength != qusid ? (
+                                    <div>
+                                        <GoArrowRight
+                                            className="border border-[#705BCC] rounded-full p-3 text-lg w-12 h-12 text-[#705BCC]  cursor-pointer ml-7"
+                                            onClick={() =>
+                                                handlearrowright(item)
+                                            }
+                                        />
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <button
+                                            onClick={hendleexamsubmit}
+                                            className="border bg-[#21BA45] border-[#21BA45]  p-3 text-lg font-semibold text-white  cursor-pointer ml-7"
+                                        >
+                                            {" "}
+                                            Submit
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         )
                 )}
             </div>
-            
         </section>
     );
 };

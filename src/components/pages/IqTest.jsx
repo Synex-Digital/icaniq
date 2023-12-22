@@ -54,7 +54,7 @@ const IqTest = (props) => {
         async function fetchData() {
             try {
                 const response = await fetch(
-                    "https://icaniq.synexdigital.com/api/model/test",
+                    "https://laraveladmin.icaniqbd.com/api/model/test",
                     {
                         method: "GET",
                         headers: {
@@ -65,7 +65,6 @@ const IqTest = (props) => {
                 );
 
                 const responseData = await response.json();
-                console.log(responseData);
                 setModels(responseData.modelTest);
             } catch (error) {
                 console.error("Login error:", error);
@@ -83,7 +82,7 @@ const IqTest = (props) => {
 
     // if (models.length == 0) {
     //     console.log("ok");
-        
+
     //     return;
     // }
 
@@ -99,7 +98,7 @@ const IqTest = (props) => {
     let handlstart = async () => {
         try {
             const response = await fetch(
-                `https://icaniq.synexdigital.com/api/model/request/${modelsId}`,
+                `https://laraveladmin.icaniqbd.com/api/model/request/${modelsId}`,
                 {
                     method: "GET",
                     headers: {
@@ -132,7 +131,7 @@ const IqTest = (props) => {
             data.append("model_id", examId);
 
             const response = await fetch(
-                "https://icaniq.synexdigital.com/api/attempt",
+                "https://laraveladmin.icaniqbd.com/api/attempt",
                 {
                     method: "POST",
                     headers: {

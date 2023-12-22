@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "../layout/Image";
 import signinframe from "../../assets/signinframe.webp";
 import cover from "../../assets/cover.png";
@@ -88,7 +88,7 @@ const Signin = () => {
             data.append("password", values.password);
 
             const response = await fetch(
-                "https://icaniq.synexdigital.com/api/login",
+                "https://laraveladmin.icaniqbd.com/api/login",
                 {
                     method: "POST",
                     headers: {
@@ -120,10 +120,11 @@ const Signin = () => {
     return (
         <div className="  flex ">
             <div className=" hidden xl:block xl:w-1/2 relative">
-                <Image
-                    className="absolute top-8 left-8 md:w-[120px]"
-                    imgsrc={icanIQ}
-                />
+                <div className="absolute top-8 left-8 md:w-[150px]">
+                    <p className="font-rb font-extrabold text-white text-4xl">
+                        iCAN-IQ
+                    </p>
+                </div>
                 <Image
                     imgsrc={cover}
                     className="h-[100vh] w-full object-cover"
@@ -170,7 +171,7 @@ const Signin = () => {
                             Password
                         </h3>
 
-                        <div className=" relative">
+                        <div className=" relative mb-2">
                             <input
                                 type={show ? "text" : "password"}
                                 className="p-3 w-full mt-2 md:mt-4 border rounded border-bcolor border-solid"
@@ -199,7 +200,7 @@ const Signin = () => {
                                 />
                             )}
                         </div>
-                        <Link className="smalldevice:max-sm:text-white  font-rb text-tbcolor ">
+                        <Link className="smalldevice:max-sm:text-white font-rb text-tbcolor ">
                             Forgot Password?
                         </Link>
                         <button

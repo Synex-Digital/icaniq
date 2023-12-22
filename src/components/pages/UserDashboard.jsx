@@ -1,29 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "../layout/Image";
 import profile from "../../assets/profile.png";
-import PassGraphs from "../layout/PassGraphs";
 import { useSelector } from "react-redux";
 import logo from "../../assets/logo_hd.webp";
-import Background from "../../assets/logo.png";
 
 const UserDashboard = (props) => {
-    let show = useSelector((state) => state.counter.value);
     let loginUser = useSelector((state) => state.loggedUser.loginUser);
+    let userToken = useSelector((state) => state.tokened.Token);
+    let [performance, setPerformance] = useState("");
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await fetch(
+                    "https://laraveladmin.icaniqbd.com/api/performance",
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${userToken}`,
+                            Accept: "application/json",
+                        },
+                    }
+                );
+
+                const responseData = await response.json();
+                setPerformance(responseData.data);
+            } catch (error) {
+                console.error("Login error:", error);
+                throw error;
+            }
+        }
+        fetchData();
+    }, []);
 
     return (
         <div className="flex flex-col md:flex-row gap-4  justify-between mt-16 p-4 w-full  ">
             <div className="grid gap-4 h-fit w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 text-center">
                 <div className="rounded-xl border border-gray-300 px-2 py-4 shadow-sm flex flex-col">
-                    <span>Name</span>
-                    <span>Description</span>
+                    <span>Total Tests</span>
+                    <span>{performance.total_test}</span>
                 </div>
                 <div className="rounded-xl border border-gray-300 px-2 py-4 shadow-sm flex flex-col">
-                    <span>Name</span>
-                    <span>Description</span>
+                    <span>Average Score</span>
+                    <span>{performance.av_score}</span>
                 </div>
                 <div className="rounded-xl border border-gray-300 px-2 py-4 shadow-sm flex flex-col">
-                    <span>Name</span>
-                    <span>Description</span>
+                    <span>Average Time</span>
+                    <span>{performance.av_time}</span>
                 </div>
             </div>
             <div className="flex flex-col gap-4">

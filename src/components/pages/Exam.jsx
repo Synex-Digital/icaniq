@@ -187,7 +187,7 @@ const Exam = () => {
     };
 
     let hendleexamsubmit = async () => {
-        setIsOpen(true);
+        
         try {
             let data = new FormData();
             data.append("model_id", modeltestvaluse.id);
@@ -205,11 +205,11 @@ const Exam = () => {
             );
 
             const responseData = await response.json();
-            navigate("/user/iqtest");
         } catch (error) {
             console.error("Login error:", error);
             throw error;
         }
+        setIsOpen(true);
     };
 
     let handlearrowleft = () => {

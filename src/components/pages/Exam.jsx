@@ -155,7 +155,6 @@ const Exam = () => {
     time.setSeconds(time.getSeconds() + examcount);
 
     let hendlesubmit = async (sitem, item) => {
-        
         try {
             let data = new FormData();
             data.append("choice_id", sitem.id);
@@ -187,7 +186,6 @@ const Exam = () => {
     };
 
     let hendleexamsubmit = async () => {
-        
         try {
             let data = new FormData();
             data.append("model_id", modeltestvaluse.id);
@@ -230,6 +228,7 @@ const Exam = () => {
     };
 
     let handlequstionindex = (item) => {
+        console.log(item.index);
         dispatch(questionid(item.index));
         localStorage.setItem("questionid", JSON.stringify(item.index));
     };
@@ -267,12 +266,12 @@ const Exam = () => {
                                 <p
                                     className={` ${
                                         qusid == item.index &&
-                                        "bg-[#e6d414] text-white border border-[#e6d414]"
+                                        "!bg-[#2185D0] text-white border border-[#2185D0]"
                                     }   
                                  ${
                                      item.exam_status &&
-                                     "bg-[#21BA45] text-white border border-[#21BA45]"
-                                 } border rounded-sm py-1 px-3`}
+                                     "bg-[#21BA45] text-white border !border-[#21BA45]"
+                                 } ${item.index < qusid ? "bg-red-500 text-white" :"" } border rounded-sm py-1 px-3`}
                                     onClick={() => handlequstionindex(item)}
                                 >
                                     {index + 1}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BsCalendar2Check } from "react-icons/bs";
+import { IoTimeOutline } from "react-icons/io5";
 import { GiNotebook } from "react-icons/gi";
 import { PiClockClockwiseFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
@@ -30,6 +30,7 @@ const Result = () => {
 
                 const responseData = await response.json();
                 setModalResult(responseData.data);
+                console.log(responseData);
             } catch (error) {
                 console.error("Login error:", error);
                 throw error;
@@ -82,6 +83,14 @@ const Result = () => {
                                 {item.model_name}
                             </h2>
                             <div className="font-rb text-sm text-[#6D6D6D] xl:w-[320px]">
+                            <div className="flex justify-between my-5 ">
+                                    <h4 className="flex items-center gap-x-2 font-rb text-[#3D3D3D]">
+                                        <span className=" text-2xl text-[#705BCC]">
+                                            <IoTimeOutline />
+                                        </span>
+                                         <span className="px-4 text-xs py-1 rounded-lg bg-[#1987545e]">{item.date}</span>
+                                    </h4>
+                                </div>
                                 <div className="flex justify-between my-5 ">
                                     <h4 className="flex items-center gap-x-2 font-rb text-[#3D3D3D]">
                                         <span className=" text-2xl text-[#705BCC]">

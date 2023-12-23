@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import Image from "./layout/Image";
 import logo from "../assets/logoblack.png";
-import profile from "../assets/profile.png";
+import profileimg from "../assets/profile.png";
 import { useDispatch, useSelector } from "react-redux";
 import { IoSearchOutline } from "react-icons/io5";
 import { MdOutlineNotificationsActive } from "react-icons/md";
@@ -58,7 +58,7 @@ const Navbar = () => {
 
             <div className="flex w-[15%] items-center gap-x-3 relative justify-end mr-6">
                 <MdOutlineNotificationsActive className=" font-semibold text-white text-xl" />
-                <Image className=" w-12 h-12 rounded-full" imgsrc={loginUser.profile} />
+                <Image className=" w-12 h-12 rounded-full" imgsrc={loginUser.profile == null ? profileimg : loginUser.profile} />
             </div>
         </nav>
     );

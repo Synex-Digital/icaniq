@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "../layout/Image";
-import signinframe from "../../assets/signinframe.webp";
-import cover from "../../assets/cover.png";
-import icanIQ from "../../assets/IcanIQ.png";
-import layoutimg from "../../assets/layoutimg.png";
+import icanIQ from "../../assets/logo.svg";
 import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
 import { Link } from "react-router-dom";
@@ -118,39 +115,20 @@ const Signin = () => {
     };
 
     return (
-        <div className="  flex ">
-            <div className=" hidden xl:block xl:w-1/2 relative">
-                <div className="absolute top-8 left-8 md:w-[150px]">
-                    <p className="font-rb font-extrabold text-white text-4xl">
-                        iCAN-IQ
-                    </p>
-                </div>
-                <Image
-                    imgsrc={cover}
-                    className="h-[100vh] w-full object-cover"
-                />
-            </div>
-            <div className=" xl:w-1/2 w-full sm:flex relative">
-                <div className=" sm:max-xl:w-1/2">
+        <div className="flex justify-center items-center h-[100vh]">
+            <div className="md:shadow-2xl shadow p-8 rounded-xl smalldevice:max-sm:w-[90%]">
+                <div className="flex justify-center mb-5 ">
                     <Image
-                        className="absolute block xl:hidden md:top-10 smalldevice:max-sm:left-[37%] md:left-10 top-4 left-4 w-[100px]"
                         imgsrc={icanIQ}
-                    />
-                    <Image
-                        imgsrc={signinframe}
-                        className="h-[100vh] w-full object-cover hidden smalldevice:max-sm:block"
-                    />
-                    <Image
-                        imgsrc={cover}
-                        className="h-[100vh] w-full object-cover hidden sm:max-xl:block"
+                        className="bg-black w-24 h-24 rounded-full"
                     />
                 </div>
-                <div className="smalldevice:max-sm:absolute smalldevice:max-sm:w-full sm:max-xl:w-1/2 sm:w-[430px] top-28 xl:mx-auto xl:my-auto  smalldevice:max-xl:my-auto px-5">
-                    <h2 className=" text-center font-rb font-bold sm:max-md:text-xl md:text-3xl lg:text-5xl smalldevice:max-sm:text-xl mb-2 md:mb-5 text-tbcolor smalldevice:max-sm:text-white">
-                        Welcome Back
+                <div className="sm:w-[430px]">
+                    <h2 className=" text-center font-rb font-bold sm:max-md:text-xl md:text-xl lg:text-2xl smalldevice:max-sm:text-xl mb-2 md:mb-5 text-tbcolor ">
+                        Sign in
                     </h2>
-                    <div className=" md:p-5 px-2 md:border rounded-lg border-tgcolor">
-                        <h3 className="smalldevice:max-sm:text-white font-rb md:font-semibold font-medium md:text-lg text-tbcolor smalldevice:max-sm:mt-3">
+                    <div className="rounded-lg">
+                        <h3 className=" font-rb md:font-semibold font-medium md:text-lg text-tbcolor smalldevice:max-sm:mt-3">
                             Email
                         </h3>
                         <input
@@ -167,7 +145,7 @@ const Signin = () => {
                                     Please Enter your Email
                                 </p>
                             )}
-                        <h3 className="smalldevice:max-sm:text-white font-rb md:font-semibold font-medium md:text-lg text-tbcolor smalldevice:max-sm:mt-3">
+                        <h3 className="font-rb md:font-semibold font-medium md:text-lg text-tbcolor smalldevice:max-sm:mt-3">
                             Password
                         </h3>
 
@@ -200,11 +178,11 @@ const Signin = () => {
                                 />
                             )}
                         </div>
-                        <Link className="smalldevice:max-sm:text-white font-rb text-tbcolor ">
+                        <Link className="smalldevice:max-sm:text-white font-rb text-tgcolor font-medium ">
                             Forgot Password?
                         </Link>
                         <button
-                            className=" bg-btncolor w-full p-1 md:p-3 mt-2 text-white md:mt-7 text-xl font-medium md:font-bold rounded smalldevice:max-sm:my-5 smalldevice:max-sm:p-3"
+                            className=" bg-tgcolor w-full p-1 md:p-3 mt-2 text-white md:mt-5 text-xl font-medium md:font-bold rounded smalldevice:max-sm:my-5 smalldevice:max-sm:p-3"
                             onClick={handlelogin}
                         >
                             Log in

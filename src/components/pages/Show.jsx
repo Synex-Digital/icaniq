@@ -19,15 +19,18 @@ const Show = () => {
             {/* <div className="w-full flex items-center justify-center my-[30px]">
                 <a className="py-3 px-8 bg-[#3888F9] font-rb text-xl font-semibold text-white cursor-pointer">Download Sheet</a>
             </div> */}
-            <div className="w-full border-[4px] border-green-400 font-rb font-medium md:text-2xl text-xl p-5 uppercase">
-                <p>
-                    <span>Total Number: </span> {result.history.total}
-                </p>
+            <div className="w-full border-[2px] border-gray-400 font-rb font-medium md:text-2xl text-xl p-5">
                 <p className="text-green-400">
-                    <span>Correct Answer: </span> {result.history.correct}
+                    <span>Correct answer: </span> {result.history.correct}
                 </p>
                 <p className="text-red-500">
                     <span>Incorrect: </span> {result.history.wrong}
+                </p>
+                <p>
+                    <span>Total number: </span> {result.history.total}
+                </p>
+                <p >
+                    <span>Time taken: </span> {result.history.time_taken}
                 </p>
             </div>
             {result.data.map((item, index) => (

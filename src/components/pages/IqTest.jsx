@@ -10,7 +10,6 @@ import { userExamQuestion } from "../../../features/examQuestionSlice";
 import { modelTest } from "../../../features/modelTestSlice";
 import { userExamid } from "../../../features/examIdSlice";
 
-
 const customStyles = {
     content: {
         top: "50%",
@@ -216,6 +215,13 @@ const IqTest = (props) => {
                                     >
                                         Start
                                     </button>
+                                ) : item.approval == 5 ? (
+                                    <button
+                                        onClick={() => openModal(item)}
+                                        className="group font-rb font-bold text-lg text-center border py-[10px] w-full text-[#3888F9] rounded-lg border-[#3888F9] transition duration-300 ease-in-out hover:text-white hover:bg-[#3888F9]"
+                                    >
+                                        Request
+                                    </button>
                                 ) : (
                                     <button
                                         disabled
@@ -239,7 +245,7 @@ const IqTest = (props) => {
                     contentLabel="Example Modal"
                 >
                     <p className="sm:w-[456px] font-rb text-lg text-[#454545] mb-10">
-                    Send a request to Admin to start the exam 
+                        Send a request to Admin to start the exam
                     </p>
                     <div className="flex justify-between">
                         <button

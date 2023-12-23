@@ -60,7 +60,7 @@ const UserDashboard = (props) => {
                             <p className="font-rb text-2xl">Average Score</p>
                         </div>
                         <span className="font-rb text-black font-semibold mt-5 text-2xl">
-                            {performance == null ? 0 :performance.av_score}
+                            {performance == null ? 0 : performance.av_score}
                         </span>
                     </div>
                     <div className="rounded-lg border text-[#6D6D6D] border-gray-300 px-8 py-5 shadow-sm flex flex-col">
@@ -81,7 +81,7 @@ const UserDashboard = (props) => {
                 <div className=" bg-[#162655] h-fit p-5 rounded-2xl text-center">
                     <Image
                         className="w-24 h-24 rounded-full mx-auto"
-                        imgsrc={loginUser.profile == null ? profile : loginUser.profile == null}
+                        imgsrc={loginUser.profile == null ? profile : loginUser.profile}
                     />
                     <h2 className=" font-rb font-bold text-2xl mt-5 text-white">
                         Welcome {loginUser.name}
@@ -90,7 +90,7 @@ const UserDashboard = (props) => {
                         ID: {loginUser.student_id}
                     </p>
                     <p className="bg-[#FFCC00] px-2 py-2 rounded font-rb">
-                        Validity {loginUser.validity}
+                        Validity {loginUser.date}
                     </p>
                 </div>
 

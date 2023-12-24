@@ -106,7 +106,7 @@ const Sidebar = () => {
                             >
                                 <FaRegAddressCard className="text-2xl font-base text-white mr-2" />
                                 <p className=" font-rb font-base text-base text-white">
-                                    Address
+                                    Contact Us
                                 </p>
                             </Link>
                         </div>

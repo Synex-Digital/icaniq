@@ -264,14 +264,18 @@ const Exam = () => {
                                 className="cursor-pointer font-rb text-lg font-medium"
                             >
                                 <p
-                                    className={` ${
+                                    className={`${
+                                        item.exam_status &&
+                                        "!bg-[#21BA45] text-white border !border-[#21BA45]"
+                                    } ${
                                         qusid == item.index &&
-                                        "!bg-[#2185D0] text-white border border-[#2185D0]"
+                                        "!bg-[#2185D0] text-white border !border-[#2185D0]"
                                     }   
-                                 ${
-                                     item.exam_status &&
-                                     "bg-[#21BA45] text-white border !border-[#21BA45]"
-                                 } ${item.index < qusid ? "bg-red-500 text-white" :"" } border rounded-sm py-1 px-3`}
+                                  ${
+                                      item.index < qusid
+                                          ? "bg-red-500 text-white"
+                                          : ""
+                                  } border rounded-sm py-1 px-3`}
                                     onClick={() => handlequstionindex(item)}
                                 >
                                     {index + 1}

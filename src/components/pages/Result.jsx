@@ -30,7 +30,6 @@ const Result = () => {
 
                 const responseData = await response.json();
                 setModalResult(responseData.data);
-                console.log(responseData);
             } catch (error) {
                 console.error("Login error:", error);
                 throw error;

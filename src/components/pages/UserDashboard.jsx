@@ -86,8 +86,14 @@ const UserDashboard = (props) => {
                     <h2 className=" font-rb font-bold text-2xl mt-5 text-white">
                         Welcome {loginUser.name}
                     </h2>
-                    <p className=" font-rb font-bold mt-2 mb-7 text-white">
+                    <p className=" font-rb font-bold mt-2 text-white">
                         ID: {loginUser.student_id}
+                    </p>
+                    <p className=" font-rb font-bold my-2 text-white">
+                        Email: {loginUser.email}
+                    </p>
+                    <p className=" font-rb font-bold  mb-7 text-white">
+                        Number: {loginUser.number}
                     </p>
                     <p className="bg-[#FFCC00] px-2 py-2 rounded font-rb">
                         Validity {loginUser.date}

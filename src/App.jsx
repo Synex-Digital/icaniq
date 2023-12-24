@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Result from "./components/pages/Result";
 import Show from "./components/pages/Show";
+import Address from "./components/pages/Address";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
                 <Route path="exam" element={<Exam />}></Route>
                 <Route path="result" element={<Result />}></Route>
                 <Route path="show" element={<Show />}></Route>
+                <Route path="address" element={<Address />}></Route>
             </Route>
         </Route>
     )

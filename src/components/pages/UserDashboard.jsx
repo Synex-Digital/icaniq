@@ -74,7 +74,7 @@ const UserDashboard = (props) => {
                     </div>
                 </div>
                 <div className=" smalldevice:max-md:hidden">
-                    <Image className="mt-10" imgsrc={team} />
+                    <Image className="mt-10 rounded-lg" imgsrc={team} />
                 </div>
             </div>
             <div className="flex xl:w-[25%] flex-col gap-4">

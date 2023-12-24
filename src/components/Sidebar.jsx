@@ -12,6 +12,7 @@ import { userExamQuestion } from "../../features/examQuestionSlice";
 import { modelTest } from "../../features/modelTestSlice";
 import { userExamid } from "../../features/examIdSlice";
 import { TfiWrite } from "react-icons/tfi";
+import { FaRegAddressCard } from "react-icons/fa6";
 import Image from "./layout/Image";
 import logo from "../assets/logo.png";
 import { toast } from "react-toastify";
@@ -99,6 +100,15 @@ const Sidebar = () => {
                                     Result
                                 </p>
                             </Link>
+                            <Link
+                                to="address"
+                                className="flex items-center p-2 rounded-md bg-[#0C0C0C] hover:bg-black"
+                            >
+                                <FaRegAddressCard className="text-2xl font-base text-white mr-2" />
+                                <p className=" font-rb font-base text-base text-white">
+                                    Address
+                                </p>
+                            </Link>
                         </div>
                     </div>
                     <div className="h-[20%]">
@@ -120,12 +130,27 @@ const Sidebar = () => {
                     <div className="h-[90%]">
                         <Link
                             to="dashboard"
-                            className="flex items-center gap-x-2 mb-4"
+                            className="flex items-center pt-5 gap-x-2"
+                        >
+                            <RxDashboard className="  font-medium text-3xl text-white" />
+                        </Link>
+                        <Link
+                            to="iqtest"
+                            className="flex items-center gap-x-2 mt-6"
+                        >
+                            <TfiWrite className="text-2xl font-medium text-white" />
+                        </Link>
+                        <Link
+                            to="result"
+                            className="flex items-center gap-x-2 mt-6"
                         >
                             <MdOutlineStickyNote2 className="text-3xl font-medium text-white" />
                         </Link>
-                        <Link to="iqtest" className="flex items-center gap-x-2">
-                            <RxDashboard className="  font-medium text-3xl text-white" />
+                        <Link
+                            to="address"
+                            className="flex items-center gap-x-2 mt-6"
+                        >
+                            <FaRegAddressCard className="text-[26px] font-medium text-white" />
                         </Link>
                     </div>
                     <div className="h-[10%]">

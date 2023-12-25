@@ -34,7 +34,6 @@ const Exam = () => {
     const [examcount, setExamCount] = useState("");
     Modal.setAppElement("#root");
     const [modalIsOpen, setIsOpen] = useState(false);
-    let show = useSelector((state) => state.counter.value);
     let qusid = useSelector((state) => state.queid.value);
     let examQuestion = useSelector((state) => state.question.Question);
     let modeltestvaluse = useSelector((state) => state.userModelTest.values);
@@ -42,6 +41,7 @@ const Exam = () => {
     let userToken = useSelector((state) => state.tokened.Token);
     let examId = useSelector((state) => state.examid.id);
     let [loading, setloading] = useState(true);
+    const [upperindex, setUpperIndex] = useState("");
 
     useEffect(() => {
         async function fetchData() {
@@ -208,6 +208,8 @@ const Exam = () => {
             throw error;
         }
         setIsOpen(true);
+        dispatch(questionid(1));
+        localStorage.setItem("questionid", JSON.stringify(1));
     };
 
     let handlearrowleft = () => {
@@ -228,7 +230,9 @@ const Exam = () => {
     };
 
     let handlequstionindex = (item) => {
-        console.log(item.index);
+        if (item.index > upperindex) {
+            setUpperIndex(item.index);
+        }
         dispatch(questionid(item.index));
         localStorage.setItem("questionid", JSON.stringify(item.index));
     };
@@ -264,18 +268,24 @@ const Exam = () => {
                                 className="cursor-pointer font-rb text-lg font-medium"
                             >
                                 <p
-                                    className={`${
-                                        item.exam_status &&
-                                        "!bg-[#21BA45] text-white border !border-[#21BA45]"
-                                    } ${
+                                    className={`
+                                    ${
                                         qusid == item.index &&
                                         "!bg-[#2185D0] text-white border !border-[#2185D0]"
-                                    }   
+                                    }
+                                    ${
+                                        item.exam_status &&
+                                        "!bg-[#21BA45] text-white border !border-[#21BA45]"
+                                    } 
                                   ${
                                       item.index < qusid
                                           ? "bg-red-500 text-white"
                                           : ""
-                                  } border rounded-sm py-1 px-3`}
+                                  } ${
+                                        item.index < upperindex + 1
+                                            ? "bg-red-500 text-white"
+                                            : ""
+                                    } border rounded-sm py-1 px-3`}
                                     onClick={() => handlequstionindex(item)}
                                 >
                                     {index + 1}

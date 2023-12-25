@@ -132,7 +132,6 @@ const UserDashboard = (props) => {
                     </div>
                 </div>
 
-                {/* Slider Start */}
 
                 <div className=" smalldevice:max-xl:hidden mt-5">
                     <Slider {...settings}>
@@ -156,7 +155,6 @@ const UserDashboard = (props) => {
                         </div>
                     </Slider>
                 </div>
-                {/* Slider Start */}
             </div>
 
             <div className="flex xl:w-[25%] flex-col gap-4">
@@ -164,9 +162,7 @@ const UserDashboard = (props) => {
                     <Image
                         className="w-24 h-24 rounded-full mx-auto"
                         imgsrc={
-                            loginUser.profile == null
-                                ? profile
-                                : loginUser.profile
+                            loginUser && loginUser.profile ? loginUser.profile : profile
                         }
                     />
                     <h2 className=" font-rb font-bold text-2xl mt-5 text-white">

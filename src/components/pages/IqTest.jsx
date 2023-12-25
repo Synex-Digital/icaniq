@@ -80,11 +80,7 @@ const IqTest = (props) => {
         return <h1 className="mt-16">Loading......</h1>;
     }
 
-    // if (models.length == 0) {
-    //     console.log("ok");
-
-    //     return;
-    // }
+    
 
     let openModal = (item) => {
         setIsOpen(true);

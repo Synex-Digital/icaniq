@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BsCalendar2Check } from "react-icons/bs";
+import { IoTimeOutline } from "react-icons/io5";
 import { GiNotebook } from "react-icons/gi";
 import { PiClockClockwiseFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
@@ -12,12 +12,13 @@ const Result = () => {
     let show = useSelector((state) => state.counter.value);
     let userToken = useSelector((state) => state.tokened.Token);
     let [modalresult, setModalResult] = useState([]);
+    let [loading, setloading] = useState(true);
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const response = await fetch(
-                    "https://icaniq.synexdigital.com/api/result/list",
+                    "https://laraveladmin.icaniqbd.com/api/result/list",
                     {
                         method: "GET",
                         headers: {
@@ -28,7 +29,6 @@ const Result = () => {
                 );
 
                 const responseData = await response.json();
-                console.log(responseData);
                 setModalResult(responseData.data);
             } catch (error) {
                 console.error("Login error:", error);
@@ -36,12 +36,17 @@ const Result = () => {
             }
         }
         fetchData();
+        setloading(false);
     }, []);
+
+    if (loading) {
+        return <h1 className="mt-16">Loading......</h1>;
+    }
 
     let hendleView = async (item) => {
         try {
             const response = await fetch(
-                `https://icaniq.synexdigital.com/api/result/${item.id}`,
+                `https://laraveladmin.icaniqbd.com/api/result/${item.id}`,
                 {
                     method: "GET",
                     headers: {
@@ -77,6 +82,14 @@ const Result = () => {
                                 {item.model_name}
                             </h2>
                             <div className="font-rb text-sm text-[#6D6D6D] xl:w-[320px]">
+                            <div className="flex justify-between my-5 ">
+                                    <h4 className="flex items-center gap-x-2 font-rb text-[#3D3D3D]">
+                                        <span className=" text-2xl text-[#705BCC]">
+                                            <IoTimeOutline />
+                                        </span>
+                                         <span className="px-4 text-xs py-1 rounded-lg bg-[#1987545e]">{item.date}</span>
+                                    </h4>
+                                </div>
                                 <div className="flex justify-between my-5 ">
                                     <h4 className="flex items-center gap-x-2 font-rb text-[#3D3D3D]">
                                         <span className=" text-2xl text-[#705BCC]">

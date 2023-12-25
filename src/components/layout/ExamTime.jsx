@@ -6,6 +6,7 @@ import Image from "./Image";
 import img from "../../assets/img1.png";
 import { useDispatch, useSelector } from "react-redux";
 import { userExamQuestion } from "../../../features/examQuestionSlice";
+import { questionid } from "../../../features/questionSlice";
 
 const customStyles = {
     content: {
@@ -39,7 +40,7 @@ const ExamTime = ({ expiryTimestamp }) => {
     let handleexamstart = () => {
         dispatch(userExamQuestion(null));
         localStorage.removeItem("question");
-        navigate("/user/iqtest");
+        navigate("/user/result");
     };
     const { hours, seconds, minutes, isRunning } = useTimer({
         expiryTimestamp,
@@ -50,7 +51,7 @@ const ExamTime = ({ expiryTimestamp }) => {
                 data.append("model_id", modeltestvaluse.id);
 
                 const response = await fetch(
-                    "http://icaniq.synexdigital.com/api/answer/submit/done",
+                    "https://laraveladmin.icaniqbd.com/api/answer/submit/done",
                     {
                         method: "POST",
                         headers: {
@@ -60,13 +61,13 @@ const ExamTime = ({ expiryTimestamp }) => {
                         body: data,
                     }
                 );
-
                 const responseData = await response.json();
-                console.log(responseData);
             } catch (error) {
                 console.error("Login error:", error);
                 throw error;
             }
+            dispatch(questionid(1));
+            localStorage.setItem("questionid", JSON.stringify(1));
         },
     });
 
@@ -99,16 +100,11 @@ const ExamTime = ({ expiryTimestamp }) => {
                         className="mx-auto md:mb-7 mb-2 w-[180px] h-[120px] md:w-[250px] md:h-[180px]"
                         imgsrc={img}
                     />
-                    <p className=" font-rb font-bold text-3xl text-[#32B548] text-center">
-                        PASS
+                    <p className=" font-rb uppercase font-bold text-3xl text-[#32B548] text-center">
+                        well done
                     </p>
-                    <p className="font-rb text-lg text-white mb-2 md:mb-4 text-center">
-                        (You achieved a score of 85 out of 100.)
-                    </p>
-                    <p className="sm:w-[456px] font-rb text-white mb-4 md:mb-8">
-                        Congratulations on your achievement! Your hard work and
-                        dedication have paid off, and this success is
-                        well-deserved.
+                    <p className="sm:w-[456px] text-center font-rb text-white my-4 md:my-8">
+                        You've completed your exam!
                     </p>
                     <div className="flex justify-between">
                         <button
@@ -121,7 +117,7 @@ const ExamTime = ({ expiryTimestamp }) => {
                             onClick={handleexamstart}
                             className="w-[48%] text-[#3888F9] border rounded border-[#3888F9] transition duration-300 ease-in-out py-2 px-6 hover:bg-[#3888F9] hover:text-white text-lg font-rb font-semibold"
                         >
-                            Start
+                            Result
                         </button>
                     </div>
                 </Modal>

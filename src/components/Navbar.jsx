@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import Image from "./layout/Image";
 import logo from "../assets/logoblack.png";
-import profile from "../assets/profile.png";
-import { useDispatch } from "react-redux";
+import profileimg from "../assets/profile.png";
+import { useDispatch, useSelector } from "react-redux";
 import { IoSearchOutline } from "react-icons/io5";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { ImCross } from "react-icons/im";
 import { navvalue } from "../../features/navSlice";
-import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
     let dispatch = useDispatch();
-    let location = useLocation();
+    let loginUser = useSelector((state) => state.loggedUser.loginUser);
 
     let [show, setShow] = useState(true);
     useEffect(() => {
@@ -52,13 +51,14 @@ const Navbar = () => {
                 )}
             </div>
             <div className="flex justify-center items-center w-[70%]">
-                <h1 className="text-white text-4xl font-rb font-bold">iCAN-IQ</h1>
+                <h1 className="text-white text-4xl font-rb font-bold">
+                    iCAN-IQ
+                </h1>
             </div>
-           
+
             <div className="flex w-[15%] items-center gap-x-3 relative justify-end mr-6">
-                <IoSearchOutline className="xl:hidden text-white font-semibold text-xl " />
                 <MdOutlineNotificationsActive className=" font-semibold text-white text-xl" />
-                <Image className=" w-12 h-12" imgsrc={profile} />
+                <Image className=" w-12 h-12 rounded-full" imgsrc={loginUser && loginUser.profile ? loginUser.profile : profileimg} />
             </div>
         </nav>
     );

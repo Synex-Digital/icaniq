@@ -4,12 +4,70 @@ import { useSelector } from "react-redux";
 import logo from "../../assets/logo_hd.webp";
 import team from "../../assets/team.jpg";
 import profile from "../../assets/profile.png";
+import Slider from "react-slick";
+import SampleNextArrow from "../layout/SampleNextArrow";
+import SamplePrevArrow from "../layout/SamplePrevArrow";
 
 const UserDashboard = (props) => {
     let loginUser = useSelector((state) => state.loggedUser.loginUser);
     let userToken = useSelector((state) => state.tokened.Token);
     let [performance, setPerformance] = useState("");
     let [loading, setloading] = useState(true);
+    let [activeDot, setActiveDot] = useState(0);
+
+    const settings = {
+        dots: true,
+        infinite: true,
+        fade: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        beforeChange: (prev, next) => {
+            setActiveDot(next);
+        },
+
+        nextArrow: <SampleNextArrow />,
+        prevArrow: <SamplePrevArrow />,
+        appendDots: (dots) => (
+            <div
+                style={{
+                    paddingBottom: "10px",
+                }}
+            >
+                <ul
+                    style={{
+                        marginBottom: "15px",
+                        display: "flex",
+                        justifyContent: "center",
+                        columnGap: "20px",
+                    }}
+                >
+                    {" "}
+                    {dots}{" "}
+                </ul>
+            </div>
+        ),
+        customPaging: (i) => (
+            <div
+                style={
+                    i === activeDot
+                        ? {
+                              width: "40px",
+                              border: "2px white solid",
+                              borderRadius: "10px",
+                              padding: "2px",
+                              background:"#fff"
+                          }
+                        : {
+                            width: "40px",
+                            border: "2px white solid",
+                            borderRadius: "10px",
+                            padding: "2px",
+                        }
+                }
+            ></div>
+        ),
+    };
 
     useEffect(() => {
         async function fetchData() {
@@ -69,19 +127,43 @@ const UserDashboard = (props) => {
                             <p className="font-rb text-2xl">Average Time</p>
                         </div>
                         <span className="font-rb text-black font-semibold mt-5 text-2xl">
-                            {performance == null ? 0 :performance.av_time}
+                            {performance == null ? 0 : performance.av_time}
                         </span>
                     </div>
                 </div>
-                <div className=" smalldevice:max-md:hidden">
-                    <Image className="mt-10 rounded-lg" imgsrc={team} />
+
+
+                <div className=" smalldevice:max-xl:hidden mt-5">
+                    <Slider {...settings}>
+                        <div>
+                            <Image
+                                className="rounded-lg w-full object-cover h-[380px]"
+                                imgsrc={team}
+                            />
+                        </div>
+                        <div>
+                            <Image
+                                className=" rounded-lg w-full object-cover h-[380px]"
+                                imgsrc={team}
+                            />
+                        </div>
+                        <div>
+                            <Image
+                                className=" rounded-lg w-full object-cover h-[380px]"
+                                imgsrc={team}
+                            />
+                        </div>
+                    </Slider>
                 </div>
             </div>
+
             <div className="flex xl:w-[25%] flex-col gap-4">
                 <div className=" bg-[#162655] h-fit p-5 rounded-2xl text-center">
                     <Image
                         className="w-24 h-24 rounded-full mx-auto"
-                        imgsrc={loginUser.profile == null ? profile : loginUser.profile}
+                        imgsrc={
+                            loginUser && loginUser.profile ? loginUser.profile : profile
+                        }
                     />
                     <h2 className=" font-rb font-bold text-2xl mt-5 text-white">
                         Welcome {loginUser.name}

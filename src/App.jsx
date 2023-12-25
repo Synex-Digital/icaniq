@@ -15,6 +15,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Result from "./components/pages/Result";
 import Show from "./components/pages/Show";
 import Address from "./components/pages/Address";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const router = createBrowserRouter(
     createRoutesFromElements(

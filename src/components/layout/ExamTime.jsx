@@ -6,6 +6,7 @@ import Image from "./Image";
 import img from "../../assets/img1.png";
 import { useDispatch, useSelector } from "react-redux";
 import { userExamQuestion } from "../../../features/examQuestionSlice";
+import { questionid } from "../../../features/questionSlice";
 
 const customStyles = {
     content: {
@@ -65,6 +66,8 @@ const ExamTime = ({ expiryTimestamp }) => {
                 console.error("Login error:", error);
                 throw error;
             }
+            dispatch(questionid(1));
+            localStorage.setItem("questionid", JSON.stringify(1));
         },
     });
 

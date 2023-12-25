@@ -58,7 +58,7 @@ const Navbar = () => {
 
             <div className="flex w-[15%] items-center gap-x-3 relative justify-end mr-6">
                 <MdOutlineNotificationsActive className=" font-semibold text-white text-xl" />
-                <Image className=" w-12 h-12 rounded-full" imgsrc={loginUser.profile == null ? profileimg : loginUser.profile} />
+                <Image className=" w-12 h-12 rounded-full" imgsrc={loginUser && loginUser.profile ? loginUser.profile : profileimg} />
             </div>
         </nav>
     );

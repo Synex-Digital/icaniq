@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import img from "../../assets/img1.png";
 import Image from "../layout/Image";
 import { userExamQuestion } from "../../../features/examQuestionSlice";
+import ModalImage from "react-modal-image";
 
 const customStyles = {
     content: {
@@ -221,11 +222,14 @@ const Exam = () => {
         }
     };
 
-    let handlearrowright = () => {
+    let handlearrowright = (item) => {
         if (lastlength != qusid) {
             let incre = qusid + 1;
             dispatch(questionid(incre));
             localStorage.setItem("questionid", JSON.stringify(incre));
+        }
+        if (item.index > upperindex) {
+            setUpperIndex(item.index + 1);
         }
     };
 
@@ -271,11 +275,11 @@ const Exam = () => {
                                     className={`
                                     ${
                                         qusid == item.index &&
-                                        "!bg-[#2185D0] text-white border !border-[#2185D0]"
+                                        "!bg-[#0077ff] text-white border "
                                     }
                                     ${
                                         item.exam_status &&
-                                        "!bg-[#21BA45] text-white border !border-[#21BA45]"
+                                        "!bg-[#21BA45] text-white border "
                                     } 
                                   ${
                                       item.index < qusid
@@ -311,11 +315,15 @@ const Exam = () => {
                                     <div className="border rounded-lg relative mt-4 p-2 sm:p-4 sm:w-1/2">
                                         <div className="mb-4 flex justify-center items-center gap-x-3">
                                             {item.question_test_image && (
-                                                <img
+                                                <ModalImage
                                                     className="w-[160px] h-[160px]"
-                                                    src={
+                                                    small={
                                                         item.question_test_image
                                                     }
+                                                    large={
+                                                        item.question_test_image
+                                                    }
+                                                    alt="Image"
                                                 />
                                             )}
                                             <h2 className=" font-rb font-semibold md:text-xl xl:text-2xl text-center">

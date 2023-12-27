@@ -5,6 +5,7 @@ import { GiNotebook } from "react-icons/gi";
 import { PiClockClockwiseFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { examResult } from "../../../features/resultSlice";
+import { pdfDownload } from "../../../features/downloadPdfSlice";
 
 const Result = () => {
     let navigate = useNavigate();
@@ -44,6 +45,8 @@ const Result = () => {
     }
 
     let hendleView = async (item) => {
+        dispatch(pdfDownload(item.id));
+        localStorage.setItem("pdf", JSON.stringify(item.id));
         try {
             const response = await fetch(
                 `https://laraveladmin.icaniqbd.com/api/result/${item.id}`,
@@ -82,12 +85,14 @@ const Result = () => {
                                 {item.model_name}
                             </h2>
                             <div className="font-rb text-sm text-[#6D6D6D] xl:w-[320px]">
-                            <div className="flex justify-between my-5 ">
+                                <div className="flex justify-between my-5 ">
                                     <h4 className="flex items-center gap-x-2 font-rb text-[#3D3D3D]">
                                         <span className=" text-2xl text-[#705BCC]">
                                             <IoTimeOutline />
                                         </span>
-                                         <span className="px-4 text-xs py-1 rounded-lg bg-[#1987545e]">{item.date}</span>
+                                        <span className="px-4 text-xs py-1 rounded-lg bg-[#1987545e]">
+                                            {item.date}
+                                        </span>
                                     </h4>
                                 </div>
                                 <div className="flex justify-between my-5 ">

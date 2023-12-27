@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Image from "../layout/Image";
 import { useSelector } from "react-redux";
 import logo from "../../assets/logo_hd.webp";
-import team from "../../assets/team.jpg";
 import profile from "../../assets/profile.png";
 import Slider from "react-slick";
 import SampleNextArrow from "../layout/SampleNextArrow";
@@ -12,6 +11,7 @@ const UserDashboard = (props) => {
     let loginUser = useSelector((state) => state.loggedUser.loginUser);
     let userToken = useSelector((state) => state.tokened.Token);
     let [performance, setPerformance] = useState("");
+    let [banner, setBanner] = useState([]);
     let [loading, setloading] = useState(true);
     let [activeDot, setActiveDot] = useState(0);
 
@@ -56,14 +56,14 @@ const UserDashboard = (props) => {
                               border: "2px white solid",
                               borderRadius: "10px",
                               padding: "2px",
-                              background:"#fff"
+                              background: "#fff",
                           }
                         : {
-                            width: "40px",
-                            border: "2px white solid",
-                            borderRadius: "10px",
-                            padding: "2px",
-                        }
+                              width: "40px",
+                              border: "2px white solid",
+                              borderRadius: "10px",
+                              padding: "2px",
+                          }
                 }
             ></div>
         ),
@@ -85,6 +85,7 @@ const UserDashboard = (props) => {
 
                 const responseData = await response.json();
                 setPerformance(responseData.data);
+                setBanner(responseData.banner);
             } catch (error) {
                 console.error("Login error:", error);
                 throw error;
@@ -132,27 +133,16 @@ const UserDashboard = (props) => {
                     </div>
                 </div>
 
-
                 <div className=" smalldevice:max-xl:hidden mt-5">
                     <Slider {...settings}>
-                        <div>
-                            <Image
-                                className="rounded-lg w-full object-cover h-[380px]"
-                                imgsrc={team}
-                            />
-                        </div>
-                        <div>
-                            <Image
-                                className=" rounded-lg w-full object-cover h-[380px]"
-                                imgsrc={team}
-                            />
-                        </div>
-                        <div>
-                            <Image
-                                className=" rounded-lg w-full object-cover h-[380px]"
-                                imgsrc={team}
-                            />
-                        </div>
+                        {banner.map((item) => (
+                            <div>
+                                <Image
+                                    className="rounded-lg"
+                                    imgsrc={item.banner}
+                                />
+                            </div>
+                        ))}
                     </Slider>
                 </div>
             </div>
@@ -162,7 +152,9 @@ const UserDashboard = (props) => {
                     <Image
                         className="w-24 h-24 rounded-full mx-auto"
                         imgsrc={
-                            loginUser && loginUser.profile ? loginUser.profile : profile
+                            loginUser && loginUser.profile
+                                ? loginUser.profile
+                                : profile
                         }
                     />
                     <h2 className=" font-rb font-bold text-2xl mt-5 text-white">

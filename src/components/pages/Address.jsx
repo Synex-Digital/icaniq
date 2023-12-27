@@ -24,6 +24,10 @@ const Address = () => {
                     <br />
                     (beside Anada Cinema Hall) Farmgate, Dhaka
                 </h2>
+                <h2 className="font-rb mt-4">
+                    (Mirpur Branch) Lift 5, Prince Bazar building, Mirpur 12 bus stand, Mirpur
+                    12
+                </h2>
             </div>
         </div>
     );

@@ -105,6 +105,8 @@ const IqTest = (props) => {
             );
 
             const responseData = await response.json();
+            console.log(responseData);
+            console.log(modelsId);
             notify(responseData.message);
         } catch (error) {
             console.error("Login error:", error);

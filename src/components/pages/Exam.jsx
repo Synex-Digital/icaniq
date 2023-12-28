@@ -90,6 +90,7 @@ const Exam = () => {
                 );
 
                 const responseData = await response.json();
+                console.log(responseData);
             } catch (error) {
                 console.error("Login error:", error);
                 throw error;
@@ -114,6 +115,7 @@ const Exam = () => {
                 );
 
                 const responseData = await response.json();
+                console.log(responseData);
                 setExamCount(responseData.exam_time);
             } catch (error) {
                 console.error("Login error:", error);
@@ -275,7 +277,7 @@ const Exam = () => {
                                     className={`
                                     ${
                                         qusid == item.index &&
-                                        "!bg-[#0077ff] text-white border "
+                                        "!bg-[#0066db] text-white border "
                                     }
                                     ${
                                         item.exam_status &&

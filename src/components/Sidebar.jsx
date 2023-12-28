@@ -51,7 +51,6 @@ const Sidebar = () => {
             const responseData = await response.json();
             notify(responseData.message);
         } catch (error) {
-            console.error("Login error:", error);
             throw error;
         }
         dispatch(userData(null));

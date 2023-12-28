@@ -65,7 +65,6 @@ const Exam = () => {
                 const responseData = await response.json();
                 setModels(responseData.data);
             } catch (error) {
-                console.error("Login error:", error);
                 throw error;
             }
         }
@@ -90,9 +89,7 @@ const Exam = () => {
                 );
 
                 const responseData = await response.json();
-                console.log(responseData);
             } catch (error) {
-                console.error("Login error:", error);
                 throw error;
             }
         }
@@ -115,10 +112,8 @@ const Exam = () => {
                 );
 
                 const responseData = await response.json();
-                console.log(responseData);
                 setExamCount(responseData.exam_time);
             } catch (error) {
-                console.error("Login error:", error);
                 throw error;
             }
         }
@@ -178,14 +173,11 @@ const Exam = () => {
 
             const responseData = await response.json();
         } catch (error) {
-            console.error("Login error:", error);
             throw error;
         }
         setQuestion(item.id);
         setModelid(modeltestvaluse.id);
         setChoiceid(sitem.id);
-        // console.log("qus", item.id);
-        // console.log("mod", modeltestvaluse.id)
     };
 
     let hendleexamsubmit = async () => {
@@ -207,7 +199,6 @@ const Exam = () => {
 
             const responseData = await response.json();
         } catch (error) {
-            console.error("Login error:", error);
             throw error;
         }
         setIsOpen(true);

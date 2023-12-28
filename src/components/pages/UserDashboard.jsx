@@ -133,10 +133,10 @@ const UserDashboard = (props) => {
                     </div>
                 </div>
 
-                <div className=" smalldevice:max-xl:hidden mt-5">
+                <div className="smalldevice:max-xl:hidden mt-5 w-full">
                     <Slider {...settings}>
                         {banner.map((item) => (
-                            <div>
+                            <div className="!flex justify-center items-center">
                                 <Image
                                     className="rounded-lg"
                                     imgsrc={item.banner}

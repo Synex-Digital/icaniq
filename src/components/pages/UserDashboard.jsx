@@ -135,8 +135,8 @@ const UserDashboard = (props) => {
 
                 <div className="smalldevice:max-xl:hidden mt-5 w-full">
                     <Slider {...settings}>
-                        {banner.map((item) => (
-                            <div className="!flex justify-center items-center">
+                        {banner && banner.map((item,index) => (
+                            <div key={index} className="!flex justify-center items-center">
                                 <Image
                                     className="rounded-lg"
                                     imgsrc={item.banner}

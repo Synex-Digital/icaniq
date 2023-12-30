@@ -35,6 +35,7 @@ const Exam = () => {
     const [examcount, setExamCount] = useState("");
     Modal.setAppElement("#root");
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [modalIsOpentwo, setIsOpenTwo] = useState(false);
     let qusid = useSelector((state) => state.queid.value);
     let examQuestion = useSelector((state) => state.question.Question);
     let modeltestvaluse = useSelector((state) => state.userModelTest.values);
@@ -42,6 +43,7 @@ const Exam = () => {
     let userToken = useSelector((state) => state.tokened.Token);
     let examId = useSelector((state) => state.examid.id);
     let [loading, setloading] = useState(true);
+    let [spamcheck, setSpamcheck] = useState(true);
     const [upperindex, setUpperIndex] = useState("");
 
     useEffect(() => {
@@ -64,6 +66,8 @@ const Exam = () => {
 
                 const responseData = await response.json();
                 setModels(responseData.data);
+                setloading(false);
+                setSpamcheck(false);
             } catch (error) {
                 throw error;
             }
@@ -113,12 +117,13 @@ const Exam = () => {
 
                 const responseData = await response.json();
                 setExamCount(responseData.exam_time);
+                console.log(responseData);
             } catch (error) {
                 throw error;
             }
         }
         fetchDatathree();
-        setloading(false);
+        setSpamcheck(false);
     }, [modelid, choiceid, question]);
 
     useEffect(() => {
@@ -126,6 +131,31 @@ const Exam = () => {
             navigate("/");
         }
     }, []);
+
+    if (loading) {
+        return <h1 className="mt-16 text-2xl">Loading......</h1>;
+    }
+
+    let handlereload = () => {
+        window.location.reload();
+        setSpamcheck(false);
+    };
+
+    if (spamcheck) {
+        return (
+            <div className="mt-16 h-[90vh] flex flex-col items-center justify-center">
+                <h1 className="text-2xl">
+                    Your test has been caught in spam wait 30s
+                </h1>
+                <button
+                    onClick={handlereload}
+                    className="text-[#3888F9] border rounded border-[#3888F9] transition duration-300 ease-in-out py-2 px-6 hover:bg-[#3888F9] hover:text-white text-lg font-rb font-semibold mt-5"
+                >
+                    Again start
+                </button>
+            </div>
+        );
+    }
 
     if (loginUser == null) {
         navigate("/");
@@ -144,9 +174,11 @@ const Exam = () => {
         return;
     }
 
-    if (loading) {
-        return <h1 className="mt-16">Loading......</h1>;
+    if (models == null) {
+        setSpamcheck(true);
+        return;
     }
+
     let lastlength = models.length;
 
     const time = new Date();

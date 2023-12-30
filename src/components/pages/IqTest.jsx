@@ -66,20 +66,17 @@ const IqTest = (props) => {
 
                 const responseData = await response.json();
                 setModels(responseData.modelTest);
+                setloading(false);
             } catch (error) {
                 throw error;
             }
         }
         fetchData();
-
-        setloading(false);
     }, [modalIsOpen]);
 
     if (loading) {
-        return <h1 className="mt-16">Loading......</h1>;
+        return <h1 className="mt-16 text-2xl">Loading......</h1>;
     }
-
-    
 
     let openModal = (item) => {
         setIsOpen(true);
@@ -106,7 +103,6 @@ const IqTest = (props) => {
             const responseData = await response.json();
             notify(responseData.message);
         } catch (error) {
-            
             throw error;
         }
         setIsOpen(false);

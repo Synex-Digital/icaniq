@@ -9,6 +9,7 @@ const Show = () => {
     let result = useSelector((state) => state.examresult.value);
     let userToken = useSelector((state) => state.tokened.Token);
     let pdfID = useSelector((state) => state.pdfid.values);
+    let [loading, setloading] = useState(false);
     let [answerValues, setAnswerValues] = useState("all");
 
     if (result == null) {
@@ -17,6 +18,7 @@ const Show = () => {
     }
 
     let handlePdf = async () => {
+        setloading(true);
         try {
             const response = await fetch(
                 `https://laraveladmin.icaniqbd.com/api/result/download/${pdfID} `,
@@ -32,6 +34,7 @@ const Show = () => {
             if (response.ok) {
                 const blob = await response.blob();
                 const url = URL.createObjectURL(blob);
+                setloading(false);
 
                 window.open(url, "_blank");
             } else {
@@ -54,9 +57,15 @@ const Show = () => {
                 onClick={handlePdf}
                 className="w-full flex items-center justify-center my-[30px]"
             >
-                <a className="py-3 px-8 bg-[#3888F9] font-rb text-xl font-semibold text-white cursor-pointer">
-                    Download Sheet
-                </a>
+                {loading ? (
+                    <a className="py-3 px-8 bg-[#3888F9] font-rb text-xl font-semibold text-white cursor-pointer">
+                        Loading.......
+                    </a>
+                ) : (
+                    <a className="py-3 px-8 bg-[#3888F9] font-rb text-xl font-semibold text-white cursor-pointer">
+                        Download Sheet
+                    </a>
+                )}
             </div>
             <div className="w-full  border-gray-400 font-rb font-semibold text-xl flex justify-between mb-10">
                 <div>

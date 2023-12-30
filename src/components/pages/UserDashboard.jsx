@@ -12,7 +12,6 @@ const UserDashboard = (props) => {
     let userToken = useSelector((state) => state.tokened.Token);
     let [performance, setPerformance] = useState("");
     let [banner, setBanner] = useState([]);
-    let [loading, setloading] = useState(true);
     let [activeDot, setActiveDot] = useState(0);
 
     const settings = {
@@ -91,16 +90,14 @@ const UserDashboard = (props) => {
             }
         }
         fetchData();
-        setloading(false);
+        
     }, []);
 
-    if (loading) {
-        return <h1 className="mt-16">Loading.......</h1>;
-    }
+    
 
     return (
         <div className="flex flex-col md:flex-row gap-4  justify-between mt-16 p-4 w-full  ">
-            <div className="xl:w-[75%]">
+            <div className="xl:w-[72%]">
                 <div className="grid gap-4 h-fit w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 text-center">
                     <div className="rounded-lg border text-[#6D6D6D] border-gray-300 px-8 py-5 shadow-sm flex flex-col">
                         <div className="flex gap-x-3 items-center justify-center">
@@ -137,7 +134,7 @@ const UserDashboard = (props) => {
                         {banner && banner.map((item,index) => (
                             <div key={index} className="!flex justify-center items-center">
                                 <Image
-                                    className="rounded-lg"
+                                    className="rounded-lg h-[315px]"
                                     imgsrc={item.banner}
                                 />
                             </div>
@@ -146,7 +143,7 @@ const UserDashboard = (props) => {
                 </div>
             </div>
 
-            <div className="flex xl:w-[25%] flex-col gap-4">
+            <div className="flex xl:w-[28%] flex-col gap-4">
                 <div className=" bg-[#162655] h-fit p-5 rounded-2xl text-center">
                     <Image
                         className="w-24 h-24 rounded-full mx-auto"

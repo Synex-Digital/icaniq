@@ -31,16 +31,17 @@ const Result = () => {
 
                 const responseData = await response.json();
                 setModalResult(responseData.data);
+                setloading(false);
             } catch (error) {
                 throw error;
             }
         }
         fetchData();
-        setloading(false);
+        
     }, []);
 
     if (loading) {
-        return <h1 className="mt-16">Loading......</h1>;
+        return <h1 className="mt-16 text-2xl">Loading......</h1>;
     }
 
     let hendleView = async (item) => {

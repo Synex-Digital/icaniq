@@ -32,7 +32,6 @@ const Result = () => {
                 const responseData = await response.json();
                 setModalResult(responseData.data);
             } catch (error) {
-                console.error("Login error:", error);
                 throw error;
             }
         }
@@ -63,7 +62,6 @@ const Result = () => {
             dispatch(examResult(responseData));
             localStorage.setItem("result", JSON.stringify(responseData));
         } catch (error) {
-            console.error("Login error:", error);
             throw error;
         }
         navigate("/user/show");

@@ -65,7 +65,6 @@ const Exam = () => {
                 const responseData = await response.json();
                 setModels(responseData.data);
             } catch (error) {
-                console.error("Login error:", error);
                 throw error;
             }
         }
@@ -91,7 +90,6 @@ const Exam = () => {
 
                 const responseData = await response.json();
             } catch (error) {
-                console.error("Login error:", error);
                 throw error;
             }
         }
@@ -116,7 +114,6 @@ const Exam = () => {
                 const responseData = await response.json();
                 setExamCount(responseData.exam_time);
             } catch (error) {
-                console.error("Login error:", error);
                 throw error;
             }
         }
@@ -176,14 +173,11 @@ const Exam = () => {
 
             const responseData = await response.json();
         } catch (error) {
-            console.error("Login error:", error);
             throw error;
         }
         setQuestion(item.id);
         setModelid(modeltestvaluse.id);
         setChoiceid(sitem.id);
-        // console.log("qus", item.id);
-        // console.log("mod", modeltestvaluse.id)
     };
 
     let hendleexamsubmit = async () => {
@@ -205,7 +199,6 @@ const Exam = () => {
 
             const responseData = await response.json();
         } catch (error) {
-            console.error("Login error:", error);
             throw error;
         }
         setIsOpen(true);
@@ -275,7 +268,7 @@ const Exam = () => {
                                     className={`
                                     ${
                                         qusid == item.index &&
-                                        "!bg-[#0077ff] text-white border "
+                                        "!bg-[#0066db] text-white border "
                                     }
                                     ${
                                         item.exam_status &&

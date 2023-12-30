@@ -87,7 +87,6 @@ const UserDashboard = (props) => {
                 setPerformance(responseData.data);
                 setBanner(responseData.banner);
             } catch (error) {
-                console.error("Login error:", error);
                 throw error;
             }
         }

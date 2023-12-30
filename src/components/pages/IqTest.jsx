@@ -67,7 +67,6 @@ const IqTest = (props) => {
                 const responseData = await response.json();
                 setModels(responseData.modelTest);
             } catch (error) {
-                console.error("Login error:", error);
                 throw error;
             }
         }
@@ -107,7 +106,7 @@ const IqTest = (props) => {
             const responseData = await response.json();
             notify(responseData.message);
         } catch (error) {
-            console.error("Login error:", error);
+            
             throw error;
         }
         setIsOpen(false);
@@ -142,7 +141,6 @@ const IqTest = (props) => {
             dispatch(userExamQuestion(responseData.data));
             localStorage.setItem("question", JSON.stringify(responseData.data));
         } catch (error) {
-            console.error("Login error:", error);
             throw error;
         }
         dispatch(userExamid(examId));

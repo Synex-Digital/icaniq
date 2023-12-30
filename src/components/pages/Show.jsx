@@ -40,7 +40,6 @@ const Show = () => {
                 );
             }
         } catch (error) {
-            console.error("Login error:", error);
             throw error;
         }
     };

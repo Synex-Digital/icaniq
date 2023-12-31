@@ -35,7 +35,6 @@ const Exam = () => {
     const [examcount, setExamCount] = useState("");
     Modal.setAppElement("#root");
     const [modalIsOpen, setIsOpen] = useState(false);
-    const [modalIsOpentwo, setIsOpenTwo] = useState(false);
     let qusid = useSelector((state) => state.queid.value);
     let examQuestion = useSelector((state) => state.question.Question);
     let modeltestvaluse = useSelector((state) => state.userModelTest.values);
@@ -66,7 +65,7 @@ const Exam = () => {
 
                 const responseData = await response.json();
                 setModels(responseData.data);
-                setloading(false);
+
                 setSpamcheck(false);
             } catch (error) {
                 throw error;
@@ -117,7 +116,7 @@ const Exam = () => {
 
                 const responseData = await response.json();
                 setExamCount(responseData.exam_time);
-                console.log(responseData);
+                setloading(false);
             } catch (error) {
                 throw error;
             }
@@ -167,10 +166,6 @@ const Exam = () => {
     }
     if (examQuestion == null) {
         navigate("/user/iqtest");
-        return;
-    }
-
-    if (examcount == "") {
         return;
     }
 
